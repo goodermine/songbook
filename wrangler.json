@@ -1,0 +1,16 @@
+{
+	"compatibility_date": "2025-10-08",
+	"main": "src/index.ts",
+	"name": "songbook",
+	"upload_source_maps": true,
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_id": "f1bd1860-7c99-4d1c-bc6f-ea40bf45bdee",
+			"database_name": "d1-songbook-database"
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}
