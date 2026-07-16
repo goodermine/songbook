@@ -1,0 +1,415 @@
+{
+  "version": 2,
+  "title": "People Aren't Broken. They're Rehearsed. (V3 physics)",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "content_duration": 28.0,
+  "safe_content_end": 27.6,
+  "final_hold": 1.0,
+  "style": {
+    "paper": [
+      249,
+      247,
+      240
+    ],
+    "ink": [
+      38,
+      43,
+      46
+    ],
+    "faint": [
+      118,
+      120,
+      116
+    ],
+    "accent": [
+      202,
+      83,
+      48
+    ],
+    "teal": [
+      31,
+      111,
+      112
+    ]
+  },
+  "narration": {
+    "transcript": "People aren't broken. They're rehearsed. A reaction, repeated often enough, becomes a pattern. And a pattern repeated long enough can begin to feel like identity. But familiar does not mean fixed. Identity is not destiny. Interrupt the old rehearsal. Pause before the familiar response. Practise something different. Repetition built the pattern. And repetition can build the way out."
+  },
+  "scenes": [
+    {
+      "id": "label",
+      "start": 0.0,
+      "end": 5.2,
+      "actions": [
+        {
+          "id": "people_heading",
+          "type": "draw_text",
+          "start": 0.2,
+          "duration": 0.8,
+          "requires_pen": true,
+          "text": "PEOPLE AREN'T",
+          "x": 92,
+          "y": 72,
+          "size": 61,
+          "bold": true,
+          "color": "ink"
+        },
+        {
+          "id": "broken_heading",
+          "type": "draw_text",
+          "start": 1.05,
+          "duration": 0.8,
+          "requires_pen": true,
+          "text": "BROKEN",
+          "x": 690,
+          "y": 72,
+          "size": 74,
+          "bold": true,
+          "color": "accent"
+        },
+        {
+          "id": "person_one",
+          "type": "draw_asset",
+          "asset": "person_one",
+          "start": 1.9,
+          "duration": 1.2,
+          "requires_pen": true,
+          "color": "ink",
+          "width": 6
+        },
+        {
+          "id": "cracks",
+          "type": "draw_asset",
+          "asset": "cracks",
+          "start": 3.15,
+          "duration": 0.55,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 4
+        },
+        {
+          "id": "cross_out",
+          "type": "draw_asset",
+          "asset": "cross_out",
+          "start": 3.75,
+          "duration": 0.75,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 9
+        },
+        {
+          "id": "label_note",
+          "type": "fade_text",
+          "start": 4.05,
+          "duration": 0.65,
+          "requires_pen": false,
+          "text": "That label explains nothing.",
+          "x": 670,
+          "y": 235,
+          "size": 38,
+          "italic": true,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "rehearsal",
+      "start": 5.2,
+      "end": 10.2,
+      "actions": [
+        {
+          "id": "rehearsed_heading",
+          "type": "draw_text",
+          "start": 5.25,
+          "duration": 0.9,
+          "requires_pen": true,
+          "text": "THEY'RE REHEARSED.",
+          "x": 120,
+          "y": 72,
+          "size": 70,
+          "bold": true,
+          "color": "ink"
+        },
+        {
+          "id": "person_two",
+          "type": "draw_asset",
+          "asset": "person_two",
+          "start": 6.2,
+          "duration": 1.05,
+          "requires_pen": true,
+          "color": "ink",
+          "width": 6
+        },
+        {
+          "id": "rehearsal_loop",
+          "type": "draw_asset",
+          "asset": "rehearsal_loop",
+          "start": 7.3,
+          "duration": 1.85,
+          "requires_pen": true,
+          "color": "teal",
+          "width": 8,
+          "arrowheads": true
+        },
+        {
+          "id": "loop_labels",
+          "type": "fade_labels",
+          "start": 7.65,
+          "duration": 1.2,
+          "requires_pen": false,
+          "color": "faint",
+          "size": 25,
+          "labels": [
+            {
+              "text": "trigger",
+              "x": 1095,
+              "y": 254
+            },
+            {
+              "text": "reaction",
+              "x": 1018,
+              "y": 520
+            },
+            {
+              "text": "relief",
+              "x": 355,
+              "y": 470
+            },
+            {
+              "text": "repeat",
+              "x": 415,
+              "y": 205
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pattern",
+      "start": 10.2,
+      "end": 16.2,
+      "actions": [
+        {
+          "id": "reaction_heading",
+          "type": "draw_text",
+          "start": 10.25,
+          "duration": 0.95,
+          "requires_pen": true,
+          "text": "A REACTION REPEATED",
+          "x": 128,
+          "y": 82,
+          "size": 59,
+          "bold": true,
+          "color": "ink"
+        },
+        {
+          "id": "reaction_arrows",
+          "type": "draw_asset",
+          "asset": "reaction_arrows",
+          "start": 11.25,
+          "duration": 2.25,
+          "requires_pen": true,
+          "color": "ink",
+          "last_color": "teal",
+          "width": 6,
+          "arrowheads": true
+        },
+        {
+          "id": "reaction_dots",
+          "type": "fade_asset",
+          "asset": "reaction_dots",
+          "start": 11.55,
+          "duration": 1.85,
+          "requires_pen": false,
+          "color": "accent"
+        },
+        {
+          "id": "pattern_result",
+          "type": "draw_text",
+          "start": 13.55,
+          "duration": 1.45,
+          "requires_pen": true,
+          "text": "BECOMES A PATTERN.",
+          "x": 290,
+          "y": 492,
+          "size": 62,
+          "bold": true,
+          "color": "teal"
+        }
+      ]
+    },
+    {
+      "id": "identity",
+      "start": 16.2,
+      "end": 21.7,
+      "actions": [
+        {
+          "id": "pattern_heading",
+          "type": "draw_text",
+          "start": 16.25,
+          "duration": 0.8,
+          "requires_pen": true,
+          "text": "A PATTERN CAN FEEL LIKE",
+          "x": 135,
+          "y": 78,
+          "size": 53,
+          "bold": true,
+          "color": "ink"
+        },
+        {
+          "id": "identity_word",
+          "type": "draw_text",
+          "start": 17.1,
+          "duration": 0.8,
+          "requires_pen": true,
+          "text": "IDENTITY",
+          "x": 430,
+          "y": 180,
+          "size": 87,
+          "bold": true,
+          "color": "accent"
+        },
+        {
+          "id": "identity_box",
+          "type": "draw_asset",
+          "asset": "identity_box",
+          "start": 17.95,
+          "duration": 1.0,
+          "requires_pen": true,
+          "color": "ink",
+          "width": 7
+        },
+        {
+          "id": "identity_note",
+          "type": "fade_text",
+          "start": 18.35,
+          "duration": 0.6,
+          "requires_pen": false,
+          "text": "THIS IS JUST WHO I AM",
+          "x": 382,
+          "y": 320,
+          "size": 35,
+          "italic": true,
+          "color": "ink"
+        },
+        {
+          "id": "identity_break",
+          "type": "draw_break",
+          "asset": "identity_break",
+          "start": 19.05,
+          "duration": 0.85,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "familiar_fixed",
+          "type": "draw_text",
+          "start": 19.95,
+          "duration": 1.0,
+          "requires_pen": true,
+          "text": "FAMILIAR \u2260 FIXED",
+          "x": 462,
+          "y": 475,
+          "size": 54,
+          "bold": true,
+          "color": "teal"
+        }
+      ]
+    },
+    {
+      "id": "choice",
+      "start": 21.7,
+      "end": 28.0,
+      "actions": [
+        {
+          "id": "interrupt_heading",
+          "type": "draw_text",
+          "start": 21.75,
+          "duration": 1.0,
+          "requires_pen": true,
+          "text": "INTERRUPT THE REHEARSAL.",
+          "x": 105,
+          "y": 70,
+          "size": 60,
+          "bold": true,
+          "color": "ink"
+        },
+        {
+          "id": "old_loop",
+          "type": "draw_asset",
+          "asset": "old_loop",
+          "start": 22.8,
+          "duration": 0.75,
+          "requires_pen": true,
+          "color": "faint",
+          "width": 6
+        },
+        {
+          "id": "pause_symbol",
+          "type": "draw_asset",
+          "asset": "pause_symbol",
+          "start": 23.6,
+          "duration": 0.45,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 14
+        },
+        {
+          "id": "choice_path",
+          "type": "draw_asset",
+          "asset": "choice_path",
+          "start": 24.1,
+          "duration": 1.45,
+          "requires_pen": true,
+          "color": "teal",
+          "width": 9,
+          "arrowheads": true
+        },
+        {
+          "id": "practice_heading",
+          "type": "draw_text",
+          "start": 25.6,
+          "duration": 0.95,
+          "requires_pen": true,
+          "text": "PRACTICE A DIFFERENT RESPONSE.",
+          "x": 390,
+          "y": 470,
+          "size": 36,
+          "bold": true,
+          "color": "teal"
+        },
+        {
+          "id": "repeat_pattern",
+          "type": "fade_text",
+          "start": 26.55,
+          "duration": 0.45,
+          "requires_pen": false,
+          "text": "Repetition built the pattern.",
+          "x": 425,
+          "y": 545,
+          "size": 27,
+          "italic": true,
+          "color": "ink"
+        },
+        {
+          "id": "repeat_exit",
+          "type": "fade_text",
+          "start": 27.0,
+          "duration": 0.45,
+          "requires_pen": false,
+          "text": "Repetition can build the way out.",
+          "x": 425,
+          "y": 582,
+          "size": 27,
+          "italic": true,
+          "color": "accent"
+        }
+      ]
+    }
+  ],
+  "pen_physics": "lift",
+  "hand": "sprite"
+}
