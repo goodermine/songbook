@@ -18,6 +18,8 @@ Proof video: **People Aren't Broken. They're Rehearsed.**
 | `storyboard_v2.json` | Active story/timing/style source of truth |
 | `storyboards/smoke.json` | 3-second smoke storyboard used by the test suite |
 | `timeline.py` | Physical pen-timeline compiler (stroke / arrowhead / travel events) |
+| `text_strokes.py` | Hershey single-line font parser and text layout |
+| `assets/fonts/futural.jhf` | Bundled Hershey Simplex stroke font (see fonts README) |
 | `tools/bake_assets.py` | Provenance of the asset migration; regenerates `assets/` |
 | `tools/asset_contact_sheet.py` | Diagnostic contact sheet (Phase 2 gate artifact) |
 | `tools/geometry_audit.py` | Per-frame nib audit; fails on pen-down teleports (Phase 3 gate) |
@@ -96,8 +98,14 @@ audio modes and assert stream counts and clean decodes.
   `tools/geometry_audit.py` turns that into a proof artifact — smoke (lift):
   **0 violations**; main storyboard (legacy): 72 teleports up to 106 px
   (`baseline/*.geometry-audit.json`).
-- [ ] **Phase 4 — True stroke text** (bundled single-line font; the current text
-  reveal is a raster wipe, not handwriting).
+- [x] **Phase 4 — True stroke text**: bundled Hershey Simplex
+  (`assets/fonts/futural.jhf`, ASCII 32–126) parsed by `text_strokes.py`;
+  the new `write_text` action lays glyphs out as ordered strokes and compiles
+  them through the same physical timeline as illustrations — the nib follows
+  letterforms and lifts between disconnected glyph components. At 50 %
+  progress only the first half of the ordered glyph strokes exists (gate
+  test). Overflowing or unsupported text fails preflight before rendering.
+  The raster wipe survives only as `draw_text`/`fast_reveal_text`.
 - [ ] **Phase 5 — Hand/marker rig** (nib-anchored sprite, see
   `docs/HAND_ASSET_SPEC.md`).
 - [ ] **Phase 6 — Rendering/illustration quality** (traced arrowheads,

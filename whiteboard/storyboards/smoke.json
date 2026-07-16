@@ -24,7 +24,7 @@
       "start": 0.0,
       "end": 4.0,
       "actions": [
-        {"id": "smoke_heading", "type": "draw_text", "start": 0.10, "duration": 0.70, "requires_pen": true, "text": "SMOKE TEST", "x": 120, "y": 80, "size": 60, "bold": true, "color": "ink"},
+        {"id": "smoke_heading", "type": "write_text", "start": 0.10, "duration": 0.70, "requires_pen": true, "text": "SMOKE TEST", "x": 120, "y": 80, "size": 40, "width": 3, "color": "ink"},
         {"id": "smoke_cracks", "type": "draw_asset", "asset": "cracks", "start": 0.90, "duration": 0.50, "requires_pen": true, "color": "teal", "width": 6},
         {"id": "smoke_note", "type": "fade_text", "start": 1.75, "duration": 0.45, "requires_pen": false, "text": "still standing", "x": 520, "y": 260, "size": 34, "italic": true, "color": "faint"},
         {"id": "smoke_person", "type": "draw_asset", "asset": "person_one", "start": 1.80, "duration": 1.30, "requires_pen": true, "color": "ink", "width": 6},

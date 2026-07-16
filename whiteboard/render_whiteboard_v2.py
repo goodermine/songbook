@@ -19,7 +19,8 @@ from typing import Any
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-from asset_registry import AssetRegistry, GeometryError
+from asset_registry import Asset, AssetRegistry, GeometryError, StrokePath, preflight_asset
+from text_strokes import TextStrokeError, strokes_bounds, text_to_strokes
 from timeline import PenEvent, compile_drawable, smoothed_tangent
 
 
@@ -234,6 +235,39 @@ def compiled_events(asset_name: str, duration: float, arrowheads: bool) -> tuple
     return tuple(events)
 
 
+@lru_cache(maxsize=256)
+def text_timeline(text: str, x: float, y: float, size: float, duration: float,
+                  board: tuple[int, int]) -> tuple[tuple[PenEvent, ...], dict[str, Any]]:
+    """Lay out a string as glyph strokes and compile its physical timeline.
+
+    The synthetic asset goes through the same geometry preflight as
+    illustration assets, so overflowing or unsupported text fails before any
+    frame renders.
+    """
+    try:
+        polylines = text_to_strokes(text, x, y, size)
+    except TextStrokeError as exc:
+        raise BuildError(str(exc)) from exc
+    strokes = []
+    for index, points in enumerate(polylines):
+        is_last = index == len(polylines) - 1
+        gap = 0.0 if is_last else math.dist(points[-1], polylines[index + 1][0])
+        strokes.append(StrokePath(
+            id=f"glyph_{index}",
+            points=tuple(points),
+            closed=math.dist(points[0], points[-1]) <= 1e-6,
+            pen_lift_after=(not is_last) and gap > 1e-6,
+        ))
+    asset = Asset(id="text", board=board, view_box=strokes_bounds(polylines),
+                  self_intersections="allow", strokes=tuple(strokes))
+    try:
+        preflight_asset(asset)
+    except GeometryError as exc:
+        raise BuildError(f"Text {text!r} failed geometry preflight: {exc}") from exc
+    events, stats = compile_drawable(asset, duration, False)
+    return tuple(events), stats
+
+
 def draw_events(state: FrameState, owner: str, events: tuple[PenEvent, ...], tau: float,
                 color: tuple[int, int, int], width: int, seed_base: int,
                 last_color: tuple[int, int, int] | None = None, claim: bool = True) -> None:
@@ -327,7 +361,13 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
         if asset.board != board:
             raise BuildError(f"Asset {name!r} was authored for board {asset.board}, "
                              f"storyboard is {board}")
-    return {"assets": len(names), "fonts": "ok"}
+    text_actions = 0
+    for action in flatten_actions(storyboard):
+        if action["type"] == "write_text":
+            text_timeline(action["text"], float(action["x"]), float(action["y"]),
+                          float(action["size"]), float(action["duration"]), board)
+            text_actions += 1
+    return {"assets": len(names), "text_actions": text_actions, "fonts": "ok"}
 
 
 class WhiteboardProject:
@@ -361,8 +401,16 @@ class WhiteboardProject:
                 continue
             color = self.style[action.get("color", "ink")]
             action_type = action["type"]
-            if action_type == "draw_text":
+            if action_type in {"draw_text", "fast_reveal_text"}:
+                # Raster wipe reveal — legacy behaviour, not handwriting.
                 draw_text_action(state, action, p, color, self.width, self.height)
+            elif action_type == "write_text":
+                events, _stats = text_timeline(action["text"], float(action["x"]), float(action["y"]),
+                                               float(action["size"]), float(action["duration"]),
+                                               (self.width, self.height))
+                tau = time_s - float(action["start"])
+                draw_events(state, action["id"], events, tau, color, int(action.get("width", 3)),
+                            3000 + index)
             elif action_type == "fade_text":
                 fade_text(state, action, p, color, self.width, self.height)
             elif action_type == "fade_labels":

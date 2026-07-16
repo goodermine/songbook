@@ -42,13 +42,19 @@ def action_thresholds(storyboard: dict, project) -> dict[str, float]:
     """Per-action pen-down step limits derived from each compiled timeline."""
     thresholds = {}
     if project.pen_physics != "lift":
-        return thresholds
+        return thresholds  # write_text still compiles physically, but keep legacy audits global
     for action in engine.flatten_actions(storyboard):
-        if action["type"] not in {"draw_asset", "draw_break"}:
+        if action["type"] in {"draw_asset", "draw_break"}:
+            _, stats = engine.compile_drawable(
+                engine.REGISTRY.load(action["asset"]),
+                float(action["duration"]), bool(action.get("arrowheads")))
+        elif action["type"] == "write_text":
+            _, stats = engine.text_timeline(
+                action["text"], float(action["x"]), float(action["y"]),
+                float(action["size"]), float(action["duration"]),
+                (project.width, project.height))
+        else:
             continue
-        _, stats = engine.compile_drawable(
-            engine.REGISTRY.load(action["asset"]),
-            float(action["duration"]), bool(action.get("arrowheads")))
         thresholds[action["id"]] = EASING_HEADROOM * stats["draw_px_per_s"] / project.fps
     return thresholds
 
