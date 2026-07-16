@@ -23,9 +23,9 @@ def test_registry_loads_every_storyboard_asset(main_storyboard, smoke_storyboard
 
 def test_registry_covers_known_asset_set():
     assert engine.REGISTRY.names() == [
-        "choice_path", "cracks", "cross_out", "identity_box", "identity_break",
-        "old_loop", "pause_symbol", "person_one", "person_two",
-        "reaction_arrows", "rehearsal_loop",
+        "checkmark", "choice_path", "cracks", "cross_out", "identity_box",
+        "identity_break", "old_loop", "pause_symbol", "person_one",
+        "person_two", "reaction_arrows", "rehearsal_loop",
     ]
 
 
