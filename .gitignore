@@ -205,3 +205,4 @@ whiteboard/*.mp4
 whiteboard/*.build.json
 __pycache__/
 .pytest_cache/
+whiteboard/proof_renders/

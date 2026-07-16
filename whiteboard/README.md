@@ -26,6 +26,8 @@ Proof video: **People Aren't Broken. They're Rehearsed.**
 | `tools/bake_assets.py` | Provenance of the asset migration; regenerates `assets/` |
 | `tools/asset_contact_sheet.py` | Diagnostic contact sheet (Phase 2 gate artifact) |
 | `tools/geometry_audit.py` | Per-frame nib audit; fails on pen-down teleports (Phase 3 gate) |
+| `tools/prove_generality.py` | Phase 7 runner: renders + gates all proof storyboards |
+| `storyboards/proof/` | Three unseen proof storyboards (render with zero Python edits) |
 | `baseline/` | Frozen-baseline evidence (versions, probe, frame hashes, contact sheet) |
 | `tests/` | pytest suite (schema, pen scheduler, geometry, audio modes, integration, golden frames) |
 | `reference/` | Pristine V2 renderer/master and V1 history — do not edit |
@@ -120,10 +122,19 @@ audio modes and assert stream counts and clean decodes.
   bounded wrist, hand visible only while a pen is down. Open aesthetic
   choices (skin tone, left/right, style) remain owner-swappable — replace the
   sprite + metadata, not code.
-- [ ] **Phase 6 — Rendering/illustration quality** (traced arrowheads,
-  progressive break erasure, supersampling, transitions).
-- [ ] **Phase 7 — Generality proof** (three unseen storyboards render with zero
-  renderer edits).
+- [ ] **Phase 6 — Rendering/illustration quality** (supersampling/Cairo
+  antialiasing, explicit transition policy, 9:16 templates, cohesive doodle
+  vocabulary — largely aesthetic; traced arrowheads and progressive break
+  erasure already landed with Phase 3). Open owner decisions: hand style/skin
+  tone/handedness, type personality.
+- [x] **Phase 7 — Generality proof**: three unseen 30–35 s storyboards
+  (`storyboards/proof/`) — *Habits Compound*, *React or Respond*, *Practice
+  Makes Patterns* — plus a hand-authored JSON asset (`assets/checkmark.json`)
+  render **3/3 with zero renderer edits** via `tools/prove_generality.py`.
+  Per video: one H.264 stream, zero audio streams, clean tail decode, zero
+  pen collisions, zero pen-down teleports, max nib error 0.68 px (≤2 px
+  gate), max pose-angle error 0.49° (≤1° gate). Report:
+  `baseline/generality_report.json`.
 
 Non-negotiable product rules (one hand, one pen-down stroke, nib on the stroke
 front, no teleporting, silent = zero audio streams, storyboards not Python for

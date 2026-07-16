@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "title": "Habits Compound",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "content_duration": 34.0,
+  "safe_content_end": 33.6,
+  "final_hold": 1.0,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "style": {
+    "paper": [249, 247, 240],
+    "ink": [38, 43, 46],
+    "faint": [118, 120, 116],
+    "accent": [202, 83, 48],
+    "teal": [31, 111, 112]
+  },
+  "narration": {
+    "transcript": "Habits compound. The loop runs you until you see it. One percent every day. Start today: repetition is a vote for who you become."
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0.0,
+      "end": 8.5,
+      "actions": [
+        {"id": "h1", "type": "write_text", "text": "HABITS COMPOUND", "x": 130, "y": 64, "size": 52, "width": 4, "start": 0.2, "duration": 2.6, "requires_pen": true, "color": "ink"},
+        {"id": "hook_person", "type": "draw_asset", "asset": "person_one", "start": 3.0, "duration": 1.4, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "hook_cracks", "type": "draw_asset", "asset": "cracks", "start": 4.5, "duration": 0.6, "requires_pen": true, "color": "accent", "width": 4},
+        {"id": "hook_note", "type": "fade_text", "text": "tiny reps, huge returns.", "x": 620, "y": 250, "size": 34, "italic": true, "start": 5.4, "duration": 0.8, "requires_pen": false, "color": "ink"}
+      ]
+    },
+    {
+      "id": "loop",
+      "start": 8.5,
+      "end": 17.0,
+      "actions": [
+        {"id": "loop_circle", "type": "draw_asset", "asset": "rehearsal_loop", "start": 8.7, "duration": 2.2, "requires_pen": true, "color": "teal", "width": 8, "arrowheads": true},
+        {"id": "loop_labels", "type": "fade_labels", "start": 11.2, "duration": 1.6, "requires_pen": false, "color": "faint", "size": 25,
+          "labels": [
+            {"text": "cue", "x": 1095, "y": 254},
+            {"text": "routine", "x": 1018, "y": 520},
+            {"text": "reward", "x": 355, "y": 470},
+            {"text": "repeat", "x": 415, "y": 205}
+          ]
+        },
+        {"id": "h2", "type": "write_text", "text": "THE LOOP RUNS YOU", "x": 150, "y": 62, "size": 44, "width": 4, "start": 13.2, "duration": 2.5, "requires_pen": true, "color": "ink"}
+      ]
+    },
+    {
+      "id": "growth",
+      "start": 17.0,
+      "end": 25.5,
+      "actions": [
+        {"id": "growth_path", "type": "draw_asset", "asset": "choice_path", "start": 17.3, "duration": 1.9, "requires_pen": true, "color": "teal", "width": 9, "arrowheads": true},
+        {"id": "h3", "type": "write_text", "text": "1% EVERY DAY", "x": 470, "y": 490, "size": 46, "width": 4, "start": 19.4, "duration": 2.0, "requires_pen": true, "color": "teal"},
+        {"id": "growth_note", "type": "fade_text", "text": "small beats loud.", "x": 500, "y": 570, "size": 28, "italic": true, "start": 21.8, "duration": 0.7, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "close",
+      "start": 25.5,
+      "end": 34.0,
+      "actions": [
+        {"id": "close_check", "type": "draw_asset", "asset": "checkmark", "start": 25.8, "duration": 0.9, "requires_pen": true, "color": "accent", "width": 10},
+        {"id": "h4", "type": "write_text", "text": "START TODAY.", "x": 420, "y": 120, "size": 50, "width": 4, "start": 27.0, "duration": 1.9, "requires_pen": true, "color": "ink"},
+        {"id": "close_f1", "type": "fade_text", "text": "Repetition is a vote", "x": 470, "y": 530, "size": 28, "italic": true, "start": 29.2, "duration": 0.6, "requires_pen": false, "color": "ink"},
+        {"id": "close_f2", "type": "fade_text", "text": "for who you become.", "x": 470, "y": 567, "size": 28, "italic": true, "start": 29.9, "duration": 0.6, "requires_pen": false, "color": "accent"}
+      ]
+    }
+  ]
+}
