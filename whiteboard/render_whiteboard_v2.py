@@ -19,7 +19,8 @@ from typing import Any
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-from asset_registry import Asset, AssetRegistry, GeometryError, StrokePath, preflight_asset
+from asset_registry import (Asset, AssetRegistry, GeometryError, StrokePath,
+                            preflight_asset, transform_asset)
 from hand_rig import HandRigError, default_rig
 from text_strokes import TextStrokeError, strokes_bounds, text_to_strokes
 from timeline import PenEvent, compile_drawable, smoothed_tangent
@@ -230,10 +231,37 @@ def load_asset(name: str):
         raise BuildError(str(exc)) from exc
 
 
-@lru_cache(maxsize=256)
-def compiled_events(asset_name: str, duration: float, arrowheads: bool) -> tuple[PenEvent, ...]:
-    """Cache one physical timeline per (asset, duration, arrowheads) triple."""
-    events, _stats = compile_drawable(REGISTRY.load(asset_name), duration, arrowheads)
+@lru_cache(maxsize=512)
+def placed_asset(name: str, at: tuple[float, float] | None, scale: float) -> Asset:
+    """Asset repositioned/rescaled per the action's `at`/`scale` fields."""
+    asset = load_asset(name)
+    if at is None and scale == 1.0:
+        return asset
+    try:
+        return transform_asset(asset, at, scale)
+    except GeometryError as exc:
+        raise BuildError(str(exc)) from exc
+
+
+def action_placement(action: dict[str, Any]) -> tuple[tuple[float, float] | None, float]:
+    at = action.get("at")
+    if at is not None:
+        if not (isinstance(at, (list, tuple)) and len(at) == 2):
+            raise BuildError(f"Action {action.get('id')!r}: 'at' must be an [x, y] pair")
+        at = (float(at[0]), float(at[1]))
+    return at, float(action.get("scale", 1.0))
+
+
+def action_asset(action: dict[str, Any]) -> Asset:
+    at, scale = action_placement(action)
+    return placed_asset(action["asset"], at, scale)
+
+
+@lru_cache(maxsize=512)
+def compiled_events(asset_name: str, at: tuple[float, float] | None, scale: float,
+                    duration: float, arrowheads: bool) -> tuple[PenEvent, ...]:
+    """Cache one physical timeline per placed asset + duration + arrowheads."""
+    events, _stats = compile_drawable(placed_asset(asset_name, at, scale), duration, arrowheads)
     return tuple(events)
 
 
@@ -358,13 +386,21 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
     for kind in FONT_CANDIDATES:
         resolve_font_path(kind)
     board = (int(storyboard["width"]), int(storyboard["height"]))
-    names = sorted({action["asset"] for action in flatten_actions(storyboard)
-                    if action["type"] in {"draw_asset", "draw_break"}})
-    for name in names:
-        asset = load_asset(name)
-        if asset.board != board:
-            raise BuildError(f"Asset {name!r} was authored for board {asset.board}, "
+    names = set()
+    for action in flatten_actions(storyboard):
+        if action["type"] not in {"draw_asset", "draw_break"}:
+            continue
+        names.add(action["asset"])
+        placed = action_asset(action)
+        if placed.board != board:
+            raise BuildError(f"Asset {action['asset']!r} was authored for board {placed.board}, "
                              f"storyboard is {board}")
+        try:
+            # Re-validate at the placed position so a bad `at`/`scale` that
+            # pushes geometry off the board fails before rendering.
+            preflight_asset(placed)
+        except GeometryError as exc:
+            raise BuildError(f"Action {action['id']!r}: {exc}") from exc
     text_actions = 0
     for action in flatten_actions(storyboard):
         if action["type"] == "write_text":
@@ -436,7 +472,8 @@ class WhiteboardProject:
                         state.draw.ellipse((x - 18, 348, x + 18, 384), outline=alpha_color, width=5)
             elif action_type in {"draw_asset", "draw_break"}:
                 if self.pen_physics == "lift":
-                    events = compiled_events(action["asset"], float(action["duration"]),
+                    at, scale = action_placement(action)
+                    events = compiled_events(action["asset"], at, scale, float(action["duration"]),
                                              bool(action.get("arrowheads")))
                     tau = time_s - float(action["start"])
                     if action_type == "draw_break":
@@ -447,7 +484,7 @@ class WhiteboardProject:
                     draw_events(state, action["id"], events, tau, color, int(action.get("width", 6)),
                                 1000 + index, self.style.get(action.get("last_color", "")))
                 else:
-                    asset = load_asset(action["asset"])
+                    asset = action_asset(action)
                     paths = [list(stroke.points) for stroke in asset.strokes]
                     arrowhead_paths = [list(stroke.arrowhead) if stroke.arrowhead else None
                                        for stroke in asset.strokes]

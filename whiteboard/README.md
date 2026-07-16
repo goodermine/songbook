@@ -15,6 +15,7 @@ Proof video: **People Aren't Broken. They're Rehearsed.**
 | `render_whiteboard_v2.py` | Active CLI/validator/renderer (V2.1: explicit audio modes, typed assets) |
 | `asset_registry.py` | Typed `StrokePath`/`Asset` models, JSON loader, geometry preflight |
 | `assets/*.json` | Asset geometry (one file per asset) — edit these, not Python |
+| `tools/author_library_assets.py` | Parametric generator for the reusable doodle library |
 | `storyboard_v2.json` | Active story/timing/style source of truth |
 | `storyboards/smoke.json` | 3-second smoke storyboard used by the test suite |
 | `timeline.py` | Physical pen-timeline compiler (stroke / arrowhead / travel events) |
@@ -64,6 +65,24 @@ python3 render_whiteboard_v2.py --audio-mode mix --narration n.wav      # narrat
 `--silent` remains as a deprecated alias for `--audio-mode none`. Every build
 writes `<output>.build.json` including `audio_mode` and the probed
 `audio_streams` count.
+
+## Asset library and placement
+
+26 assets ship in `assets/` — the original scene drawings plus a reusable
+doodle library (lightbulb, speech/thought bubbles, star, heart, target, clock,
+magnifier, gear, mountain+flag, question/exclamation marks, circle-highlight,
+wavy underline, checkmark). Library assets are authored centred on the board;
+any `draw_asset`/`draw_break` action can position and resize them with data:
+
+```json
+{"id": "idea", "type": "draw_asset", "asset": "lightbulb",
+ "at": [250, 400], "scale": 0.8, "start": 3.6, "duration": 1.5,
+ "requires_pen": true, "color": "ink", "width": 5}
+```
+
+Placement is preflighted: an `at`/`scale` that pushes geometry off the board
+fails before rendering. `storyboards/asset_showcase.json` demos the full
+library; the labelled contact sheet is `baseline/assets_contact_sheet.png`.
 
 ## Tests
 

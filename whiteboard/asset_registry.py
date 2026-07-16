@@ -184,6 +184,43 @@ def preflight_asset(asset: Asset) -> None:
                                 f"between strokes {current.id!r} and {following.id!r}")
 
 
+def transform_asset(asset: Asset, at: Point | None = None, scale: float = 1.0) -> Asset:
+    """Place an asset: move its view-box centre to ``at`` and scale around it.
+
+    Assets are authored at a natural position (library assets centre on the
+    board); storyboard actions may reposition and resize them with
+    ``"at": [x, y]`` and ``"scale"`` without touching the asset file.
+    """
+    if scale <= 0:
+        raise GeometryError(f"Asset {asset.id!r}: scale must be positive, got {scale}")
+    x0, y0, x1, y1 = asset.view_box
+    center = ((x0 + x1) / 2, (y0 + y1) / 2)
+    target = at if at is not None else center
+
+    def place(point: Point) -> Point:
+        return ((point[0] - center[0]) * scale + target[0],
+                (point[1] - center[1]) * scale + target[1])
+
+    strokes = tuple(StrokePath(
+        id=stroke.id,
+        points=tuple(place(p) for p in stroke.points),
+        closed=stroke.closed,
+        pen_lift_after=stroke.pen_lift_after,
+        arrowhead=tuple(place(p) for p in stroke.arrowhead) if stroke.arrowhead else None,
+        color_intent=stroke.color_intent,
+        width_intent=stroke.width_intent,
+    ) for stroke in asset.strokes)
+    half_w, half_h = (x1 - x0) / 2 * scale, (y1 - y0) / 2 * scale
+    return Asset(
+        id=f"{asset.id}@{target[0]:g},{target[1]:g}x{scale:g}",
+        board=asset.board,
+        view_box=(target[0] - half_w, target[1] - half_h,
+                  target[0] + half_w, target[1] + half_h),
+        self_intersections=asset.self_intersections,
+        strokes=strokes,
+    )
+
+
 class AssetRegistry:
     """Loads, validates and caches typed assets from a directory of JSON files."""
 

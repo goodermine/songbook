@@ -21,12 +21,27 @@ def test_registry_loads_every_storyboard_asset(main_storyboard, smoke_storyboard
             assert asset.strokes, name
 
 
+CORE_ASSETS = {
+    "checkmark", "choice_path", "cracks", "cross_out", "identity_box",
+    "identity_break", "old_loop", "pause_symbol", "person_one",
+    "person_two", "reaction_arrows", "rehearsal_loop",
+}
+LIBRARY_ASSETS = {
+    "lightbulb", "speech_bubble", "thought_bubble", "star_five", "heart",
+    "target", "clock", "magnifier", "gear", "mountain_flag",
+    "question_mark", "exclamation", "circle_highlight", "underline_swash",
+}
+
+
 def test_registry_covers_known_asset_set():
-    assert engine.REGISTRY.names() == [
-        "checkmark", "choice_path", "cracks", "cross_out", "identity_box",
-        "identity_break", "old_loop", "pause_symbol", "person_one",
-        "person_two", "reaction_arrows", "rehearsal_loop",
-    ]
+    names = set(engine.REGISTRY.names())
+    assert CORE_ASSETS <= names
+    assert LIBRARY_ASSETS <= names
+
+
+def test_every_registered_asset_passes_preflight():
+    for name in engine.REGISTRY.names():
+        assert engine.REGISTRY.load(name).strokes, name
 
 
 def test_unknown_asset_fails_with_name():
@@ -146,3 +161,63 @@ def test_board_mismatch_fails(smoke_storyboard, tmp_path, monkeypatch):
     bad["width"], bad["height"] = 1920, 1080
     with pytest.raises(engine.BuildError, match="board"):
         engine.preflight_project(bad)
+
+
+def test_transform_moves_view_box_center():
+    from asset_registry import transform_asset
+    asset = engine.REGISTRY.load("target")
+    placed = transform_asset(asset, at=(300.0, 500.0), scale=0.5)
+    x0, y0, x1, y1 = placed.view_box
+    assert ((x0 + x1) / 2, (y0 + y1) / 2) == pytest.approx((300.0, 500.0))
+    assert (x1 - x0) == pytest.approx((asset.view_box[2] - asset.view_box[0]) * 0.5)
+    # Geometry survives placement: strokes still valid.
+    from asset_registry import preflight_asset as pf
+    pf(placed)
+
+
+def test_transform_scales_arrowheads_too():
+    from asset_registry import transform_asset
+    asset = engine.REGISTRY.load("choice_path")
+    placed = transform_asset(asset, at=(400.0, 300.0), scale=2.0)
+    stroke, original = placed.strokes[0], asset.strokes[0]
+    assert stroke.arrowhead is not None
+    original_span = math.dist(original.arrowhead[0], original.arrowhead[-1])
+    assert math.dist(stroke.arrowhead[0], stroke.arrowhead[-1]) == pytest.approx(2 * original_span)
+
+
+def test_invalid_scale_fails():
+    from asset_registry import GeometryError as GE, transform_asset
+    with pytest.raises(GE, match="scale"):
+        transform_asset(engine.REGISTRY.load("target"), scale=0.0)
+
+
+def test_placement_off_board_fails_preflight(smoke_storyboard):
+    bad = json.loads(json.dumps(smoke_storyboard))
+    bad["scenes"][0]["actions"][1] = {
+        "id": "off_board", "type": "draw_asset", "asset": "target",
+        "at": [1250, 360], "start": 0.9, "duration": 0.5,
+        "requires_pen": True, "color": "teal", "width": 6,
+    }
+    with pytest.raises(engine.BuildError, match="board"):
+        engine.preflight_project(bad)
+
+
+def test_placed_render_puts_ink_at_target(smoke_storyboard):
+    storyboard = json.loads(json.dumps(smoke_storyboard))
+    storyboard["scenes"][0]["actions"] = [{
+        "id": "placed_target", "type": "draw_asset", "asset": "target",
+        "at": [300, 500], "scale": 0.5, "start": 0.1, "duration": 0.8,
+        "requires_pen": True, "color": "ink", "width": 5,
+    }]
+    engine.validate_storyboard(storyboard)
+    engine.preflight_project(storyboard)
+    project = engine.WhiteboardProject(storyboard)
+    tips = []
+    for frame in range(4, 20):  # sample across the 0.1-0.9s action
+        project.render_frame(frame / 24)
+        report = project.last_report
+        if report["pen"] == "down":
+            tips.append(report["tip"])
+    assert tips, "expected pen-down frames during the placed draw"
+    # Placed target: 95px outer ring scaled 0.5 -> nib stays within ~48px+margin.
+    assert all(math.dist(tip, (300, 500)) < 60 for tip in tips)

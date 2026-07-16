@@ -46,7 +46,7 @@ def action_thresholds(storyboard: dict, project) -> dict[str, float]:
     for action in engine.flatten_actions(storyboard):
         if action["type"] in {"draw_asset", "draw_break"}:
             _, stats = engine.compile_drawable(
-                engine.REGISTRY.load(action["asset"]),
+                engine.action_asset(action),
                 float(action["duration"]), bool(action.get("arrowheads")))
         elif action["type"] == "write_text":
             _, stats = engine.text_timeline(
