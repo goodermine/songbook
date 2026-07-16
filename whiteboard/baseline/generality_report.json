@@ -18,7 +18,7 @@
         "text_actions": 4,
         "fonts": "ok"
       },
-      "render_seconds": 23.63,
+      "render_seconds": 13.54,
       "output": "/home/user/songbook/whiteboard/proof_renders/habits_compound.mp4",
       "streams": [
         [
@@ -27,7 +27,7 @@
         ]
       ],
       "duration": 34.625,
-      "size_bytes": 624430,
+      "size_bytes": 873241,
       "geometry": {
         "pen_down_frames": 320,
         "max_tip_step_px": 48.53,
@@ -35,8 +35,8 @@
       },
       "hand": {
         "pen_down_frames": 320,
-        "max_nib_error_px": 0.683,
-        "p99_nib_error_px": 0.617,
+        "max_nib_error_px": 0.679,
+        "p99_nib_error_px": 0.659,
         "max_angle_error_deg": 0.49
       },
       "failures": [],
@@ -56,7 +56,7 @@
         "text_actions": 4,
         "fonts": "ok"
       },
-      "render_seconds": 18.82,
+      "render_seconds": 10.71,
       "output": "/home/user/songbook/whiteboard/proof_renders/practice_makes_patterns.mp4",
       "streams": [
         [
@@ -65,7 +65,7 @@
         ]
       ],
       "duration": 31.625,
-      "size_bytes": 626239,
+      "size_bytes": 822194,
       "geometry": {
         "pen_down_frames": 305,
         "max_tip_step_px": 53.13,
@@ -73,8 +73,8 @@
       },
       "hand": {
         "pen_down_frames": 305,
-        "max_nib_error_px": 0.679,
-        "p99_nib_error_px": 0.657,
+        "max_nib_error_px": 0.677,
+        "p99_nib_error_px": 0.639,
         "max_angle_error_deg": 0.48
       },
       "failures": [],
@@ -94,7 +94,7 @@
         "text_actions": 4,
         "fonts": "ok"
       },
-      "render_seconds": 16.82,
+      "render_seconds": 10.36,
       "output": "/home/user/songbook/whiteboard/proof_renders/react_or_respond.mp4",
       "streams": [
         [
@@ -103,7 +103,7 @@
         ]
       ],
       "duration": 32.625,
-      "size_bytes": 673198,
+      "size_bytes": 971675,
       "geometry": {
         "pen_down_frames": 340,
         "max_tip_step_px": 88.68,
@@ -111,8 +111,8 @@
       },
       "hand": {
         "pen_down_frames": 340,
-        "max_nib_error_px": 0.683,
-        "p99_nib_error_px": 0.647,
+        "max_nib_error_px": 0.699,
+        "p99_nib_error_px": 0.673,
         "max_angle_error_deg": 0.467
       },
       "failures": [],

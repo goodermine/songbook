@@ -89,6 +89,9 @@ def main() -> None:
                         help="asset name to write (default replaces the active rig)")
     parser.add_argument("--key-background", type=int, default=None, metavar="TOLERANCE",
                         help="key out a near-white background with this tolerance (e.g. 24)")
+    parser.add_argument("--fade-bottom", type=int, default=0, metavar="PX",
+                        help="soft-fade the bottom PX of the artwork to transparent "
+                             "(hides a hard crop where the wrist leaves the source image)")
     args = parser.parse_args()
 
     image = Image.open(args.source).convert("RGBA")
@@ -104,6 +107,14 @@ def main() -> None:
              else (image.width * 0.8, image.height * 0.85))
     if not (0 <= nib[0] < image.width and 0 <= nib[1] < image.height):
         raise SystemExit(f"--nib {args.nib} falls outside the artwork bounds {bbox}")
+
+    if args.fade_bottom > 0:
+        fade = min(args.fade_bottom, image.height)
+        alpha_band = image.getchannel("A").load()
+        for row in range(image.height - fade, image.height):
+            factor = (image.height - 1 - row) / fade
+            for col in range(image.width):
+                alpha_band[col, row] = int(alpha_band[col, row] * factor)
 
     scale = (args.height / image.height) if args.height else 1.0
     if scale != 1.0:

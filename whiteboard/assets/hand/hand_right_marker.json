@@ -2,18 +2,18 @@
   "id": "hand_right_marker",
   "sprite": "hand_right_marker.png",
   "size": [
-    460,
-    460
+    807,
+    850
   ],
   "nib": [
-    92.0,
-    88.0
+    257.5,
+    264.92
   ],
-  "pen_angle_deg": 42.0,
+  "pen_angle_deg": 46.0,
   "wrist": [
-    238.0,
-    248.0
+    516.34,
+    572.0
   ],
   "contact": "down",
-  "provenance": "generated once by tools/generate_hand.py; do not regenerate per frame"
+  "provenance": "imported once from c531246b-2151.png by tools/import_hand.py"
 }
