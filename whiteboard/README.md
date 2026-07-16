@@ -12,11 +12,15 @@ Proof video: **People Aren't Broken. They're Rehearsed.**
 
 | Path | Purpose |
 | --- | --- |
-| `render_whiteboard_v2.py` | Active CLI/validator/renderer (V2.1: explicit audio modes) |
+| `render_whiteboard_v2.py` | Active CLI/validator/renderer (V2.1: explicit audio modes, typed assets) |
+| `asset_registry.py` | Typed `StrokePath`/`Asset` models, JSON loader, geometry preflight |
+| `assets/*.json` | Asset geometry (one file per asset) — edit these, not Python |
 | `storyboard_v2.json` | Active story/timing/style source of truth |
 | `storyboards/smoke.json` | 3-second smoke storyboard used by the test suite |
-| `baseline/` | Phase 0 frozen-baseline evidence (versions, probe, frame hashes) |
-| `tests/` | pytest suite (schema, pen scheduler, audio modes, integration, golden frames) |
+| `tools/bake_assets.py` | Provenance of the asset migration; regenerates `assets/` |
+| `tools/asset_contact_sheet.py` | Diagnostic contact sheet (Phase 2 gate artifact) |
+| `baseline/` | Frozen-baseline evidence (versions, probe, frame hashes, contact sheet) |
+| `tests/` | pytest suite (schema, pen scheduler, geometry, audio modes, integration, golden frames) |
 | `reference/` | Pristine V2 renderer/master and V1 history — do not edit |
 | `docs/` | Handoff, audits, hand asset spec |
 
@@ -66,12 +70,18 @@ audio modes and assert stream counts and clean decodes.
 ## Phase status
 
 - [x] **Phase 0 — Freeze and measure**: baseline reproduced and recorded
-  (`baseline/BASELINE.md`), smoke storyboard added, suite of 38 tests green.
+  (`baseline/BASELINE.md`), smoke storyboard added, test suite green.
 - [x] **Phase 1 — Explicit audio policy**: `--audio-mode none|chalk|narration|mix`,
   `none` default, no WAV synthesised in `none` mode, manifest reports
   `audio_streams`.
-- [ ] **Phase 2 — Typed stroke geometry** (`AssetRegistry`/`StrokePath`, assets out
-  of Python, geometry preflight).
+- [x] **Phase 2 — Typed stroke geometry**: `asset_registry.py` with
+  `StrokePath`/`Asset` models; all 11 assets baked to `assets/*.json` with
+  closed/pen-lift/view-box/arrowhead metadata (`tools/bake_assets.py`);
+  geometry preflight (empty paths, NaN, zero-length segments, board clipping,
+  view-box mismatch, undeclared discontinuities, self-intersection policy)
+  runs before FFmpeg; diagnostic contact sheet at
+  `baseline/assets_contact_sheet.png`. Golden frames stayed byte-identical
+  through the migration.
 - [ ] **Phase 3 — Physical timeline** (pen-down/pen-up/hold/cut events, speed
   limits, no teleporting nib).
 - [ ] **Phase 4 — True stroke text** (bundled single-line font; the current text

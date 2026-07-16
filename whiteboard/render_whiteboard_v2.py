@@ -19,10 +19,15 @@ from typing import Any
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
+from asset_registry import AssetRegistry, GeometryError
+
 
 ROOT = Path(__file__).resolve().parent
 STORYBOARD_DEFAULT = ROOT / "storyboard_v2.json"
+ASSET_DIR = ROOT / "assets"
 AUDIO_MODES = ("none", "chalk", "narration", "mix")
+
+REGISTRY = AssetRegistry(ASSET_DIR)
 FONT_CANDIDATES = {
     "regular": [
         "/usr/share/fonts/opentype/urw-base35/URWBookman-Light.otf",
@@ -154,20 +159,10 @@ def sketch_line(draw: ImageDraw.ImageDraw, points: list[tuple[float, float]], co
         draw.line(jittered, fill=color, width=max(1, width - pass_no * 2), joint="curve")
 
 
-def arrow_head(draw: ImageDraw.ImageDraw, path: list[tuple[float, float]], color: tuple[int, int, int], width: int, seed: int) -> None:
-    if len(path) < 2:
-        return
-    tip, previous = path[-1], path[-2]
-    angle = math.atan2(tip[1] - previous[1], tip[0] - previous[0])
-    size = 23
-    left = (tip[0] - math.cos(angle - .55) * size, tip[1] - math.sin(angle - .55) * size)
-    right = (tip[0] - math.cos(angle + .55) * size, tip[1] - math.sin(angle + .55) * size)
-    sketch_line(draw, [left, tip, right], color, width, seed)
-
-
 def compound_paths(state: FrameState, owner: str, paths: list[list[tuple[float, float]]], p: float,
                    color: tuple[int, int, int], width: int, seed: int,
-                   arrowheads: bool = False, last_color: tuple[int, int, int] | None = None) -> None:
+                   arrowheads: bool = False, last_color: tuple[int, int, int] | None = None,
+                   arrowhead_paths: list[list[tuple[float, float]] | None] | None = None) -> None:
     """Draw compound paths at uniform physical velocity with one global pen."""
     lengths = [path_length(path) for path in paths]
     target = clamp(p) * sum(lengths)
@@ -176,8 +171,8 @@ def compound_paths(state: FrameState, owner: str, paths: list[list[tuple[float, 
         path_color = last_color if last_color and index == len(paths) - 1 else color
         if target >= length:
             sketch_line(state.draw, path, path_color, width, seed + index)
-            if arrowheads:
-                arrow_head(state.draw, path, path_color, width, seed + 100 + index)
+            if arrowheads and arrowhead_paths and arrowhead_paths[index]:
+                sketch_line(state.draw, arrowhead_paths[index], path_color, width, seed + 100 + index)
             target -= length
             continue
         if target > 0:
@@ -220,46 +215,12 @@ def fade_text(state: FrameState, action: dict[str, Any], p: float, color: tuple[
     state.image.alpha_composite(copy)
 
 
-def person_paths(cx: float, cy: float) -> list[list[tuple[float, float]]]:
-    head = [(cx + math.cos(a) * 35, cy - 105 + math.sin(a) * 35) for a in np.linspace(-math.pi / 2, 3 * math.pi / 2, 36)]
-    return [head, [(cx, cy - 70), (cx, cy + 15)], [(cx, cy - 35), (cx - 55, cy - 2)],
-            [(cx, cy - 35), (cx + 55, cy - 2)], [(cx, cy + 15), (cx - 48, cy + 83)],
-            [(cx, cy + 15), (cx + 48, cy + 83)]]
-
-
-def quadratic_arrow(x1: float, y1: float, x2: float, y2: float, bend: float = 0.0, samples: int = 45) -> list[tuple[float, float]]:
-    mx, my = (x1 + x2) / 2, (y1 + y2) / 2
-    nx, ny = -(y2 - y1), x2 - x1
-    length = math.hypot(nx, ny) or 1.0
-    cx, cy = mx + nx / length * bend, my + ny / length * bend
-    return [((1-u)**2*x1 + 2*(1-u)*u*cx + u*u*x2,
-             (1-u)**2*y1 + 2*(1-u)*u*cy + u*u*y2) for u in np.linspace(0, 1, samples)]
-
-
-def asset_paths(name: str) -> list[list[tuple[float, float]]]:
-    if name == "person_one":
-        return person_paths(390, 370)
-    if name == "person_two":
-        return person_paths(640, 365)
-    if name == "cracks":
-        return [[(390, 268), (374, 293), (392, 310)], [(392, 310), (370, 337)], [(392, 310), (414, 339)]]
-    if name == "cross_out":
-        return [[(665, 105), (1025, 160)], [(1010, 92), (685, 175)]]
-    if name == "rehearsal_loop":
-        return [[(640 + math.cos(a) * 235, 360 + math.sin(a) * 190) for a in np.linspace(-.55, math.pi * 1.73, 100)]]
-    if name == "reaction_arrows":
-        return [quadratic_arrow(x - 75, 310, x + 75, 310, -28) for x in [205, 420, 635, 850, 1065]]
-    if name == "identity_box":
-        return [[(330, 160), (950, 160), (950, 395), (330, 395), (330, 160)]]
-    if name == "identity_break":
-        return [[(640, 158), (610, 210), (662, 255), (620, 312), (650, 395)]]
-    if name == "old_loop":
-        return [[(345 + math.cos(a) * 125, 330 + math.sin(a) * 115) for a in np.linspace(0, math.pi * 2, 80)]]
-    if name == "pause_symbol":
-        return [[(322, 275), (322, 385)], [(370, 275), (370, 385)]]
-    if name == "choice_path":
-        return [[(465, 425), (540, 395), (615, 420), (700, 340), (790, 355), (875, 250), (1010, 215)]]
-    raise BuildError(f"Unknown asset {name!r}")
+def load_asset(name: str):
+    """Fetch a typed asset from the registry; geometry lives in assets/*.json."""
+    try:
+        return REGISTRY.load(name)
+    except GeometryError as exc:
+        raise BuildError(str(exc)) from exc
 
 
 def paper_texture(width: int, height: int, paper: tuple[int, int, int]) -> Image.Image:
@@ -311,6 +272,21 @@ def validate_storyboard(storyboard: dict[str, Any]) -> dict[str, Any]:
     return {"actions": len(actions), "pen_actions": len(pen_actions), "pen_collisions": 0, "max_active_pens": 1}
 
 
+def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
+    """Fail on missing fonts/assets and bad geometry before any frame renders."""
+    for kind in FONT_CANDIDATES:
+        resolve_font_path(kind)
+    board = (int(storyboard["width"]), int(storyboard["height"]))
+    names = sorted({action["asset"] for action in flatten_actions(storyboard)
+                    if action["type"] in {"draw_asset", "draw_break"}})
+    for name in names:
+        asset = load_asset(name)
+        if asset.board != board:
+            raise BuildError(f"Asset {name!r} was authored for board {asset.board}, "
+                             f"storyboard is {board}")
+    return {"assets": len(names), "fonts": "ok"}
+
+
 class WhiteboardProject:
     def __init__(self, storyboard: dict[str, Any]) -> None:
         self.storyboard = storyboard
@@ -356,11 +332,15 @@ class WhiteboardProject:
                         alpha_color = tuple(round(channel * local + self.style["paper"][i] * (1-local)) for i, channel in enumerate(color))
                         state.draw.ellipse((x - 18, 348, x + 18, 384), outline=alpha_color, width=5)
             elif action_type in {"draw_asset", "draw_break"}:
-                paths = asset_paths(action["asset"])
+                asset = load_asset(action["asset"])
+                paths = [list(stroke.points) for stroke in asset.strokes]
+                arrowhead_paths = [list(stroke.arrowhead) if stroke.arrowhead else None
+                                   for stroke in asset.strokes]
                 if action_type == "draw_break":
                     compound_paths(state, f"{action['id']}_erase", paths, 1.0, self.style["paper"], 18, 800 + index)
                 compound_paths(state, action["id"], paths, p, color, int(action.get("width", 6)), 1000 + index,
-                               bool(action.get("arrowheads")), self.style.get(action.get("last_color", "")))
+                               bool(action.get("arrowheads")), self.style.get(action.get("last_color", "")),
+                               arrowhead_paths)
             else:
                 raise BuildError(f"Unsupported action type {action_type!r}")
         state.overlay_pen()
@@ -416,6 +396,7 @@ def render(project: WhiteboardProject, output: Path, narration: Path | None, pre
             raise BuildError(f"Narration file not found: {narration}")
     elif narration is not None:
         raise BuildError(f"Audio mode {audio_mode!r} does not accept --narration")
+    preflight_project(project.storyboard)
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
         raise BuildError("FFmpeg and FFprobe are required")
     output = output.resolve()
@@ -544,8 +525,9 @@ def main() -> None:
     audio_mode = resolve_audio_mode(args)
     storyboard = json.loads(args.storyboard.read_text(encoding="utf-8"))
     validation = validate_storyboard(storyboard)
+    preflight = preflight_project(storyboard)
     if args.validate_only:
-        print(json.dumps({"status": "valid", **validation}, indent=2))
+        print(json.dumps({"status": "valid", **validation, "preflight": preflight}, indent=2))
         return
     result = render(WhiteboardProject(storyboard), args.output, args.narration, args.preview, audio_mode)
     report = {"status": "succeeded", "validation": validation, **result}
