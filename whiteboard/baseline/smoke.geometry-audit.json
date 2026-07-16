@@ -1,0 +1,18 @@
+{
+  "pen_physics": "lift",
+  "fps": 24,
+  "frames": 96,
+  "pen_down_frames": 58,
+  "measured_steps": 46,
+  "max_tip_step_px": 40.07,
+  "p99_tip_step_px": 38.74,
+  "default_step_threshold_px": 50.0,
+  "action_step_thresholds_px": {
+    "smoke_cracks": 21.82,
+    "smoke_person": 48.56,
+    "smoke_pause": 39.08
+  },
+  "violations": [],
+  "max_active_pens": 1,
+  "storyboard": "storyboards/smoke.json"
+}

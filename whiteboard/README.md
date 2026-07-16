@@ -17,8 +17,10 @@ Proof video: **People Aren't Broken. They're Rehearsed.**
 | `assets/*.json` | Asset geometry (one file per asset) — edit these, not Python |
 | `storyboard_v2.json` | Active story/timing/style source of truth |
 | `storyboards/smoke.json` | 3-second smoke storyboard used by the test suite |
+| `timeline.py` | Physical pen-timeline compiler (stroke / arrowhead / travel events) |
 | `tools/bake_assets.py` | Provenance of the asset migration; regenerates `assets/` |
 | `tools/asset_contact_sheet.py` | Diagnostic contact sheet (Phase 2 gate artifact) |
+| `tools/geometry_audit.py` | Per-frame nib audit; fails on pen-down teleports (Phase 3 gate) |
 | `baseline/` | Frozen-baseline evidence (versions, probe, frame hashes, contact sheet) |
 | `tests/` | pytest suite (schema, pen scheduler, geometry, audio modes, integration, golden frames) |
 | `reference/` | Pristine V2 renderer/master and V1 history — do not edit |
@@ -82,8 +84,18 @@ audio modes and assert stream counts and clean decodes.
   runs before FFmpeg; diagnostic contact sheet at
   `baseline/assets_contact_sheet.png`. Golden frames stayed byte-identical
   through the migration.
-- [ ] **Phase 3 — Physical timeline** (pen-down/pen-up/hold/cut events, speed
-  limits, no teleporting nib).
+- [x] **Phase 3 — Physical timeline**: `timeline.py` compiles drawable actions
+  into contiguous `stroke`/`arrowhead`/`travel` events (pen-up travel at 2.5×
+  drawing speed, ≥80 ms visible lifts, speed warnings outside 200–2000 px/s).
+  Opt-in per storyboard via `"pen_physics": "lift"` — the frozen V2 baseline
+  keeps `legacy` and stays byte-identical. In lift mode: the hand lifts
+  instead of teleporting, arrowheads are physically traced, the identity-break
+  erase mask shares the accent line's partial progress, and the marker angle
+  is smoothed over the trailing 22 px of path. Every frame reports
+  action/stroke/tip/tangent/pen state (`WhiteboardProject.last_report`);
+  `tools/geometry_audit.py` turns that into a proof artifact — smoke (lift):
+  **0 violations**; main storyboard (legacy): 72 teleports up to 106 px
+  (`baseline/*.geometry-audit.json`).
 - [ ] **Phase 4 — True stroke text** (bundled single-line font; the current text
   reveal is a raster wipe, not handwriting).
 - [ ] **Phase 5 — Hand/marker rig** (nib-anchored sprite, see

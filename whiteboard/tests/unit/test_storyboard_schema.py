@@ -52,7 +52,6 @@ def test_action_past_content_end_fails(storyboard_copy):
 
 def test_action_outside_scene_fails(storyboard_copy):
     storyboard_copy["scenes"][0]["end"] = 2.0
-    storyboard_copy["content_duration"] = 3.0
     with pytest.raises(engine.BuildError, match="outside scene"):
         engine.validate_storyboard(storyboard_copy)
 

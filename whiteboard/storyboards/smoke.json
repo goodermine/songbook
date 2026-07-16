@@ -4,9 +4,10 @@
   "width": 1280,
   "height": 720,
   "fps": 24,
-  "content_duration": 3.0,
-  "safe_content_end": 2.8,
+  "content_duration": 4.0,
+  "safe_content_end": 3.8,
   "final_hold": 0.5,
+  "pen_physics": "lift",
   "style": {
     "paper": [249, 247, 240],
     "ink": [38, 43, 46],
@@ -21,12 +22,13 @@
     {
       "id": "smoke",
       "start": 0.0,
-      "end": 3.0,
+      "end": 4.0,
       "actions": [
         {"id": "smoke_heading", "type": "draw_text", "start": 0.10, "duration": 0.70, "requires_pen": true, "text": "SMOKE TEST", "x": 120, "y": 80, "size": 60, "bold": true, "color": "ink"},
-        {"id": "smoke_box", "type": "draw_asset", "asset": "identity_box", "start": 0.90, "duration": 0.80, "requires_pen": true, "color": "teal", "width": 6},
-        {"id": "smoke_note", "type": "fade_text", "start": 1.80, "duration": 0.50, "requires_pen": false, "text": "still standing", "x": 520, "y": 260, "size": 34, "italic": true, "color": "faint"},
-        {"id": "smoke_pause", "type": "draw_asset", "asset": "pause_symbol", "start": 2.00, "duration": 0.40, "requires_pen": true, "color": "accent", "width": 12}
+        {"id": "smoke_cracks", "type": "draw_asset", "asset": "cracks", "start": 0.90, "duration": 0.50, "requires_pen": true, "color": "teal", "width": 6},
+        {"id": "smoke_note", "type": "fade_text", "start": 1.75, "duration": 0.45, "requires_pen": false, "text": "still standing", "x": 520, "y": 260, "size": 34, "italic": true, "color": "faint"},
+        {"id": "smoke_person", "type": "draw_asset", "asset": "person_one", "start": 1.80, "duration": 1.30, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "smoke_pause", "type": "draw_asset", "asset": "pause_symbol", "start": 3.20, "duration": 0.50, "requires_pen": true, "color": "accent", "width": 12}
       ]
     }
   ]

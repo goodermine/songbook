@@ -20,12 +20,14 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 from asset_registry import AssetRegistry, GeometryError
+from timeline import PenEvent, compile_drawable, smoothed_tangent
 
 
 ROOT = Path(__file__).resolve().parent
 STORYBOARD_DEFAULT = ROOT / "storyboard_v2.json"
 ASSET_DIR = ROOT / "assets"
 AUDIO_MODES = ("none", "chalk", "narration", "mix")
+PEN_PHYSICS_MODES = ("legacy", "lift")
 
 REGISTRY = AssetRegistry(ASSET_DIR)
 FONT_CANDIDATES = {
@@ -79,6 +81,7 @@ class PenPose:
     owner: str
     tip: tuple[float, float]
     tangent: tuple[float, float]
+    stroke: str | None = None
 
 
 class FrameState:
@@ -89,11 +92,12 @@ class FrameState:
         self.draw = ImageDraw.Draw(image)
         self.pen: PenPose | None = None
 
-    def claim_pen(self, owner: str, tip: tuple[float, float], tangent: tuple[float, float]) -> None:
+    def claim_pen(self, owner: str, tip: tuple[float, float], tangent: tuple[float, float],
+                  stroke: str | None = None) -> None:
         if self.pen is not None and self.pen.owner != owner:
             raise BuildError(f"Multiple active pens at runtime: {self.pen.owner!r} and {owner!r}")
         length = math.hypot(*tangent) or 1.0
-        self.pen = PenPose(owner, tip, (tangent[0] / length, tangent[1] / length))
+        self.pen = PenPose(owner, tip, (tangent[0] / length, tangent[1] / length), stroke)
 
     def overlay_pen(self) -> None:
         if self.pen:
@@ -223,6 +227,43 @@ def load_asset(name: str):
         raise BuildError(str(exc)) from exc
 
 
+@lru_cache(maxsize=256)
+def compiled_events(asset_name: str, duration: float, arrowheads: bool) -> tuple[PenEvent, ...]:
+    """Cache one physical timeline per (asset, duration, arrowheads) triple."""
+    events, _stats = compile_drawable(REGISTRY.load(asset_name), duration, arrowheads)
+    return tuple(events)
+
+
+def draw_events(state: FrameState, owner: str, events: tuple[PenEvent, ...], tau: float,
+                color: tuple[int, int, int], width: int, seed_base: int,
+                last_color: tuple[int, int, int] | None = None, claim: bool = True) -> None:
+    """Render a compiled physical timeline at local action time ``tau``.
+
+    Completed pen-down events are drawn in full; the active pen-down event is
+    drawn partially with the pen claimed at its front; travel events draw
+    nothing and claim nothing — the hand is lifted between strokes instead of
+    teleporting. Seeds match the legacy renderer so the sketch texture of a
+    finished frame is unchanged.
+    """
+    stroke_indices = [event.stroke_index for event in events if event.kind == "stroke"]
+    last_index = stroke_indices[-1] if stroke_indices else -1
+    for event in events:
+        if event.kind == "travel" or tau <= event.start:
+            continue
+        event_color = last_color if last_color and event.stroke_index == last_index else color
+        seed = seed_base + event.stroke_index + (100 if event.kind == "arrowhead" else 0)
+        points = list(event.points)
+        if tau >= event.end:
+            sketch_line(state.draw, points, event_color, width, seed)
+            continue
+        fraction = smooth((tau - event.start) / event.duration)
+        partial, tip, _tangent = partial_path(points, fraction * path_length(points))
+        sketch_line(state.draw, partial, event_color, width, seed)
+        if claim:
+            state.claim_pen(owner, tip, smoothed_tangent(partial),
+                            stroke=f"{event.kind}:{event.stroke_index}")
+
+
 def paper_texture(width: int, height: int, paper: tuple[int, int, int]) -> Image.Image:
     rng = random.Random(17)
     image = Image.new("RGB", (width, height), paper)
@@ -246,6 +287,8 @@ def validate_storyboard(storyboard: dict[str, Any]) -> dict[str, Any]:
         raise BuildError(f"Storyboard is missing keys: {missing}")
     if storyboard["version"] != 2:
         raise BuildError("Only storyboard version 2 is supported")
+    if storyboard.get("pen_physics", "legacy") not in PEN_PHYSICS_MODES:
+        raise BuildError(f"pen_physics must be one of {PEN_PHYSICS_MODES}")
     actions = flatten_actions(storyboard)
     ids = [action["id"] for action in actions]
     if len(ids) != len(set(ids)):
@@ -295,7 +338,9 @@ class WhiteboardProject:
         self.fps = int(storyboard["fps"])
         self.duration = float(storyboard["content_duration"])
         self.style = {name: tuple(value) for name, value in storyboard["style"].items()}
+        self.pen_physics = storyboard.get("pen_physics", "legacy")
         self.base = paper_texture(self.width, self.height, self.style["paper"])
+        self.last_report: dict[str, Any] | None = None
 
     def active_scene(self, time_s: float) -> dict[str, Any]:
         for scene in self.storyboard["scenes"]:
@@ -332,18 +377,40 @@ class WhiteboardProject:
                         alpha_color = tuple(round(channel * local + self.style["paper"][i] * (1-local)) for i, channel in enumerate(color))
                         state.draw.ellipse((x - 18, 348, x + 18, 384), outline=alpha_color, width=5)
             elif action_type in {"draw_asset", "draw_break"}:
-                asset = load_asset(action["asset"])
-                paths = [list(stroke.points) for stroke in asset.strokes]
-                arrowhead_paths = [list(stroke.arrowhead) if stroke.arrowhead else None
-                                   for stroke in asset.strokes]
-                if action_type == "draw_break":
-                    compound_paths(state, f"{action['id']}_erase", paths, 1.0, self.style["paper"], 18, 800 + index)
-                compound_paths(state, action["id"], paths, p, color, int(action.get("width", 6)), 1000 + index,
-                               bool(action.get("arrowheads")), self.style.get(action.get("last_color", "")),
-                               arrowhead_paths)
+                if self.pen_physics == "lift":
+                    events = compiled_events(action["asset"], float(action["duration"]),
+                                             bool(action.get("arrowheads")))
+                    tau = time_s - float(action["start"])
+                    if action_type == "draw_break":
+                        # Erase mask and accent line share identical partial
+                        # progress: paper never appears ahead of the nib.
+                        draw_events(state, action["id"], events, tau, self.style["paper"], 18,
+                                    800 + index, claim=False)
+                    draw_events(state, action["id"], events, tau, color, int(action.get("width", 6)),
+                                1000 + index, self.style.get(action.get("last_color", "")))
+                else:
+                    asset = load_asset(action["asset"])
+                    paths = [list(stroke.points) for stroke in asset.strokes]
+                    arrowhead_paths = [list(stroke.arrowhead) if stroke.arrowhead else None
+                                       for stroke in asset.strokes]
+                    if action_type == "draw_break":
+                        compound_paths(state, f"{action['id']}_erase", paths, 1.0, self.style["paper"], 18, 800 + index)
+                    compound_paths(state, action["id"], paths, p, color, int(action.get("width", 6)), 1000 + index,
+                                   bool(action.get("arrowheads")), self.style.get(action.get("last_color", "")),
+                                   arrowhead_paths)
             else:
                 raise BuildError(f"Unsupported action type {action_type!r}")
         state.overlay_pen()
+        pen = state.pen
+        self.last_report = {
+            "time": time_s,
+            "scene": scene["id"],
+            "pen": "down" if pen else "up",
+            "owner": pen.owner if pen else None,
+            "stroke": pen.stroke if pen else None,
+            "tip": list(pen.tip) if pen else None,
+            "tangent": list(pen.tangent) if pen else None,
+        }
         return state.image.convert("RGB")
 
 
