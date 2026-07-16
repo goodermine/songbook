@@ -20,6 +20,9 @@ Proof video: **People Aren't Broken. They're Rehearsed.**
 | `timeline.py` | Physical pen-timeline compiler (stroke / arrowhead / travel events) |
 | `text_strokes.py` | Hershey single-line font parser and text layout |
 | `assets/fonts/futural.jhf` | Bundled Hershey Simplex stroke font (see fonts README) |
+| `hand_rig.py` | Nib-anchored hand/marker sprite rig (cached 1° rotations) |
+| `assets/hand/` | Generated-once hand sprite + measured metadata |
+| `tools/generate_hand.py` | One-time hand sprite generator (never per frame) |
 | `tools/bake_assets.py` | Provenance of the asset migration; regenerates `assets/` |
 | `tools/asset_contact_sheet.py` | Diagnostic contact sheet (Phase 2 gate artifact) |
 | `tools/geometry_audit.py` | Per-frame nib audit; fails on pen-down teleports (Phase 3 gate) |
@@ -106,8 +109,17 @@ audio modes and assert stream counts and clean decodes.
   progress only the first half of the ordered glyph strokes exists (gate
   test). Overflowing or unsupported text fails preflight before rendering.
   The raster wipe survives only as `draw_text`/`fast_reveal_text`.
-- [ ] **Phase 5 — Hand/marker rig** (nib-anchored sprite, see
-  `docs/HAND_ASSET_SPEC.md`).
+- [x] **Phase 5 — Hand/marker rig**: illustrated right hand holding a dark
+  marker, generated **once** by `tools/generate_hand.py` and committed under
+  `assets/hand/` with measured nib anchor, native pen angle and wrist anchor.
+  `hand_rig.py` rotates around the nib anchor (not the image centre) with 1°
+  quantised cached rotations; the barrel keeps a natural base angle and sways
+  at most ±10° with the stroke direction. Opt-in via `"hand": "sprite"`
+  (default `procedural` keeps the baseline). Gates enforced by tests: nib
+  error ≤ 2 px for 100 % of poses, commanded/rendered angle within 1°,
+  bounded wrist, hand visible only while a pen is down. Open aesthetic
+  choices (skin tone, left/right, style) remain owner-swappable — replace the
+  sprite + metadata, not code.
 - [ ] **Phase 6 — Rendering/illustration quality** (traced arrowheads,
   progressive break erasure, supersampling, transitions).
 - [ ] **Phase 7 — Generality proof** (three unseen storyboards render with zero

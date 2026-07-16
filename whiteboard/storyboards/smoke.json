@@ -8,6 +8,7 @@
   "safe_content_end": 3.8,
   "final_hold": 0.5,
   "pen_physics": "lift",
+  "hand": "sprite",
   "style": {
     "paper": [249, 247, 240],
     "ink": [38, 43, 46],

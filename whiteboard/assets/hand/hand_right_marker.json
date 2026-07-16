@@ -1,0 +1,19 @@
+{
+  "id": "hand_right_marker",
+  "sprite": "hand_right_marker.png",
+  "size": [
+    460,
+    460
+  ],
+  "nib": [
+    92.0,
+    88.0
+  ],
+  "pen_angle_deg": 42.0,
+  "wrist": [
+    238.0,
+    248.0
+  ],
+  "contact": "down",
+  "provenance": "generated once by tools/generate_hand.py; do not regenerate per frame"
+}

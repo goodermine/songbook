@@ -20,6 +20,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 from asset_registry import Asset, AssetRegistry, GeometryError, StrokePath, preflight_asset
+from hand_rig import HandRigError, default_rig
 from text_strokes import TextStrokeError, strokes_bounds, text_to_strokes
 from timeline import PenEvent, compile_drawable, smoothed_tangent
 
@@ -29,6 +30,7 @@ STORYBOARD_DEFAULT = ROOT / "storyboard_v2.json"
 ASSET_DIR = ROOT / "assets"
 AUDIO_MODES = ("none", "chalk", "narration", "mix")
 PEN_PHYSICS_MODES = ("legacy", "lift")
+HAND_MODES = ("procedural", "sprite")
 
 REGISTRY = AssetRegistry(ASSET_DIR)
 FONT_CANDIDATES = {
@@ -323,6 +325,8 @@ def validate_storyboard(storyboard: dict[str, Any]) -> dict[str, Any]:
         raise BuildError("Only storyboard version 2 is supported")
     if storyboard.get("pen_physics", "legacy") not in PEN_PHYSICS_MODES:
         raise BuildError(f"pen_physics must be one of {PEN_PHYSICS_MODES}")
+    if storyboard.get("hand", "procedural") not in HAND_MODES:
+        raise BuildError(f"hand must be one of {HAND_MODES}")
     actions = flatten_actions(storyboard)
     ids = [action["id"] for action in actions]
     if len(ids) != len(set(ids)):
@@ -367,6 +371,11 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
             text_timeline(action["text"], float(action["x"]), float(action["y"]),
                           float(action["size"]), float(action["duration"]), board)
             text_actions += 1
+    if storyboard.get("hand", "procedural") == "sprite":
+        try:
+            default_rig()
+        except HandRigError as exc:
+            raise BuildError(str(exc)) from exc
     return {"assets": len(names), "text_actions": text_actions, "fonts": "ok"}
 
 
@@ -379,6 +388,7 @@ class WhiteboardProject:
         self.duration = float(storyboard["content_duration"])
         self.style = {name: tuple(value) for name, value in storyboard["style"].items()}
         self.pen_physics = storyboard.get("pen_physics", "legacy")
+        self.hand = storyboard.get("hand", "procedural")
         self.base = paper_texture(self.width, self.height, self.style["paper"])
         self.last_report: dict[str, Any] | None = None
 
@@ -448,8 +458,12 @@ class WhiteboardProject:
                                    arrowhead_paths)
             else:
                 raise BuildError(f"Unsupported action type {action_type!r}")
-        state.overlay_pen()
         pen = state.pen
+        hand_pose = None
+        if pen and self.hand == "sprite":
+            hand_pose = default_rig().draw(state.image, pen.tip, pen.tangent)
+        else:
+            state.overlay_pen()
         self.last_report = {
             "time": time_s,
             "scene": scene["id"],
@@ -458,6 +472,7 @@ class WhiteboardProject:
             "stroke": pen.stroke if pen else None,
             "tip": list(pen.tip) if pen else None,
             "tangent": list(pen.tangent) if pen else None,
+            "hand_pose": hand_pose,
         }
         return state.image.convert("RGB")
 
