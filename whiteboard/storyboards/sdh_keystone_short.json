@@ -10,6 +10,7 @@
   "pen_physics": "lift",
   "hand": "sprite",
   "chrome": "none",
+  "text_font": "marker",
   "style": {
     "paper": [249, 247, 240],
     "ink": [38, 43, 46],
@@ -62,8 +63,7 @@
         {"id": "cl_h1", "type": "write_text", "text": "STRATEGIC DIALOGUE", "x": 95, "y": 320, "size": 38, "width": 4, "start": 35.4, "duration": 2.3, "requires_pen": true, "color": "ink"},
         {"id": "cl_h2", "type": "write_text", "text": "HYPNOTHERAPY", "x": 130, "y": 410, "size": 52, "width": 5, "start": 37.9, "duration": 2.0, "requires_pen": true, "color": "accent"},
         {"id": "cl_sub", "type": "fade_text", "text": "question-led change", "x": 350, "y": 560, "size": 36, "italic": true, "start": 40.2, "duration": 0.7, "requires_pen": false, "color": "teal"},
-        {"id": "cl_bulb", "type": "draw_asset", "asset": "lightbulb", "at": [380, 950], "scale": 1.0, "start": 41.0, "duration": 1.2, "requires_pen": true, "color": "ink", "width": 5},
-        {"id": "cl_check", "type": "draw_asset", "asset": "checkmark", "at": [700, 950], "scale": 0.85, "start": 42.4, "duration": 0.7, "requires_pen": true, "color": "teal", "width": 9},
+        {"id": "cl_book", "type": "show_image", "image": "book_cover", "at": [540, 940], "height": 560, "start": 41.0, "duration": 1.2, "requires_pen": false},
         {"id": "cl_cta", "type": "write_text", "text": "LEARN MORE", "x": 280, "y": 1200, "size": 40, "width": 4, "start": 43.4, "duration": 1.1, "requires_pen": true, "color": "accent"},
         {"id": "cl_url", "type": "write_text", "text": "AARONELLIS.AU", "x": 105, "y": 1310, "size": 50, "width": 5, "start": 44.8, "duration": 1.7, "requires_pen": true, "color": "teal"},
         {"id": "cl_swash", "type": "draw_asset", "asset": "underline_swash", "at": [540, 1460], "scale": 1.4, "start": 46.8, "duration": 0.7, "requires_pen": true, "color": "accent", "width": 5},

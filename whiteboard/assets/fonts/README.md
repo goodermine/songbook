@@ -1,3 +1,14 @@
+# Bundled fonts
+
+## PermanentMarker-Regular.ttf — Permanent Marker
+
+Marker-style display font by Font Diner, from Google Fonts. Licensed under
+the Apache License, Version 2.0. Used by `write_text` actions with
+`"font": "marker"` (or storyboard-level `"text_font": "marker"`): glyphs are
+rasterised and revealed through a brush mask that follows Hershey skeleton
+paths fitted to the rendered text, so the nib traces believable letter
+motion while the finished text keeps the marker look.
+
 # Bundled single-line (stroke) fonts
 
 ## futural.jhf — Hershey Simplex

@@ -49,7 +49,10 @@ def action_thresholds(storyboard: dict, project) -> dict[str, float]:
                 engine.action_asset(action, (project.width, project.height)),
                 float(action["duration"]), bool(action.get("arrowheads")))
         elif action["type"] == "write_text":
-            _, stats = engine.text_timeline(
+            plan = (engine.marker_text_plan
+                    if action.get("font", project.text_font) == "marker"
+                    else engine.text_timeline)
+            _, stats = plan(
                 action["text"], float(action["x"]), float(action["y"]),
                 float(action["size"]), float(action["duration"]),
                 (project.width, project.height))

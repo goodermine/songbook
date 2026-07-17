@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 from asset_registry import (Asset, AssetRegistry, GeometryError, StrokePath,
                             preflight_asset, transform_asset)
@@ -36,6 +36,8 @@ HAND_MODES = ("procedural", "sprite")
 CHROME_MODES = ("legacy", "none")
 
 REGISTRY = AssetRegistry(ASSET_DIR)
+MARKER_FONT_PATH = ROOT / "assets" / "fonts" / "PermanentMarker-Regular.ttf"
+TEXT_FONTS = ("hershey", "marker")
 FONT_CANDIDATES = {
     "regular": [
         "/usr/share/fonts/opentype/urw-base35/URWBookman-Light.otf",
@@ -80,6 +82,23 @@ def resolve_font_path(kind: str) -> str:
 def load_font(size: int, bold: bool = False, italic: bool = False) -> ImageFont.FreeTypeFont:
     kind = "bold" if bold else "italic" if italic else "regular"
     return ImageFont.truetype(resolve_font_path(kind), size)
+
+
+@lru_cache(maxsize=4)
+def _marker_cap_ratio() -> float:
+    """Cap-height / point-size ratio of the bundled marker font."""
+    probe = ImageFont.truetype(str(MARKER_FONT_PATH), 100)
+    box = probe.getbbox("H")
+    return (box[3] - box[1]) / 100.0
+
+
+@lru_cache(maxsize=64)
+def marker_font(cap_height: int) -> ImageFont.FreeTypeFont:
+    """Marker font sized so capitals stand ``cap_height`` px tall, matching
+    the Hershey layout contract (y = cap top, size = cap height)."""
+    if not MARKER_FONT_PATH.is_file():
+        raise BuildError(f"Marker font not found: {MARKER_FONT_PATH}")
+    return ImageFont.truetype(str(MARKER_FONT_PATH), max(4, round(cap_height / _marker_cap_ratio())))
 
 
 @dataclass(frozen=True)
@@ -303,6 +322,101 @@ def show_image(state: FrameState, action: dict[str, Any], p: float) -> None:
                                         round(float(at[1]) - image.height / 2)))
 
 
+@lru_cache(maxsize=128)
+def marker_text_layer(width: int, height: int, text: str, x: int, y: int, size: int,
+                      color: tuple[int, int, int]) -> tuple[Image.Image, tuple[int, int, int, int]]:
+    """Rasterise a string in the bundled marker font; (x, y) is the cap-top."""
+    layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(layer)
+    font = marker_font(size)
+    # Anchor so the capital letters' top lands on y, like the stroke font.
+    cap_box = font.getbbox("H")
+    draw.text((x - font.getbbox(text)[0] + 1, y - cap_box[1]), text, font=font, fill=(*color, 255))
+    bbox = layer.getbbox()
+    if bbox is None:
+        raise BuildError(f"Marker text {text!r} rendered no pixels")
+    return layer, bbox
+
+
+@lru_cache(maxsize=128)
+def marker_text_plan(text: str, x: float, y: float, size: float, duration: float,
+                     board: tuple[int, int]) -> tuple[tuple[PenEvent, ...], dict[str, Any]]:
+    """Physical reveal plan for marker text: Hershey skeletons fitted to the
+    rasterised glyphs' bounding box act as the brush path the nib follows."""
+    layer, bbox = marker_text_layer(board[0], board[1], text, round(x), round(y),
+                                    round(size), (0, 0, 0))
+    if bbox[0] < 0 or bbox[1] < 0 or bbox[2] > board[0] or bbox[3] > board[1]:
+        raise BuildError(f"Marker text {text!r} bounds {bbox} leave the "
+                         f"{board[0]}x{board[1]} board")
+    try:
+        skeleton = text_to_strokes(text, 0.0, 0.0, 100.0)
+    except TextStrokeError as exc:
+        raise BuildError(str(exc)) from exc
+    sx0, sy0, sx1, sy1 = strokes_bounds(skeleton)
+    span_x, span_y = max(sx1 - sx0, 1e-6), max(sy1 - sy0, 1e-6)
+    fit_x = (bbox[2] - bbox[0]) / span_x
+    fit_y = (bbox[3] - bbox[1]) / span_y
+    fitted = [[(bbox[0] + (px - sx0) * fit_x, bbox[1] + (py - sy0) * fit_y)
+               for px, py in stroke] for stroke in skeleton]
+    strokes = []
+    for index, points in enumerate(fitted):
+        is_last = index == len(fitted) - 1
+        gap = 0.0 if is_last else math.dist(points[-1], fitted[index + 1][0])
+        strokes.append(StrokePath(
+            id=f"glyph_{index}", points=tuple(points),
+            closed=math.dist(points[0], points[-1]) <= 1e-6,
+            pen_lift_after=(not is_last) and gap > 1e-6,
+        ))
+    asset = Asset(id="marker_text", board=board, view_box=strokes_bounds(fitted),
+                  self_intersections="allow", strokes=tuple(strokes))
+    events, stats = compile_drawable(asset, duration, False)
+    return tuple(events), stats
+
+
+def draw_marker_text(state: FrameState, action: dict[str, Any], time_s: float,
+                     color: tuple[int, int, int], board: tuple[int, int]) -> None:
+    """Reveal marker-font text through a brush mask following the fitted
+    skeleton; the nib rides the brush front. Completed text is composited in
+    full so no glyph pixel is ever left behind."""
+    size = float(action["size"])
+    layer, _bbox = marker_text_layer(board[0], board[1], action["text"],
+                                     round(float(action["x"])), round(float(action["y"])),
+                                     round(size), color)
+    duration = float(action["duration"])
+    tau = time_s - float(action["start"])
+    if tau >= duration:
+        state.image.alpha_composite(layer)
+        return
+    events, _stats = marker_text_plan(action["text"], float(action["x"]), float(action["y"]),
+                                      size, duration, board)
+    brush = max(16, round(size * 0.72))
+    mask = Image.new("L", (board[0], board[1]), 0)
+    mask_draw = ImageDraw.Draw(mask)
+
+    def paint(points: list[tuple[float, float]]) -> None:
+        if len(points) >= 2:
+            mask_draw.line(points, fill=255, width=brush, joint="curve")
+        half = brush / 2
+        for px, py in (points[0], points[-1]):
+            mask_draw.ellipse((px - half, py - half, px + half, py + half), fill=255)
+
+    for event in events:
+        if event.kind == "travel" or tau <= event.start:
+            continue
+        points = list(event.points)
+        if tau >= event.end:
+            paint(points)
+            continue
+        fraction = smooth((tau - event.start) / event.duration)
+        partial, tip, _tan = partial_path(points, fraction * path_length(points))
+        paint(partial)
+        state.claim_pen(action["id"], tip, smoothed_tangent(partial),
+                        stroke=f"marker:{event.stroke_index}")
+    revealed = layer.copy()
+    revealed.putalpha(ImageChops.multiply(layer.getchannel("A"), mask))
+    state.image.alpha_composite(revealed)
+
+
 @lru_cache(maxsize=256)
 def text_timeline(text: str, x: float, y: float, size: float, duration: float,
                   board: tuple[int, int]) -> tuple[tuple[PenEvent, ...], dict[str, Any]]:
@@ -395,6 +509,8 @@ def validate_storyboard(storyboard: dict[str, Any]) -> dict[str, Any]:
         raise BuildError(f"hand must be one of {HAND_MODES}")
     if storyboard.get("chrome", "legacy") not in CHROME_MODES:
         raise BuildError(f"chrome must be one of {CHROME_MODES}")
+    if storyboard.get("text_font", "hershey") not in TEXT_FONTS:
+        raise BuildError(f"text_font must be one of {TEXT_FONTS}")
     actions = flatten_actions(storyboard)
     ids = [action["id"] for action in actions]
     if len(ids) != len(set(ids)):
@@ -460,10 +576,15 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
             raise BuildError(f"Action {action['id']!r}: placed asset {action['asset']!r} "
                              f"bounds {placed.view_box} leave the {board[0]}x{board[1]} board")
     text_actions = 0
+    text_font_default = storyboard.get("text_font", "hershey")
     for action in flatten_actions(storyboard):
         if action["type"] == "write_text":
-            text_timeline(action["text"], float(action["x"]), float(action["y"]),
-                          float(action["size"]), float(action["duration"]), board)
+            if action.get("font", text_font_default) == "marker":
+                marker_text_plan(action["text"], float(action["x"]), float(action["y"]),
+                                 float(action["size"]), float(action["duration"]), board)
+            else:
+                text_timeline(action["text"], float(action["x"]), float(action["y"]),
+                              float(action["size"]), float(action["duration"]), board)
             text_actions += 1
     if storyboard.get("hand", "procedural") == "sprite":
         try:
@@ -484,6 +605,7 @@ class WhiteboardProject:
         self.pen_physics = storyboard.get("pen_physics", "legacy")
         self.hand = storyboard.get("hand", "procedural")
         self.chrome = storyboard.get("chrome", "legacy")
+        self.text_font = storyboard.get("text_font", "hershey")
         self.base = paper_texture(self.width, self.height, self.style["paper"])
         self.last_report: dict[str, Any] | None = None
 
@@ -511,12 +633,15 @@ class WhiteboardProject:
                 # Raster wipe reveal — legacy behaviour, not handwriting.
                 draw_text_action(state, action, p, color, self.width, self.height)
             elif action_type == "write_text":
-                events, _stats = text_timeline(action["text"], float(action["x"]), float(action["y"]),
-                                               float(action["size"]), float(action["duration"]),
-                                               (self.width, self.height))
-                tau = time_s - float(action["start"])
-                draw_events(state, action["id"], events, tau, color, int(action.get("width", 3)),
-                            3000 + index)
+                if action.get("font", self.text_font) == "marker":
+                    draw_marker_text(state, action, time_s, color, (self.width, self.height))
+                else:
+                    events, _stats = text_timeline(action["text"], float(action["x"]), float(action["y"]),
+                                                   float(action["size"]), float(action["duration"]),
+                                                   (self.width, self.height))
+                    tau = time_s - float(action["start"])
+                    draw_events(state, action["id"], events, tau, color, int(action.get("width", 3)),
+                                3000 + index)
             elif action_type == "fade_text":
                 fade_text(state, action, p, color, self.width, self.height)
             elif action_type == "fade_labels":
