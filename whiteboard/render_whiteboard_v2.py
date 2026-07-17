@@ -32,6 +32,7 @@ ASSET_DIR = ROOT / "assets"
 AUDIO_MODES = ("none", "chalk", "narration", "mix")
 PEN_PHYSICS_MODES = ("legacy", "lift")
 HAND_MODES = ("procedural", "sprite")
+CHROME_MODES = ("legacy", "none")
 
 REGISTRY = AssetRegistry(ASSET_DIR)
 FONT_CANDIDATES = {
@@ -355,6 +356,8 @@ def validate_storyboard(storyboard: dict[str, Any]) -> dict[str, Any]:
         raise BuildError(f"pen_physics must be one of {PEN_PHYSICS_MODES}")
     if storyboard.get("hand", "procedural") not in HAND_MODES:
         raise BuildError(f"hand must be one of {HAND_MODES}")
+    if storyboard.get("chrome", "legacy") not in CHROME_MODES:
+        raise BuildError(f"chrome must be one of {CHROME_MODES}")
     actions = flatten_actions(storyboard)
     ids = [action["id"] for action in actions]
     if len(ids) != len(set(ids)):
@@ -425,6 +428,7 @@ class WhiteboardProject:
         self.style = {name: tuple(value) for name, value in storyboard["style"].items()}
         self.pen_physics = storyboard.get("pen_physics", "legacy")
         self.hand = storyboard.get("hand", "procedural")
+        self.chrome = storyboard.get("chrome", "legacy")
         self.base = paper_texture(self.width, self.height, self.style["paper"])
         self.last_report: dict[str, Any] | None = None
 
@@ -437,9 +441,10 @@ class WhiteboardProject:
     def render_frame(self, time_s: float) -> Image.Image:
         image = self.base.convert("RGBA")
         state = FrameState(image)
-        state.draw.text((55, 665), "A WHITEBOARD THOUGHT EXPERIMENT", font=load_font(19, italic=True), fill=self.style["faint"])
-        state.draw.line((55, 640, 1225, 640), fill=(224, 220, 210), width=2)
-        state.draw.line((55, 640, 55 + 1170 * clamp(time_s / self.duration), 640), fill=self.style["teal"], width=4)
+        if self.chrome == "legacy":
+            state.draw.text((55, 665), "A WHITEBOARD THOUGHT EXPERIMENT", font=load_font(19, italic=True), fill=self.style["faint"])
+            state.draw.line((55, 640, 1225, 640), fill=(224, 220, 210), width=2)
+            state.draw.line((55, 640, 55 + 1170 * clamp(time_s / self.duration), 640), fill=self.style["teal"], width=4)
         scene = self.active_scene(time_s)
         for index, action in enumerate(scene["actions"]):
             p = action_progress(action, time_s)
@@ -600,7 +605,7 @@ def render(project: WhiteboardProject, output: Path, narration: Path | None, pre
         final_duration = safe_end + hold
         video_filter = (f"[0:v]trim=end={safe_end},setpts=PTS-STARTPTS,"
                         f"tpad=stop_mode=clone:stop_duration={hold}[v]")
-        video_codec = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p"]
+        video_codec = ["-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p"]
         if audio_mode == "none":
             final_command = [
                 "ffmpeg", "-y", "-loglevel", "error", "-i", str(raw_video),
