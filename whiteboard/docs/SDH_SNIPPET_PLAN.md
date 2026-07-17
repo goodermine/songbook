@@ -34,8 +34,9 @@ breaks → AI voice → `tools/retime_storyboard.py` → narrated master.
 - **Narration**: written after visual lock, one section per scene, 3 s breaks
   between sections for retiming (see `vocal_warmup_narration.txt` as the
   format reference).
-- **CTA options** for the close card: "Learn the method" / book title +
-  author. Swap per platform.
+- **CTA (series standard)**: hand-written "LEARN MORE" (orange) over
+  "AARONELLIS.AU" (teal, larger), orange swash underline, then the faint
+  "from the book by Aaron Ellis" fade. Same close on every snippet.
 
 ## Asset dependencies
 
