@@ -238,11 +238,12 @@ def draw_text_action(state: FrameState, action: dict[str, Any], p: float, color:
 
 def fade_text(state: FrameState, action: dict[str, Any], p: float, color: tuple[int, int, int],
               width: int, height: int, caption_font: str = "serif") -> None:
+    x = round(resolve_text_x(action, width, "marker" if caption_font == "marker" else "serif"))
     if caption_font == "marker":
-        layer, _ = marker_text_layer(width, height, action["text"], int(action["x"]),
+        layer, _ = marker_text_layer(width, height, action["text"], x,
                                      int(action["y"]), int(action["size"]), color)
     else:
-        layer, _ = cached_text_layer(width, height, action["text"], int(action["x"]), int(action["y"]),
+        layer, _ = cached_text_layer(width, height, action["text"], x, int(action["y"]),
                                      int(action["size"]), color, bool(action.get("bold")), bool(action.get("italic")))
     alpha = layer.getchannel("A").point(lambda value: int(value * clamp(p)))
     copy = layer.copy()
@@ -385,15 +386,16 @@ def draw_marker_text(state: FrameState, action: dict[str, Any], time_s: float,
     skeleton; the nib rides the brush front. Completed text is composited in
     full so no glyph pixel is ever left behind."""
     size = float(action["size"])
+    x = resolve_text_x(action, board[0], "marker")
     layer, _bbox = marker_text_layer(board[0], board[1], action["text"],
-                                     round(float(action["x"])), round(float(action["y"])),
+                                     round(x), round(float(action["y"])),
                                      round(size), color)
     duration = float(action["duration"])
     tau = time_s - float(action["start"])
     if tau >= duration:
         state.image.alpha_composite(layer)
         return
-    events, _stats = marker_text_plan(action["text"], float(action["x"]), float(action["y"]),
+    events, _stats = marker_text_plan(action["text"], x, float(action["y"]),
                                       size, duration, board)
     brush = max(16, round(size * 0.72))
     mask = Image.new("L", (board[0], board[1]), 0)
@@ -464,12 +466,51 @@ def fill_timeline(polygon: tuple[tuple[float, float], ...], width: int, duration
     return tuple(events), stats
 
 
-def action_fill_polygon(action: dict[str, Any]) -> tuple[tuple[float, float], ...]:
+def action_fill_polygon(action: dict[str, Any],
+                        board: tuple[int, int] | None = None) -> tuple[tuple[float, float], ...]:
+    """Fill region for a draw_fill action: inline polygon, or an asset stroke.
+
+    With ``"asset"`` (plus optional ``"stroke_id"``, ``"at"``, ``"scale"``)
+    the region is the asset's closed stroke at its placed position — so the
+    hand can colour in a drawn shape without anyone computing coordinates.
+    """
+    if "asset" in action:
+        placed = action_asset(action, board)
+        stroke_id = action.get("stroke_id")
+        candidates = [s for s in placed.strokes
+                      if (s.id == stroke_id if stroke_id else s.closed)]
+        if not candidates:
+            raise BuildError(f"Action {action.get('id')!r}: no "
+                             f"{'stroke ' + repr(stroke_id) if stroke_id else 'closed stroke'} "
+                             f"to fill in asset {action['asset']!r}")
+        return candidates[0].points
     polygon = action.get("polygon")
     if not (isinstance(polygon, list) and len(polygon) >= 3):
         raise BuildError(f"Action {action.get('id')!r}: draw_fill requires \"polygon\" "
-                         f"with at least 3 [x, y] points")
+                         f"with at least 3 [x, y] points, or an \"asset\" reference")
     return tuple((float(p[0]), float(p[1])) for p in polygon)
+
+
+@lru_cache(maxsize=256)
+def measured_text_width(text: str, size: int, kind: str,
+                        bold: bool = False, italic: bool = False) -> float:
+    if kind == "hershey":
+        bounds = strokes_bounds(text_to_strokes(text, 0.0, 0.0, float(size)))
+        return bounds[2] - bounds[0]
+    if kind == "marker":
+        box = marker_font(size).getbbox(text)
+        return box[2] - box[0]
+    box = load_font(size, bold, italic).getbbox(text)
+    return box[2] - box[0]
+
+
+def resolve_text_x(action: dict[str, Any], board_width: int, kind: str) -> float:
+    """Text anchor: explicit x, or measured centre with `"align": "center"`."""
+    if action.get("align") == "center":
+        width = measured_text_width(action["text"], round(float(action["size"])), kind,
+                                    bool(action.get("bold")), bool(action.get("italic")))
+        return (board_width - width) / 2
+    return float(action["x"])
 
 
 @lru_cache(maxsize=256)
@@ -648,14 +689,16 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
     text_font_default = storyboard.get("text_font", "hershey")
     for action in flatten_actions(storyboard):
         if action["type"] == "draw_fill":
-            fill_timeline(action_fill_polygon(action), int(action.get("width", 18)),
+            fill_timeline(action_fill_polygon(action, board), int(action.get("width", 18)),
                           float(action["duration"]), board)
         if action["type"] == "write_text":
             if action.get("font", text_font_default) == "marker":
-                marker_text_plan(action["text"], float(action["x"]), float(action["y"]),
+                marker_text_plan(action["text"], resolve_text_x(action, board[0], "marker"),
+                                 float(action["y"]),
                                  float(action["size"]), float(action["duration"]), board)
             else:
-                text_timeline(action["text"], float(action["x"]), float(action["y"]),
+                text_timeline(action["text"], resolve_text_x(action, board[0], "hershey"),
+                              float(action["y"]),
                               float(action["size"]), float(action["duration"]), board)
             text_actions += 1
     if storyboard.get("hand", "procedural") == "sprite":
@@ -711,7 +754,9 @@ class WhiteboardProject:
                 if action.get("font", self.text_font) == "marker":
                     draw_marker_text(state, action, time_s, color, (self.width, self.height))
                 else:
-                    events, _stats = text_timeline(action["text"], float(action["x"]), float(action["y"]),
+                    events, _stats = text_timeline(action["text"],
+                                                   resolve_text_x(action, self.width, "hershey"),
+                                                   float(action["y"]),
                                                    float(action["size"]), float(action["duration"]),
                                                    (self.width, self.height))
                     tau = time_s - float(action["start"])
@@ -723,7 +768,7 @@ class WhiteboardProject:
                     synthetic = {**action, **label, "id": f"{action['id']}_{label_index}", "italic": True}
                     fade_text(state, synthetic, local, color, self.width, self.height, self.caption_font)
             elif action_type == "draw_fill":
-                events, _stats = fill_timeline(action_fill_polygon(action),
+                events, _stats = fill_timeline(action_fill_polygon(action, (self.width, self.height)),
                                                int(action.get("width", 18)),
                                                float(action["duration"]),
                                                (self.width, self.height))
