@@ -193,6 +193,34 @@ def straw_glass() -> list:
     ]
 
 
+def stone_arch() -> list:
+    # A voussoir stone arch with an emphasised keystone at the crown - the
+    # Strategic Dialogue Hypnotherapy model of a problem.
+    c = (CX, CY + 70)
+    outer, inner = 200.0, 125.0
+
+    def joint(angle_frac: float, sid: str) -> tuple:
+        a = math.pi * angle_frac
+        return (sid, [(c[0] + math.cos(a) * inner, c[1] + math.sin(a) * inner),
+                      (c[0] + math.cos(a) * outer, c[1] + math.sin(a) * outer)])
+
+    return [
+        ("outer_arc", circle(c[0], c[1], outer, math.pi, 2 * math.pi, 40)),
+        ("inner_arc", circle(c[0], c[1], inner, math.pi, 2 * math.pi, 30)),
+        ("pier_left_outer", [(c[0] - outer, c[1]), (c[0] - outer, c[1] + 130)]),
+        ("pier_left_inner", [(c[0] - inner, c[1]), (c[0] - inner, c[1] + 130)]),
+        ("pier_right_inner", [(c[0] + inner, c[1]), (c[0] + inner, c[1] + 130)]),
+        ("pier_right_outer", [(c[0] + outer, c[1]), (c[0] + outer, c[1] + 130)]),
+        ("ground", [(c[0] - outer - 30, c[1] + 130), (c[0] + outer + 30, c[1] + 130)]),
+        joint(1.15, "joint_a"),
+        joint(1.30, "joint_b"),
+        joint(1.70, "joint_c"),
+        joint(1.85, "joint_d"),
+        joint(1.44, "keystone_left"),
+        joint(1.56, "keystone_right"),
+    ]
+
+
 def music_note() -> list:
     # Eighth note: head, stem, flag.
     return [
@@ -219,6 +247,7 @@ LIBRARY = {
     "underline_swash": (underline_swash, "forbid"),
     "straw_glass": (straw_glass, "allow"),
     "music_note": (music_note, "forbid"),
+    "stone_arch": (stone_arch, "forbid"),
 }
 
 

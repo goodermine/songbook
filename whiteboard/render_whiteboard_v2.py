@@ -29,6 +29,7 @@ from timeline import PenEvent, compile_drawable, smoothed_tangent
 ROOT = Path(__file__).resolve().parent
 STORYBOARD_DEFAULT = ROOT / "storyboard_v2.json"
 ASSET_DIR = ROOT / "assets"
+IMAGE_DIR = ROOT / "assets" / "images"
 AUDIO_MODES = ("none", "chalk", "narration", "mix")
 PEN_PHYSICS_MODES = ("legacy", "lift")
 HAND_MODES = ("procedural", "sprite")
@@ -233,13 +234,14 @@ def load_asset(name: str):
 
 
 @lru_cache(maxsize=512)
-def placed_asset(name: str, at: tuple[float, float] | None, scale: float) -> Asset:
+def placed_asset(name: str, at: tuple[float, float] | None, scale: float,
+                 board: tuple[int, int] | None = None) -> Asset:
     """Asset repositioned/rescaled per the action's `at`/`scale` fields."""
     asset = load_asset(name)
     if at is None and scale == 1.0:
         return asset
     try:
-        return transform_asset(asset, at, scale)
+        return transform_asset(asset, at, scale, board)
     except GeometryError as exc:
         raise BuildError(str(exc)) from exc
 
@@ -253,17 +255,52 @@ def action_placement(action: dict[str, Any]) -> tuple[tuple[float, float] | None
     return at, float(action.get("scale", 1.0))
 
 
-def action_asset(action: dict[str, Any]) -> Asset:
+def action_asset(action: dict[str, Any], board: tuple[int, int] | None = None) -> Asset:
     at, scale = action_placement(action)
-    return placed_asset(action["asset"], at, scale)
+    return placed_asset(action["asset"], at, scale, board)
 
 
 @lru_cache(maxsize=512)
 def compiled_events(asset_name: str, at: tuple[float, float] | None, scale: float,
-                    duration: float, arrowheads: bool) -> tuple[PenEvent, ...]:
+                    duration: float, arrowheads: bool,
+                    board: tuple[int, int] | None = None) -> tuple[PenEvent, ...]:
     """Cache one physical timeline per placed asset + duration + arrowheads."""
-    events, _stats = compile_drawable(placed_asset(asset_name, at, scale), duration, arrowheads)
+    events, _stats = compile_drawable(placed_asset(asset_name, at, scale, board),
+                                      duration, arrowheads)
     return tuple(events)
+
+
+@lru_cache(maxsize=64)
+def load_image_asset(name: str, height: int) -> Image.Image:
+    """Load a raster image asset (e.g. AI-generated artwork) scaled to height.
+
+    Images live as transparent PNGs under assets/images/ and are shown with
+    fade actions — they are placed artwork, not pen drawings, so no hand ever
+    appears over them (rule 6).
+    """
+    path = IMAGE_DIR / f"{name}.png"
+    if not path.is_file():
+        raise BuildError(f"Unknown image asset {name!r}: no file {path}")
+    image = Image.open(path).convert("RGBA")
+    if image.width == 0 or image.height == 0:
+        raise BuildError(f"Image asset {name!r} is empty")
+    scale = height / image.height
+    return image.resize((max(1, round(image.width * scale)), height),
+                        Image.Resampling.LANCZOS)
+
+
+def show_image(state: FrameState, action: dict[str, Any], p: float) -> None:
+    """Fade in a raster image centred on the action's `at` point."""
+    height = int(action.get("height", 400))
+    image = load_image_asset(action["image"], height)
+    at = action.get("at")
+    if not (isinstance(at, (list, tuple)) and len(at) == 2):
+        raise BuildError(f"Action {action.get('id')!r}: show_image requires \"at\": [x, y]")
+    layer = image.copy()
+    alpha = layer.getchannel("A").point(lambda value: int(value * clamp(p)))
+    layer.putalpha(alpha)
+    state.image.alpha_composite(layer, (round(float(at[0]) - image.width / 2),
+                                        round(float(at[1]) - image.height / 2)))
 
 
 @lru_cache(maxsize=256)
@@ -390,20 +427,38 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
         resolve_font_path(kind)
     board = (int(storyboard["width"]), int(storyboard["height"]))
     names = set()
+    images = 0
     for action in flatten_actions(storyboard):
+        if action["type"] == "show_image":
+            height = int(action.get("height", 400))
+            image = load_image_asset(action["image"], height)
+            at = action.get("at")
+            if not (isinstance(at, (list, tuple)) and len(at) == 2):
+                raise BuildError(f"Action {action['id']!r}: show_image requires \"at\": [x, y]")
+            if (at[0] - image.width / 2 < 0 or at[0] + image.width / 2 > board[0]
+                    or at[1] - height / 2 < 0 or at[1] + height / 2 > board[1]):
+                raise BuildError(f"Action {action['id']!r}: image {action['image']!r} at {at} "
+                                 f"({image.width}x{height}) leaves the {board[0]}x{board[1]} board")
+            images += 1
+            continue
         if action["type"] not in {"draw_asset", "draw_break"}:
             continue
         names.add(action["asset"])
-        placed = action_asset(action)
-        if placed.board != board:
+        placed = action_asset(action, board)
+        # Un-placed actions inherit the asset's authored coordinates, so the
+        # boards must match. Explicitly placed actions are board-agnostic:
+        # the transform recentres them and the bounds check below governs.
+        if action.get("at") is None and placed.board != board:
             raise BuildError(f"Asset {action['asset']!r} was authored for board {placed.board}, "
-                             f"storyboard is {board}")
+                             f"storyboard is {board}; place it with \"at\" or match boards")
         try:
-            # Re-validate at the placed position so a bad `at`/`scale` that
-            # pushes geometry off the board fails before rendering.
             preflight_asset(placed)
         except GeometryError as exc:
             raise BuildError(f"Action {action['id']!r}: {exc}") from exc
+        x0, y0, x1, y1 = placed.view_box
+        if x0 < 0 or y0 < 0 or x1 > board[0] or y1 > board[1]:
+            raise BuildError(f"Action {action['id']!r}: placed asset {action['asset']!r} "
+                             f"bounds {placed.view_box} leave the {board[0]}x{board[1]} board")
     text_actions = 0
     for action in flatten_actions(storyboard):
         if action["type"] == "write_text":
@@ -469,6 +524,8 @@ class WhiteboardProject:
                     local = clamp(p * len(action["labels"]) - label_index)
                     synthetic = {**action, **label, "id": f"{action['id']}_{label_index}", "italic": True}
                     fade_text(state, synthetic, local, color, self.width, self.height)
+            elif action_type == "show_image":
+                show_image(state, action, p)
             elif action_type == "fade_asset" and action["asset"] == "reaction_dots":
                 for dot_index, x in enumerate([205, 420, 635, 850, 1065]):
                     local = clamp(p * 5 - dot_index)
@@ -479,7 +536,8 @@ class WhiteboardProject:
                 if self.pen_physics == "lift":
                     at, scale = action_placement(action)
                     events = compiled_events(action["asset"], at, scale, float(action["duration"]),
-                                             bool(action.get("arrowheads")))
+                                             bool(action.get("arrowheads")),
+                                             (self.width, self.height))
                     tau = time_s - float(action["start"])
                     if action_type == "draw_break":
                         # Erase mask and accent line share identical partial
@@ -489,7 +547,7 @@ class WhiteboardProject:
                     draw_events(state, action["id"], events, tau, color, int(action.get("width", 6)),
                                 1000 + index, self.style.get(action.get("last_color", "")))
                 else:
-                    asset = action_asset(action)
+                    asset = action_asset(action, (self.width, self.height))
                     paths = [list(stroke.points) for stroke in asset.strokes]
                     arrowhead_paths = [list(stroke.arrowhead) if stroke.arrowhead else None
                                        for stroke in asset.strokes]

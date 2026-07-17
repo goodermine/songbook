@@ -184,12 +184,16 @@ def preflight_asset(asset: Asset) -> None:
                                 f"between strokes {current.id!r} and {following.id!r}")
 
 
-def transform_asset(asset: Asset, at: Point | None = None, scale: float = 1.0) -> Asset:
+def transform_asset(asset: Asset, at: Point | None = None, scale: float = 1.0,
+                    board: tuple[int, int] | None = None) -> Asset:
     """Place an asset: move its view-box centre to ``at`` and scale around it.
 
     Assets are authored at a natural position (library assets centre on the
     board); storyboard actions may reposition and resize them with
-    ``"at": [x, y]`` and ``"scale"`` without touching the asset file.
+    ``"at": [x, y]`` and ``"scale"`` without touching the asset file. A placed
+    asset is board-agnostic — pass ``board`` to re-target it at the consuming
+    storyboard's dimensions (e.g. a 9:16 vertical layout) so containment is
+    checked against the right canvas.
     """
     if scale <= 0:
         raise GeometryError(f"Asset {asset.id!r}: scale must be positive, got {scale}")
@@ -213,7 +217,7 @@ def transform_asset(asset: Asset, at: Point | None = None, scale: float = 1.0) -
     half_w, half_h = (x1 - x0) / 2 * scale, (y1 - y0) / 2 * scale
     return Asset(
         id=f"{asset.id}@{target[0]:g},{target[1]:g}x{scale:g}",
-        board=asset.board,
+        board=board if board is not None else asset.board,
         view_box=(target[0] - half_w, target[1] - half_h,
                   target[0] + half_w, target[1] + half_h),
         self_intersections=asset.self_intersections,
