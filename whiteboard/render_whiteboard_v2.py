@@ -23,7 +23,7 @@ from asset_registry import (Asset, AssetRegistry, GeometryError, StrokePath,
                             preflight_asset, transform_asset)
 from hand_rig import HandRigError, default_rig
 from text_strokes import TextStrokeError, strokes_bounds, text_to_strokes
-from timeline import PenEvent, compile_drawable, smoothed_tangent
+from timeline import PenEvent, compile_drawable, serpentine_fill, smoothed_tangent
 
 
 ROOT = Path(__file__).resolve().parent
@@ -107,6 +107,7 @@ class PenPose:
     tip: tuple[float, float]
     tangent: tuple[float, float]
     stroke: str | None = None
+    contact: bool = True  # False while the hand glides between strokes, lifted
 
 
 class FrameState:
@@ -118,11 +119,11 @@ class FrameState:
         self.pen: PenPose | None = None
 
     def claim_pen(self, owner: str, tip: tuple[float, float], tangent: tuple[float, float],
-                  stroke: str | None = None) -> None:
+                  stroke: str | None = None, contact: bool = True) -> None:
         if self.pen is not None and self.pen.owner != owner:
             raise BuildError(f"Multiple active pens at runtime: {self.pen.owner!r} and {owner!r}")
         length = math.hypot(*tangent) or 1.0
-        self.pen = PenPose(owner, tip, (tangent[0] / length, tangent[1] / length), stroke)
+        self.pen = PenPose(owner, tip, (tangent[0] / length, tangent[1] / length), stroke, contact)
 
     def overlay_pen(self) -> None:
         if self.pen:
@@ -235,9 +236,14 @@ def draw_text_action(state: FrameState, action: dict[str, Any], p: float, color:
         state.claim_pen(action["id"], (reveal_x + 4, (bbox[1] + bbox[3]) / 2 + 8), (1.0, 0.0))
 
 
-def fade_text(state: FrameState, action: dict[str, Any], p: float, color: tuple[int, int, int], width: int, height: int) -> None:
-    layer, _ = cached_text_layer(width, height, action["text"], int(action["x"]), int(action["y"]),
-                                 int(action["size"]), color, bool(action.get("bold")), bool(action.get("italic")))
+def fade_text(state: FrameState, action: dict[str, Any], p: float, color: tuple[int, int, int],
+              width: int, height: int, caption_font: str = "serif") -> None:
+    if caption_font == "marker":
+        layer, _ = marker_text_layer(width, height, action["text"], int(action["x"]),
+                                     int(action["y"]), int(action["size"]), color)
+    else:
+        layer, _ = cached_text_layer(width, height, action["text"], int(action["x"]), int(action["y"]),
+                                     int(action["size"]), color, bool(action.get("bold")), bool(action.get("italic")))
     alpha = layer.getchannel("A").point(lambda value: int(value * clamp(p)))
     copy = layer.copy()
     copy.putalpha(alpha)
@@ -401,7 +407,17 @@ def draw_marker_text(state: FrameState, action: dict[str, Any], time_s: float,
             mask_draw.ellipse((px - half, py - half, px + half, py + half), fill=255)
 
     for event in events:
-        if event.kind == "travel" or tau <= event.start:
+        if event.kind == "travel":
+            if event.start < tau < event.end:
+                fraction = smooth((tau - event.start) / event.duration)
+                origin, target = event.points[0], event.points[1]
+                position = (origin[0] + (target[0] - origin[0]) * fraction,
+                            origin[1] + (target[1] - origin[1]) * fraction)
+                state.claim_pen(action["id"], position,
+                                (target[0] - origin[0], target[1] - origin[1]),
+                                stroke=f"travel:{event.stroke_index}", contact=False)
+            continue
+        if tau <= event.start:
             continue
         points = list(event.points)
         if tau >= event.end:
@@ -415,6 +431,45 @@ def draw_marker_text(state: FrameState, action: dict[str, Any], time_s: float,
     revealed = layer.copy()
     revealed.putalpha(ImageChops.multiply(layer.getchannel("A"), mask))
     state.image.alpha_composite(revealed)
+
+
+@lru_cache(maxsize=256)
+def fill_timeline(polygon: tuple[tuple[float, float], ...], width: int, duration: float,
+                  board: tuple[int, int]) -> tuple[tuple[PenEvent, ...], dict[str, Any]]:
+    """Physical colouring-in plan: serpentine marker passes over a polygon."""
+    try:
+        rows = serpentine_fill(list(polygon), spacing=width * 0.8, inset=width * 0.55)
+    except ValueError as exc:
+        raise BuildError(str(exc)) from exc
+    if not rows:
+        raise BuildError(f"Fill polygon {polygon[:3]}... produced no passes; "
+                         f"region too small for width {width}")
+    strokes = []
+    for index, points in enumerate(rows):
+        is_last = index == len(rows) - 1
+        gap = 0.0 if is_last else math.dist(points[-1], rows[index + 1][0])
+        strokes.append(StrokePath(
+            id=f"pass_{index}", points=tuple(points), closed=False,
+            pen_lift_after=(not is_last) and gap > 1e-6,
+        ))
+    xs = [p[0] for row in rows for p in row]
+    ys = [p[1] for row in rows for p in row]
+    asset = Asset(id="fill", board=board, view_box=(min(xs), min(ys), max(xs), max(ys)),
+                  self_intersections="allow", strokes=tuple(strokes))
+    try:
+        preflight_asset(asset)
+    except GeometryError as exc:
+        raise BuildError(f"Fill region failed preflight: {exc}") from exc
+    events, stats = compile_drawable(asset, duration, False)
+    return tuple(events), stats
+
+
+def action_fill_polygon(action: dict[str, Any]) -> tuple[tuple[float, float], ...]:
+    polygon = action.get("polygon")
+    if not (isinstance(polygon, list) and len(polygon) >= 3):
+        raise BuildError(f"Action {action.get('id')!r}: draw_fill requires \"polygon\" "
+                         f"with at least 3 [x, y] points")
+    return tuple((float(p[0]), float(p[1])) for p in polygon)
 
 
 @lru_cache(maxsize=256)
@@ -464,7 +519,19 @@ def draw_events(state: FrameState, owner: str, events: tuple[PenEvent, ...], tau
     stroke_indices = [event.stroke_index for event in events if event.kind == "stroke"]
     last_index = stroke_indices[-1] if stroke_indices else -1
     for event in events:
-        if event.kind == "travel" or tau <= event.start:
+        if event.kind == "travel":
+            # The hand stays visible while it glides, lifted, to the next
+            # stroke — no teleporting, no drawing, no contact.
+            if claim and event.start < tau < event.end:
+                fraction = smooth((tau - event.start) / event.duration)
+                origin, target = event.points[0], event.points[1]
+                position = (origin[0] + (target[0] - origin[0]) * fraction,
+                            origin[1] + (target[1] - origin[1]) * fraction)
+                state.claim_pen(owner, position,
+                                (target[0] - origin[0], target[1] - origin[1]),
+                                stroke=f"travel:{event.stroke_index}", contact=False)
+            continue
+        if tau <= event.start:
             continue
         event_color = last_color if last_color and event.stroke_index == last_index else color
         seed = seed_base + event.stroke_index + (100 if event.kind == "arrowhead" else 0)
@@ -511,6 +578,8 @@ def validate_storyboard(storyboard: dict[str, Any]) -> dict[str, Any]:
         raise BuildError(f"chrome must be one of {CHROME_MODES}")
     if storyboard.get("text_font", "hershey") not in TEXT_FONTS:
         raise BuildError(f"text_font must be one of {TEXT_FONTS}")
+    if storyboard.get("caption_font", "serif") not in ("serif", "marker"):
+        raise BuildError("caption_font must be 'serif' or 'marker'")
     actions = flatten_actions(storyboard)
     ids = [action["id"] for action in actions]
     if len(ids) != len(set(ids)):
@@ -578,6 +647,9 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
     text_actions = 0
     text_font_default = storyboard.get("text_font", "hershey")
     for action in flatten_actions(storyboard):
+        if action["type"] == "draw_fill":
+            fill_timeline(action_fill_polygon(action), int(action.get("width", 18)),
+                          float(action["duration"]), board)
         if action["type"] == "write_text":
             if action.get("font", text_font_default) == "marker":
                 marker_text_plan(action["text"], float(action["x"]), float(action["y"]),
@@ -606,6 +678,7 @@ class WhiteboardProject:
         self.hand = storyboard.get("hand", "procedural")
         self.chrome = storyboard.get("chrome", "legacy")
         self.text_font = storyboard.get("text_font", "hershey")
+        self.caption_font = storyboard.get("caption_font", "serif")
         self.base = paper_texture(self.width, self.height, self.style["paper"])
         self.last_report: dict[str, Any] | None = None
 
@@ -632,6 +705,8 @@ class WhiteboardProject:
             if action_type in {"draw_text", "fast_reveal_text"}:
                 # Raster wipe reveal — legacy behaviour, not handwriting.
                 draw_text_action(state, action, p, color, self.width, self.height)
+            elif action_type == "fade_text":
+                fade_text(state, action, p, color, self.width, self.height, self.caption_font)
             elif action_type == "write_text":
                 if action.get("font", self.text_font) == "marker":
                     draw_marker_text(state, action, time_s, color, (self.width, self.height))
@@ -642,13 +717,18 @@ class WhiteboardProject:
                     tau = time_s - float(action["start"])
                     draw_events(state, action["id"], events, tau, color, int(action.get("width", 3)),
                                 3000 + index)
-            elif action_type == "fade_text":
-                fade_text(state, action, p, color, self.width, self.height)
             elif action_type == "fade_labels":
                 for label_index, label in enumerate(action["labels"]):
                     local = clamp(p * len(action["labels"]) - label_index)
                     synthetic = {**action, **label, "id": f"{action['id']}_{label_index}", "italic": True}
-                    fade_text(state, synthetic, local, color, self.width, self.height)
+                    fade_text(state, synthetic, local, color, self.width, self.height, self.caption_font)
+            elif action_type == "draw_fill":
+                events, _stats = fill_timeline(action_fill_polygon(action),
+                                               int(action.get("width", 18)),
+                                               float(action["duration"]),
+                                               (self.width, self.height))
+                draw_events(state, action["id"], events, time_s - float(action["start"]),
+                            color, int(action.get("width", 18)), 5000 + index)
             elif action_type == "show_image":
                 show_image(state, action, p)
             elif action_type == "fade_asset" and action["asset"] == "reaction_dots":
@@ -685,14 +765,17 @@ class WhiteboardProject:
                 raise BuildError(f"Unsupported action type {action_type!r}")
         pen = state.pen
         hand_pose = None
+        # A lifted hand hovers slightly up-left of the board point it glides over.
+        anchor = None if pen is None else (
+            pen.tip if pen.contact else (pen.tip[0] + 5, pen.tip[1] - 14))
         if pen and self.hand == "sprite":
-            hand_pose = default_rig().draw(state.image, pen.tip, pen.tangent)
-        else:
-            state.overlay_pen()
+            hand_pose = default_rig().draw(state.image, anchor, pen.tangent)
+        elif pen:
+            draw_marker(state.draw, anchor, pen.tangent)
         self.last_report = {
             "time": time_s,
             "scene": scene["id"],
-            "pen": "down" if pen else "up",
+            "pen": ("down" if pen.contact else "travel") if pen else "up",
             "owner": pen.owner if pen else None,
             "stroke": pen.stroke if pen else None,
             "tip": list(pen.tip) if pen else None,

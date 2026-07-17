@@ -90,13 +90,18 @@ def lift_project():
     return engine.WhiteboardProject(storyboard)
 
 
-def test_lift_mode_releases_pen_during_travel():
+def test_lift_mode_hand_glides_lifted_during_travel():
     project = lift_project()
     events, _ = compiled("pause_symbol", 0.6)
     travel = next(event for event in events if event.kind == "travel")
     midpoint = 0.2 + (travel.start + travel.end) / 2
     project.render_frame(midpoint)
-    assert project.last_report["pen"] == "up"
+    report = project.last_report
+    # The hand stays visible mid-glide, but the pen is lifted: no contact.
+    assert report["pen"] == "travel"
+    assert report["stroke"].startswith("travel:")
+    # And the glide position sits between the two bars.
+    assert travel.points[0][0] <= report["tip"][0] <= travel.points[1][0]
 
     stroke = next(event for event in events if event.kind == "stroke")
     project.render_frame(0.2 + (stroke.start + stroke.end) / 2)
@@ -120,3 +125,45 @@ def test_lift_mode_never_teleports_within_a_stroke():
         previous = report
     # 110px bars drawn in ~0.4s with easing peaks well under 20px per 1/96s.
     assert 0.0 < max_step < 20.0
+
+
+def test_serpentine_fill_covers_a_rectangle():
+    from timeline import serpentine_fill
+    rows = serpentine_fill([(100, 100), (300, 100), (300, 200), (100, 200)],
+                           spacing=16.0, inset=10.0)
+    assert len(rows) >= 5
+    for row in rows:
+        (x0, y0), (x1, y1) = row
+        assert y0 == y1                      # horizontal marker passes
+        assert 105 <= y0 <= 195              # inside the inset region
+        assert min(x0, x1) >= 105 and max(x0, x1) <= 295
+    # Serpentine: consecutive rows alternate direction.
+    directions = [1 if row[1][0] > row[0][0] else -1 for row in rows]
+    assert any(a != b for a, b in zip(directions, directions[1:]))
+
+
+def test_draw_fill_colours_region_via_the_pen():
+    import render_whiteboard_v2 as engine
+    storyboard = {
+        "version": 2, "width": 1280, "height": 720, "fps": 24,
+        "content_duration": 2.0, "safe_content_end": 1.9, "final_hold": 0.5,
+        "pen_physics": "lift", "chrome": "none",
+        "style": {"paper": [249, 247, 240], "ink": [38, 43, 46], "faint": [118, 120, 116],
+                  "accent": [202, 83, 48], "teal": [31, 111, 112]},
+        "scenes": [{"id": "s", "start": 0.0, "end": 2.0, "actions": [
+            {"id": "patch", "type": "draw_fill",
+             "polygon": [[500, 300], [700, 300], [700, 420], [500, 420]],
+             "width": 20, "start": 0.1, "duration": 1.2,
+             "requires_pen": True, "color": "accent"},
+        ]}],
+    }
+    engine.validate_storyboard(storyboard)
+    engine.preflight_project(storyboard)
+    project = engine.WhiteboardProject(storyboard)
+    project.render_frame(0.6)
+    assert project.last_report["pen"] in ("down", "travel")
+    done = project.render_frame(1.8)
+    centre = done.getpixel((600, 360))
+    assert centre[0] > 150 and centre[1] < 130  # accent orange, not paper
+    edge_outside = done.getpixel((480, 360))
+    assert edge_outside[0] > 240                # fill stayed inside the polygon

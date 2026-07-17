@@ -11,6 +11,7 @@
   "hand": "sprite",
   "chrome": "none",
   "text_font": "marker",
+  "caption_font": "marker",
   "style": {
     "paper": [249, 247, 240],
     "ink": [38, 43, 46],
@@ -30,7 +31,8 @@
         {"id": "hook_1", "type": "write_text", "text": "WHY WILLPOWER", "x": 95, "y": 220, "size": 50, "width": 4, "start": 0.2, "duration": 2.0, "requires_pen": true, "color": "ink"},
         {"id": "hook_2", "type": "write_text", "text": "FAILS", "x": 310, "y": 330, "size": 74, "width": 6, "start": 2.4, "duration": 1.2, "requires_pen": true, "color": "accent"},
         {"id": "hook_swash", "type": "draw_asset", "asset": "underline_swash", "at": [540, 500], "scale": 1.6, "start": 3.8, "duration": 0.7, "requires_pen": true, "color": "teal", "width": 6},
-        {"id": "hook_sub", "type": "fade_text", "text": "and what actually works", "x": 300, "y": 580, "size": 36, "italic": true, "start": 5.0, "duration": 0.9, "requires_pen": false, "color": "faint"}
+        {"id": "hook_excl", "type": "draw_asset", "asset": "exclamation", "at": [800, 330], "scale": 0.75, "start": 4.7, "duration": 0.6, "requires_pen": true, "color": "teal", "width": 7},
+        {"id": "hook_sub", "type": "fade_text", "text": "and what actually works", "x": 300, "y": 580, "size": 30, "start": 5.6, "duration": 0.9, "requires_pen": false, "color": "faint"}
       ]
     },
     {
@@ -47,12 +49,14 @@
         {"id": "arch_lbl3", "type": "fade_text", "text": "push one stone - the rest hold it", "x": 245, "y": 1400, "size": 32, "italic": true, "start": 19.8, "duration": 0.9, "requires_pen": false, "color": "ink"},
         {"id": "key_h1", "type": "write_text", "text": "EVERY ARCH HAS A", "x": 130, "y": 420, "size": 40, "width": 4, "start": 21.2, "duration": 2.2, "requires_pen": true, "color": "ink"},
         {"id": "key_h2", "type": "write_text", "text": "KEYSTONE", "x": 215, "y": 510, "size": 66, "width": 5, "start": 23.6, "duration": 1.7, "requires_pen": true, "color": "accent"},
-        {"id": "key_hl", "type": "draw_asset", "asset": "circle_highlight", "at": [540, 830], "scale": 0.55, "start": 25.7, "duration": 0.9, "requires_pen": true, "color": "accent", "width": 5},
-        {"id": "key_lbl1", "type": "fade_text", "text": "the oldest conclusion -", "x": 330, "y": 1470, "size": 32, "italic": true, "start": 27.0, "duration": 0.8, "requires_pen": false, "color": "ink"},
-        {"id": "key_lbl2", "type": "fade_text", "text": "the one the others depend on", "x": 280, "y": 1530, "size": 32, "italic": true, "start": 27.9, "duration": 0.8, "requires_pen": false, "color": "ink"},
-        {"id": "key_cracks", "type": "draw_asset", "asset": "cracks", "at": [540, 820], "scale": 1.0, "start": 29.2, "duration": 0.8, "requires_pen": true, "color": "accent", "width": 5},
-        {"id": "key_lbl3", "type": "fade_text", "text": "loosen it with questions...", "x": 320, "y": 1620, "size": 34, "italic": true, "start": 30.4, "duration": 0.8, "requires_pen": false, "color": "accent"},
-        {"id": "key_lbl4", "type": "fade_text", "text": "and the whole problem loses its shape", "x": 190, "y": 1690, "size": 34, "italic": true, "start": 31.6, "duration": 0.9, "requires_pen": false, "color": "accent"}
+        {"id": "key_hl", "type": "draw_asset", "asset": "circle_highlight", "at": [540, 830], "scale": 0.55, "start": 25.7, "duration": 0.8, "requires_pen": true, "color": "accent", "width": 5},
+        {"id": "key_fill", "type": "draw_fill", "polygon": [[500.6, 780.4], [579.4, 780.4], [564.6, 857.8], [515.4, 857.8]], "width": 16, "start": 26.7, "duration": 0.9, "requires_pen": true, "color": "accent"},
+        {"id": "key_lbl1", "type": "fade_text", "text": "the oldest conclusion -", "x": 330, "y": 1470, "size": 28, "start": 27.9, "duration": 0.7, "requires_pen": false, "color": "ink"},
+        {"id": "key_lbl2", "type": "fade_text", "text": "the one the others depend on", "x": 280, "y": 1530, "size": 28, "start": 28.7, "duration": 0.7, "requires_pen": false, "color": "ink"},
+        {"id": "key_cracks", "type": "draw_asset", "asset": "cracks", "at": [540, 820], "scale": 1.0, "start": 29.6, "duration": 0.7, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "key_magnifier", "type": "draw_asset", "asset": "magnifier", "at": [830, 1130], "scale": 0.85, "start": 30.5, "duration": 0.9, "requires_pen": true, "color": "teal", "width": 5},
+        {"id": "key_lbl3", "type": "fade_text", "text": "loosen it with questions...", "x": 320, "y": 1620, "size": 30, "start": 31.6, "duration": 0.7, "requires_pen": false, "color": "accent"},
+        {"id": "key_lbl4", "type": "fade_text", "text": "and the whole problem loses its shape", "x": 190, "y": 1690, "size": 30, "start": 32.5, "duration": 0.8, "requires_pen": false, "color": "accent"}
       ]
     },
     {

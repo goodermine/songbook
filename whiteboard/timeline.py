@@ -127,6 +127,42 @@ def compile_drawable(asset: Asset, duration: float,
     return events, stats
 
 
+def serpentine_fill(polygon: list[Point], spacing: float, inset: float) -> list[list[Point]]:
+    """Colouring-in strokes for a polygon: horizontal marker passes.
+
+    Scanlines advance by ``spacing``; each in-polygon interval becomes one
+    stroke, alternating direction row by row like a real marker filling a
+    shape. ``inset`` pulls the passes inside the outline so the fill tucks
+    under the drawn border instead of spilling past it.
+    """
+    if len(polygon) < 3:
+        raise ValueError("Fill polygon needs at least 3 points")
+    ys = [p[1] for p in polygon]
+    y_top, y_bottom = min(ys) + inset, max(ys) - inset
+    if y_bottom <= y_top:
+        return []
+    rows = max(1, round((y_bottom - y_top) / spacing))
+    strokes: list[list[Point]] = []
+    edges = list(zip(polygon, polygon[1:] + polygon[:1]))
+    for row in range(rows + 1):
+        y = y_top + (y_bottom - y_top) * row / rows
+        crossings = []
+        for (px, py), (qx, qy) in edges:
+            if (py <= y < qy) or (qy <= y < py):
+                crossings.append(px + (y - py) * (qx - px) / (qy - py))
+        crossings.sort()
+        intervals = []
+        for a, b in zip(crossings[0::2], crossings[1::2]):
+            a, b = a + inset, b - inset
+            if b - a > 2.0:
+                intervals.append((a, b))
+        if row % 2:
+            intervals = [(b, a) for a, b in reversed(intervals)]
+        for a, b in intervals:
+            strokes.append([(a, y), (b, y)])
+    return strokes
+
+
 def smoothed_tangent(points: list[Point], arc_px: float = 22.0) -> Point:
     """Average direction over the trailing arc, for a stable marker angle.
 
