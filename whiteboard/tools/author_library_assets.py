@@ -180,6 +180,28 @@ def underline_swash() -> list:
     return [("wave", points)]
 
 
+def straw_glass() -> list:
+    # A glass of water with a drinking straw and rising bubbles: the signature
+    # semi-occluded vocal tract exercise.
+    return [
+        ("glass", [(CX - 52, CY - 70), (CX - 40, CY + 70), (CX + 40, CY + 70), (CX + 52, CY - 70)]),
+        ("water", [(CX - 46, CY - 30), (CX + 46, CY - 30)]),
+        ("straw", [(CX + 62, CY - 112), (CX - 12, CY + 58)]),
+        ("bubble_a", circle(CX - 14, CY + 12, 7, samples=12)),
+        ("bubble_b", circle(CX + 6, CY - 6, 5, samples=10)),
+        ("bubble_c", circle(CX - 4, CY - 20, 4, samples=10)),
+    ]
+
+
+def music_note() -> list:
+    # Eighth note: head, stem, flag.
+    return [
+        ("head", circle(CX - 24, CY + 66, 17, samples=18)),
+        ("stem", [(CX - 7, CY + 66), (CX - 7, CY - 80)]),
+        ("flag", [(CX - 7, CY - 80), (CX + 18, CY - 62), (CX + 30, CY - 34), (CX + 22, CY - 6)]),
+    ]
+
+
 LIBRARY = {
     "lightbulb": (lightbulb, "forbid"),
     "speech_bubble": (speech_bubble, "forbid"),
@@ -195,6 +217,8 @@ LIBRARY = {
     "exclamation": (exclamation, "forbid"),
     "circle_highlight": (circle_highlight, "allow"),
     "underline_swash": (underline_swash, "forbid"),
+    "straw_glass": (straw_glass, "allow"),
+    "music_note": (music_note, "forbid"),
 }
 
 
