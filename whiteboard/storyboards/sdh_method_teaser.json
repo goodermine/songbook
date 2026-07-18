@@ -13,11 +13,31 @@
   "text_font": "marker",
   "caption_font": "marker",
   "style": {
-    "paper": [249, 247, 240],
-    "ink": [38, 43, 46],
-    "faint": [118, 120, 116],
-    "accent": [202, 83, 48],
-    "teal": [31, 111, 112]
+    "paper": [
+      249,
+      247,
+      240
+    ],
+    "ink": [
+      38,
+      43,
+      46
+    ],
+    "faint": [
+      118,
+      120,
+      116
+    ],
+    "accent": [
+      202,
+      83,
+      48
+    ],
+    "teal": [
+      31,
+      111,
+      112
+    ]
   },
   "narration": {
     "transcript": "Strategic Dialogue Hypnotherapy - the method in sixty seconds. The problem lives below the waterline. Every problem is an arch of conclusions, and one of them is the keystone. It feels permanent - it isn't. One real conversation, where the questions are the compass and the client finds their own answer. See the full method at aaronellis.au."
@@ -28,12 +48,82 @@
       "start": 0.0,
       "end": 9.5,
       "actions": [
-        {"id": "t1", "type": "write_text", "text": "STRATEGIC DIALOGUE", "align": "center", "y": 210, "size": 44, "start": 0.2, "duration": 2.2, "requires_pen": true, "color": "ink"},
-        {"id": "t2", "type": "write_text", "text": "HYPNOTHERAPY", "align": "center", "y": 310, "size": 60, "start": 2.6, "duration": 1.8, "requires_pen": true, "color": "accent"},
-        {"id": "t_sub", "type": "fade_text", "text": "the method, in sixty seconds", "align": "center", "y": 470, "size": 32, "start": 4.8, "duration": 0.8, "requires_pen": false, "color": "teal"},
-        {"id": "t_ice", "type": "show_image", "image": "iceberg_mind", "at": [540, 1050], "height": 620, "start": 5.2, "duration": 1.2, "requires_pen": false},
-        {"id": "t_cap", "type": "fade_text", "text": "the problem lives below the waterline", "align": "center", "y": 1480, "size": 30, "start": 6.8, "duration": 0.8, "requires_pen": false, "color": "faint"},
-        {"id": "t_swash", "type": "draw_asset", "asset": "underline_swash", "at": [540, 1600], "scale": 1.4, "start": 8.0, "duration": 0.6, "requires_pen": true, "color": "teal", "width": 5}
+        {
+          "id": "t1",
+          "type": "write_text",
+          "text": "STRATEGIC DIALOGUE",
+          "align": "center",
+          "y": 210,
+          "size": 44,
+          "start": 0.2,
+          "duration": 2.2,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "t2",
+          "type": "write_text",
+          "text": "HYPNOTHERAPY",
+          "align": "center",
+          "y": 310,
+          "size": 60,
+          "start": 2.6,
+          "duration": 1.8,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "t_sub",
+          "type": "fade_text",
+          "text": "the method, in sixty seconds",
+          "align": "center",
+          "y": 470,
+          "size": 32,
+          "start": 4.8,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "teal"
+        },
+        {
+          "id": "t_ice",
+          "type": "show_image",
+          "image": "iceberg_mind",
+          "at": [
+            540,
+            1050
+          ],
+          "height": 620,
+          "start": 5.2,
+          "duration": 1.2,
+          "requires_pen": false
+        },
+        {
+          "id": "t_cap",
+          "type": "fade_text",
+          "text": "the problem lives below the waterline",
+          "align": "center",
+          "y": 1480,
+          "size": 30,
+          "start": 6.8,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "faint"
+        },
+        {
+          "id": "t_swash",
+          "type": "draw_asset",
+          "asset": "underline_swash",
+          "at": [
+            540,
+            1600
+          ],
+          "scale": 1.4,
+          "start": 8.0,
+          "duration": 0.6,
+          "requires_pen": true,
+          "color": "teal",
+          "width": 5
+        }
       ]
     },
     {
@@ -41,13 +131,114 @@
       "start": 9.5,
       "end": 23.0,
       "actions": [
-        {"id": "a_h", "type": "write_text", "text": "EVERY PROBLEM IS AN ARCH", "align": "center", "y": 200, "size": 38, "start": 9.7, "duration": 2.7, "requires_pen": true, "color": "ink"},
-        {"id": "a_arch", "type": "draw_asset", "asset": "stone_arch", "at": [540, 880], "scale": 1.0, "start": 12.6, "duration": 4.0, "requires_pen": true, "color": "ink", "width": 6},
-        {"id": "a_fill", "type": "draw_fill", "polygon": [[502.5, 718.5], [577.5, 718.5], [563.4, 792.2], [516.6, 792.2]], "width": 16, "start": 16.9, "duration": 0.9, "requires_pen": true, "color": "accent"},
-        {"id": "a_hl", "type": "draw_asset", "asset": "circle_highlight", "at": [540, 758], "scale": 0.5, "start": 18.1, "duration": 0.7, "requires_pen": true, "color": "accent", "width": 5},
-        {"id": "a_cap1", "type": "fade_text", "text": "conclusions leaning on conclusions", "align": "center", "y": 1300, "size": 30, "start": 19.2, "duration": 0.7, "requires_pen": false, "color": "ink"},
-        {"id": "a_cap2", "type": "fade_text", "text": "one of them is the keystone", "align": "center", "y": 1365, "size": 30, "start": 20.3, "duration": 0.7, "requires_pen": false, "color": "accent"},
-        {"id": "a_cracks", "type": "draw_asset", "asset": "cracks", "at": [540, 755], "scale": 0.9, "start": 21.4, "duration": 0.6, "requires_pen": true, "color": "ink", "width": 4}
+        {
+          "id": "a_h",
+          "type": "write_text",
+          "text": "EVERY PROBLEM IS AN ARCH",
+          "align": "center",
+          "y": 200,
+          "size": 38,
+          "start": 9.7,
+          "duration": 2.7,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "a_arch",
+          "type": "draw_asset",
+          "asset": "stone_arch",
+          "at": [
+            540,
+            880
+          ],
+          "scale": 1.0,
+          "start": 12.6,
+          "duration": 4.0,
+          "requires_pen": true,
+          "color": "ink",
+          "width": 6
+        },
+        {
+          "id": "a_fill",
+          "type": "draw_fill",
+          "polygon": [
+            [
+              502.5,
+              718.5
+            ],
+            [
+              577.5,
+              718.5
+            ],
+            [
+              563.4,
+              792.2
+            ],
+            [
+              516.6,
+              792.2
+            ]
+          ],
+          "width": 16,
+          "start": 16.9,
+          "duration": 0.9,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "a_hl",
+          "type": "draw_asset",
+          "asset": "circle_highlight",
+          "at": [
+            540,
+            758
+          ],
+          "scale": 0.5,
+          "start": 18.1,
+          "duration": 0.7,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a_cap1",
+          "type": "fade_text",
+          "text": "conclusions leaning on conclusions",
+          "align": "center",
+          "y": 1300,
+          "size": 30,
+          "start": 19.2,
+          "duration": 0.7,
+          "requires_pen": false,
+          "color": "ink"
+        },
+        {
+          "id": "a_cap2",
+          "type": "fade_text",
+          "text": "one of them is the keystone",
+          "align": "center",
+          "y": 1365,
+          "size": 30,
+          "start": 20.3,
+          "duration": 0.7,
+          "requires_pen": false,
+          "color": "accent"
+        },
+        {
+          "id": "a_cracks",
+          "type": "draw_asset",
+          "asset": "cracks",
+          "at": [
+            540,
+            755
+          ],
+          "scale": 0.9,
+          "start": 21.4,
+          "duration": 0.6,
+          "requires_pen": true,
+          "color": "ink",
+          "width": 4
+        }
       ]
     },
     {
@@ -55,14 +246,117 @@
       "start": 23.0,
       "end": 36.0,
       "actions": [
-        {"id": "f_h", "type": "write_text", "text": "IT FEELS PERMANENT", "align": "center", "y": 200, "size": 42, "start": 23.2, "duration": 2.2, "requires_pen": true, "color": "ink"},
-        {"id": "f_heart", "type": "draw_asset", "asset": "heart", "at": [330, 850], "scale": 0.85, "start": 25.7, "duration": 1.0, "requires_pen": true, "color": "accent", "width": 6},
-        {"id": "f_heart_fill", "type": "draw_fill", "asset": "heart", "at": [330, 850], "scale": 0.85, "width": 18, "start": 26.9, "duration": 1.4, "requires_pen": true, "color": "accent"},
-        {"id": "f_star", "type": "draw_asset", "asset": "star_five", "at": [750, 850], "scale": 0.8, "start": 28.6, "duration": 0.9, "requires_pen": true, "color": "teal", "width": 6},
-        {"id": "f_star_fill", "type": "draw_fill", "asset": "star_five", "at": [750, 850], "scale": 0.8, "width": 16, "start": 29.8, "duration": 1.2, "requires_pen": true, "color": "teal"},
-        {"id": "f_cap1", "type": "fade_text", "text": "familiar is not fixed", "align": "center", "y": 1290, "size": 32, "start": 31.5, "duration": 0.7, "requires_pen": false, "color": "ink"},
-        {"id": "f_cap2", "type": "fade_text", "text": "patterns can be re-decided", "align": "center", "y": 1355, "size": 30, "start": 32.6, "duration": 0.7, "requires_pen": false, "color": "faint"},
-        {"id": "f_q", "type": "draw_asset", "asset": "question_mark", "at": [540, 1560], "scale": 0.8, "start": 33.8, "duration": 0.9, "requires_pen": true, "color": "faint", "width": 5}
+        {
+          "id": "f_h",
+          "type": "write_text",
+          "text": "IT FEELS PERMANENT",
+          "align": "center",
+          "y": 200,
+          "size": 42,
+          "start": 23.2,
+          "duration": 2.2,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "f_heart",
+          "type": "draw_asset",
+          "asset": "heart",
+          "at": [
+            330,
+            850
+          ],
+          "scale": 0.85,
+          "start": 25.7,
+          "duration": 1.0,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 6
+        },
+        {
+          "id": "f_heart_fill",
+          "type": "draw_fill",
+          "asset": "heart",
+          "at": [
+            330,
+            850
+          ],
+          "scale": 0.85,
+          "width": 18,
+          "start": 26.9,
+          "duration": 1.4,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "f_star",
+          "type": "draw_asset",
+          "asset": "star_five",
+          "at": [
+            750,
+            850
+          ],
+          "scale": 0.8,
+          "start": 28.6,
+          "duration": 0.9,
+          "requires_pen": true,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "f_star_fill",
+          "type": "draw_fill",
+          "asset": "star_five",
+          "at": [
+            750,
+            850
+          ],
+          "scale": 0.8,
+          "width": 16,
+          "start": 29.8,
+          "duration": 1.2,
+          "requires_pen": true,
+          "color": "teal"
+        },
+        {
+          "id": "f_cap1",
+          "type": "fade_text",
+          "text": "familiar is not fixed",
+          "align": "center",
+          "y": 1290,
+          "size": 32,
+          "start": 31.5,
+          "duration": 0.7,
+          "requires_pen": false,
+          "color": "ink"
+        },
+        {
+          "id": "f_cap2",
+          "type": "fade_text",
+          "text": "patterns can be re-decided",
+          "align": "center",
+          "y": 1355,
+          "size": 30,
+          "start": 32.6,
+          "duration": 0.7,
+          "requires_pen": false,
+          "color": "faint"
+        },
+        {
+          "id": "f_q",
+          "type": "draw_asset",
+          "asset": "question_mark",
+          "at": [
+            540,
+            1560
+          ],
+          "scale": 0.8,
+          "start": 33.8,
+          "duration": 0.9,
+          "requires_pen": true,
+          "color": "faint",
+          "width": 5
+        }
       ]
     },
     {
@@ -70,12 +364,81 @@
       "start": 36.0,
       "end": 47.0,
       "actions": [
-        {"id": "d_h", "type": "write_text", "text": "ONE REAL CONVERSATION", "align": "center", "y": 200, "size": 38, "start": 36.2, "duration": 2.4, "requires_pen": true, "color": "teal"},
-        {"id": "d_chairs", "type": "show_image", "image": "two_chairs", "at": [540, 840], "height": 560, "start": 38.9, "duration": 1.2, "requires_pen": false},
-        {"id": "d_cap1", "type": "fade_text", "text": "the client finds their own answer", "align": "center", "y": 1195, "size": 30, "start": 40.4, "duration": 0.8, "requires_pen": false, "color": "faint"},
-        {"id": "d_compass", "type": "show_image", "image": "signal_compass", "at": [300, 1480], "height": 300, "start": 41.5, "duration": 1.0, "requires_pen": false},
-        {"id": "d_path", "type": "show_image", "image": "question_path", "at": [770, 1480], "height": 330, "start": 42.8, "duration": 1.0, "requires_pen": false},
-        {"id": "d_cap2", "type": "fade_text", "text": "questions are the compass", "align": "center", "y": 1720, "size": 30, "start": 44.3, "duration": 0.8, "requires_pen": false, "color": "teal"}
+        {
+          "id": "d_h",
+          "type": "write_text",
+          "text": "ONE REAL CONVERSATION",
+          "align": "center",
+          "y": 200,
+          "size": 38,
+          "start": 36.2,
+          "duration": 2.4,
+          "requires_pen": true,
+          "color": "teal"
+        },
+        {
+          "id": "d_chairs",
+          "type": "show_image",
+          "image": "two_chairs",
+          "at": [
+            540,
+            840
+          ],
+          "height": 560,
+          "start": 38.9,
+          "duration": 1.2,
+          "requires_pen": false
+        },
+        {
+          "id": "d_cap1",
+          "type": "fade_text",
+          "text": "the client finds their own answer",
+          "align": "center",
+          "y": 1195,
+          "size": 30,
+          "start": 40.4,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "faint"
+        },
+        {
+          "id": "d_compass",
+          "type": "show_image",
+          "image": "signal_compass",
+          "at": [
+            300,
+            1480
+          ],
+          "height": 300,
+          "start": 41.5,
+          "duration": 1.0,
+          "requires_pen": false
+        },
+        {
+          "id": "d_path",
+          "type": "show_image",
+          "image": "question_path",
+          "at": [
+            770,
+            1480
+          ],
+          "height": 330,
+          "start": 42.8,
+          "duration": 1.0,
+          "requires_pen": false
+        },
+        {
+          "id": "d_cap2",
+          "type": "fade_text",
+          "text": "questions are the compass",
+          "align": "center",
+          "y": 1720,
+          "size": 30,
+          "start": 44.3,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "teal"
+        }
       ]
     },
     {
@@ -83,13 +446,84 @@
       "start": 47.0,
       "end": 58.0,
       "actions": [
-        {"id": "c_h", "type": "write_text", "text": "SEE THE FULL METHOD", "align": "center", "y": 250, "size": 40, "start": 47.3, "duration": 2.1, "requires_pen": true, "color": "ink"},
-        {"id": "c_book", "type": "show_image", "image": "book_cover", "at": [540, 830], "height": 520, "start": 49.8, "duration": 1.2, "requires_pen": false},
-        {"id": "c_cta", "type": "write_text", "text": "LEARN MORE", "align": "center", "y": 1220, "size": 42, "start": 51.4, "duration": 1.1, "requires_pen": true, "color": "accent"},
-        {"id": "c_url", "type": "write_text", "text": "AARONELLIS.AU", "align": "center", "y": 1330, "size": 52, "start": 52.8, "duration": 1.8, "requires_pen": true, "color": "teal"},
-        {"id": "c_swash", "type": "draw_asset", "asset": "underline_swash", "at": [540, 1490], "scale": 1.4, "start": 54.9, "duration": 0.6, "requires_pen": true, "color": "accent", "width": 5},
-        {"id": "c_author", "type": "fade_text", "text": "from the book by Aaron Ellis", "align": "center", "y": 1590, "size": 30, "start": 55.9, "duration": 0.8, "requires_pen": false, "color": "faint"}
+        {
+          "id": "c_h",
+          "type": "write_text",
+          "text": "SEE THE FULL METHOD",
+          "align": "center",
+          "y": 250,
+          "size": 40,
+          "start": 47.3,
+          "duration": 2.1,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "c_book",
+          "type": "show_image",
+          "image": "book_cover",
+          "at": [
+            540,
+            830
+          ],
+          "height": 520,
+          "start": 49.8,
+          "duration": 1.2,
+          "requires_pen": false
+        },
+        {
+          "id": "c_cta",
+          "type": "write_text",
+          "text": "LEARN MORE",
+          "align": "center",
+          "y": 1220,
+          "size": 42,
+          "start": 51.4,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "c_url",
+          "type": "write_text",
+          "text": "AARONELLIS.AU",
+          "align": "center",
+          "y": 1330,
+          "size": 52,
+          "start": 52.8,
+          "duration": 1.8,
+          "requires_pen": true,
+          "color": "teal"
+        },
+        {
+          "id": "c_swash",
+          "type": "draw_asset",
+          "asset": "underline_swash",
+          "at": [
+            540,
+            1490
+          ],
+          "scale": 1.4,
+          "start": 54.9,
+          "duration": 0.6,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "c_author",
+          "type": "fade_text",
+          "text": "from the book by Aaron Ellis",
+          "align": "center",
+          "y": 1590,
+          "size": 30,
+          "start": 55.9,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "faint"
+        }
       ]
     }
-  ]
+  ],
+  "stroke_style": "round"
 }

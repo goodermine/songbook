@@ -180,13 +180,20 @@ def partial_path(points: list[tuple[float, float]], distance: float) -> tuple[li
     return output, points[-1], last_tangent
 
 
-def sketch_line(draw: ImageDraw.ImageDraw, points: list[tuple[float, float]], color: tuple[int, int, int], width: int, seed: int) -> None:
+def sketch_line(draw: ImageDraw.ImageDraw, points: list[tuple[float, float]], color: tuple[int, int, int],
+                width: int, seed: int, caps: bool = False) -> None:
     if len(points) < 2:
         return
     rng = random.Random(seed)
     for pass_no in range(2):
         jittered = [(x + rng.uniform(-1.7, 1.7), y + rng.uniform(-1.7, 1.7)) for x, y in points]
-        draw.line(jittered, fill=color, width=max(1, width - pass_no * 2), joint="curve")
+        pass_width = max(1, width - pass_no * 2)
+        draw.line(jittered, fill=color, width=pass_width, joint="curve")
+        if caps and pass_width >= 3:
+            # Round every joint and both ends: marker ink pools, no square elbows.
+            half = pass_width / 2
+            for jx, jy in jittered:
+                draw.ellipse((jx - half, jy - half, jx + half, jy + half), fill=color)
 
 
 def compound_paths(state: FrameState, owner: str, paths: list[list[tuple[float, float]]], p: float,
@@ -313,6 +320,33 @@ def load_image_asset(name: str, height: int) -> Image.Image:
     scale = height / image.height
     return image.resize((max(1, round(image.width * scale)), height),
                         Image.Resampling.LANCZOS)
+
+
+def show_image_sequence(state: FrameState, action: dict[str, Any], time_s: float) -> None:
+    """Flipbook animation: cut through a list of image assets over the action.
+
+    Frames split the duration evenly; the first frame fades in briefly, later
+    frames hard-cut (the hand-drawn flipbook look). After the action the last
+    frame holds for the rest of the scene.
+    """
+    images = action["images"]
+    duration = float(action["duration"])
+    tau = time_s - float(action["start"])
+    if tau <= 0:
+        return
+    per_frame = duration / len(images)
+    index = min(len(images) - 1, int(tau / per_frame))
+    height = int(action.get("height", 400))
+    image = load_image_asset(images[index], height)
+    at = action.get("at")
+    if not (isinstance(at, (list, tuple)) and len(at) == 2):
+        raise BuildError(f"Action {action.get('id')!r}: show_image_sequence requires \"at\": [x, y]")
+    layer = image.copy()
+    if index == 0 and tau < min(0.35, per_frame):
+        alpha = layer.getchannel("A").point(lambda v: int(v * clamp(tau / min(0.35, per_frame))))
+        layer.putalpha(alpha)
+    state.image.alpha_composite(layer, (round(float(at[0]) - image.width / 2),
+                                        round(float(at[1]) - image.height / 2)))
 
 
 def show_image(state: FrameState, action: dict[str, Any], p: float) -> None:
@@ -573,7 +607,8 @@ def text_timeline(text: str, x: float, y: float, size: float, duration: float,
 
 def draw_events(state: FrameState, owner: str, events: tuple[PenEvent, ...], tau: float,
                 color: tuple[int, int, int], width: int, seed_base: int,
-                last_color: tuple[int, int, int] | None = None, claim: bool = True) -> None:
+                last_color: tuple[int, int, int] | None = None, claim: bool = True,
+                caps: bool = False) -> None:
     """Render a compiled physical timeline at local action time ``tau``.
 
     Completed pen-down events are drawn in full; the active pen-down event is
@@ -603,11 +638,11 @@ def draw_events(state: FrameState, owner: str, events: tuple[PenEvent, ...], tau
         seed = seed_base + event.stroke_index + (100 if event.kind == "arrowhead" else 0)
         points = list(event.points)
         if tau >= event.end:
-            sketch_line(state.draw, points, event_color, width, seed)
+            sketch_line(state.draw, points, event_color, width, seed, caps)
             continue
         fraction = smooth((tau - event.start) / event.duration)
         partial, tip, _tangent = partial_path(points, fraction * path_length(points))
-        sketch_line(state.draw, partial, event_color, width, seed)
+        sketch_line(state.draw, partial, event_color, width, seed, caps)
         if claim:
             state.claim_pen(owner, tip, smoothed_tangent(partial),
                             stroke=f"{event.kind}:{event.stroke_index}")
@@ -646,6 +681,8 @@ def validate_storyboard(storyboard: dict[str, Any]) -> dict[str, Any]:
         raise BuildError(f"text_font must be one of {TEXT_FONTS}")
     if storyboard.get("caption_font", "serif") not in ("serif", "marker"):
         raise BuildError("caption_font must be 'serif' or 'marker'")
+    if storyboard.get("stroke_style", "classic") not in ("classic", "round"):
+        raise BuildError("stroke_style must be 'classic' or 'round'")
     actions = flatten_actions(storyboard)
     ids = [action["id"] for action in actions]
     if len(ids) != len(set(ids)):
@@ -680,16 +717,21 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
     names = set()
     images = 0
     for action in flatten_actions(storyboard):
-        if action["type"] == "show_image":
+        if action["type"] in {"show_image", "show_image_sequence"}:
+            frame_names = (action["images"] if action["type"] == "show_image_sequence"
+                           else [action["image"]])
+            if not frame_names:
+                raise BuildError(f"Action {action['id']!r}: empty image list")
             height = int(action.get("height", 400))
-            image = load_image_asset(action["image"], height)
             at = action.get("at")
             if not (isinstance(at, (list, tuple)) and len(at) == 2):
-                raise BuildError(f"Action {action['id']!r}: show_image requires \"at\": [x, y]")
-            if (at[0] - image.width / 2 < 0 or at[0] + image.width / 2 > board[0]
-                    or at[1] - height / 2 < 0 or at[1] + height / 2 > board[1]):
-                raise BuildError(f"Action {action['id']!r}: image {action['image']!r} at {at} "
-                                 f"({image.width}x{height}) leaves the {board[0]}x{board[1]} board")
+                raise BuildError(f"Action {action['id']!r}: {action['type']} requires \"at\": [x, y]")
+            for name in frame_names:
+                image = load_image_asset(name, height)
+                if (at[0] - image.width / 2 < 0 or at[0] + image.width / 2 > board[0]
+                        or at[1] - height / 2 < 0 or at[1] + height / 2 > board[1]):
+                    raise BuildError(f"Action {action['id']!r}: image {name!r} at {at} "
+                                     f"({image.width}x{height}) leaves the {board[0]}x{board[1]} board")
             images += 1
             continue
         if action["type"] not in {"draw_asset", "draw_break"}:
@@ -747,6 +789,7 @@ class WhiteboardProject:
         self.chrome = storyboard.get("chrome", "legacy")
         self.text_font = storyboard.get("text_font", "hershey")
         self.caption_font = storyboard.get("caption_font", "serif")
+        self.round_strokes = storyboard.get("stroke_style", "classic") == "round"
         self.base = paper_texture(self.width, self.height, self.style["paper"])
         self.last_report: dict[str, Any] | None = None
 
@@ -786,7 +829,7 @@ class WhiteboardProject:
                                                    (self.width, self.height))
                     tau = time_s - float(action["start"])
                     draw_events(state, action["id"], events, tau, color, int(action.get("width", 3)),
-                                3000 + index)
+                                3000 + index, caps=self.round_strokes)
             elif action_type == "fade_labels":
                 for label_index, label in enumerate(action["labels"]):
                     local = clamp(p * len(action["labels"]) - label_index)
@@ -798,9 +841,12 @@ class WhiteboardProject:
                                                float(action["duration"]),
                                                (self.width, self.height))
                 draw_events(state, action["id"], events, time_s - float(action["start"]),
-                            color, int(action.get("width", 18)), 5000 + index)
+                            color, int(action.get("width", 18)), 5000 + index,
+                            caps=self.round_strokes)
             elif action_type == "show_image":
                 show_image(state, action, p)
+            elif action_type == "show_image_sequence":
+                show_image_sequence(state, action, time_s)
             elif action_type == "fade_asset" and action["asset"] == "reaction_dots":
                 for dot_index, x in enumerate([205, 420, 635, 850, 1065]):
                     local = clamp(p * 5 - dot_index)
@@ -818,9 +864,10 @@ class WhiteboardProject:
                         # Erase mask and accent line share identical partial
                         # progress: paper never appears ahead of the nib.
                         draw_events(state, action["id"], events, tau, self.style["paper"], 18,
-                                    800 + index, claim=False)
+                                    800 + index, claim=False, caps=self.round_strokes)
                     draw_events(state, action["id"], events, tau, color, int(action.get("width", 6)),
-                                1000 + index, self.style.get(action.get("last_color", "")))
+                                1000 + index, self.style.get(action.get("last_color", "")),
+                                caps=self.round_strokes)
                 else:
                     asset = action_asset(action, (self.width, self.height))
                     paths = [list(stroke.points) for stroke in asset.strokes]
