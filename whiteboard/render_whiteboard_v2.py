@@ -355,16 +355,31 @@ def marker_text_plan(text: str, x: float, y: float, size: float, duration: float
     if bbox[0] < 0 or bbox[1] < 0 or bbox[2] > board[0] or bbox[3] > board[1]:
         raise BuildError(f"Marker text {text!r} bounds {bbox} leave the "
                          f"{board[0]}x{board[1]} board")
-    try:
-        skeleton = text_to_strokes(text, 0.0, 0.0, 100.0)
-    except TextStrokeError as exc:
-        raise BuildError(str(exc)) from exc
-    sx0, sy0, sx1, sy1 = strokes_bounds(skeleton)
-    span_x, span_y = max(sx1 - sx0, 1e-6), max(sy1 - sy0, 1e-6)
-    fit_x = (bbox[2] - bbox[0]) / span_x
-    fit_y = (bbox[3] - bbox[1]) / span_y
-    fitted = [[(bbox[0] + (px - sx0) * fit_x, bbox[1] + (py - sy0) * fit_y)
-               for px, py in stroke] for stroke in skeleton]
+    # Fit the Hershey skeleton PER CHARACTER, each into its own rendered glyph
+    # box (via font advances), so the brush tracks every letter regardless of
+    # how the marker font's proportions differ from the skeleton's.
+    font = marker_font(round(size))
+    base_x = round(x) - font.getbbox(text)[0] + 1
+    draw_y = round(y) - font.getbbox("H")[1]
+    fitted: list[list[tuple[float, float]]] = []
+    for index, char in enumerate(text):
+        char_box = font.getbbox(char)
+        if char == " " or char_box is None or char_box[2] <= char_box[0]:
+            continue
+        advance = font.getlength(text[:index])
+        target = (base_x + advance + char_box[0], draw_y + char_box[1],
+                  base_x + advance + char_box[2], draw_y + char_box[3])
+        try:
+            skeleton = text_to_strokes(char, 0.0, 0.0, 100.0)
+        except TextStrokeError as exc:
+            raise BuildError(str(exc)) from exc
+        sx0, sy0, sx1, sy1 = strokes_bounds(skeleton)
+        fit_x = (target[2] - target[0]) / max(sx1 - sx0, 1e-6)
+        fit_y = (target[3] - target[1]) / max(sy1 - sy0, 1e-6)
+        fitted.extend([(target[0] + (px - sx0) * fit_x, target[1] + (py - sy0) * fit_y)
+                       for px, py in stroke] for stroke in skeleton)
+    if not fitted:
+        raise BuildError(f"Marker text {text!r} produced no strokes to trace")
     strokes = []
     for index, points in enumerate(fitted):
         is_last = index == len(fitted) - 1
@@ -400,6 +415,7 @@ def draw_marker_text(state: FrameState, action: dict[str, Any], time_s: float,
     brush = max(16, round(size * 0.72))
     mask = Image.new("L", (board[0], board[1]), 0)
     mask_draw = ImageDraw.Draw(mask)
+    front_x: float | None = None
 
     def paint(points: list[tuple[float, float]]) -> None:
         if len(points) >= 2:
@@ -424,12 +440,21 @@ def draw_marker_text(state: FrameState, action: dict[str, Any], time_s: float,
         points = list(event.points)
         if tau >= event.end:
             paint(points)
+            front_x = max(front_x or 0.0, max(px for px, _ in points))
             continue
         fraction = smooth((tau - event.start) / event.duration)
         partial, tip, _tan = partial_path(points, fraction * path_length(points))
         paint(partial)
+        front_x = max(front_x or 0.0, tip[0])
         state.claim_pen(action["id"], tip, smoothed_tangent(partial),
                         stroke=f"marker:{event.stroke_index}")
+    if front_x is not None:
+        # Trailing reveal front: letters the pen has already passed are always
+        # fully inked, so nothing pops in later. The brush handles the detail
+        # at the front; this backstop trails just behind it.
+        _bx0, _by0, _bx1, _by1 = _bbox
+        mask_draw.rectangle((_bx0 - brush, _by0 - brush,
+                             front_x - brush * 0.55, _by1 + brush), fill=255)
     revealed = layer.copy()
     revealed.putalpha(ImageChops.multiply(layer.getchannel("A"), mask))
     state.image.alpha_composite(revealed)
