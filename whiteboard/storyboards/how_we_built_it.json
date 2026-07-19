@@ -1,0 +1,118 @@
+{
+  "version": 2,
+  "title": "How We Built a Whiteboard Video Engine",
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "content_duration": 60.0,
+  "safe_content_end": 59.6,
+  "final_hold": 1.4,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "chrome": "none",
+  "text_font": "marker",
+  "caption_font": "marker",
+  "stroke_style": "round",
+  "style": {
+    "paper": [249, 247, 240],
+    "ink": [38, 43, 46],
+    "faint": [118, 120, 116],
+    "accent": [202, 83, 48],
+    "teal": [31, 111, 112]
+  },
+  "narration": {
+    "transcript": "From a storyboard to the screen. Here is how we built a whiteboard video engine. It starts with one file: plain text in, a finished video out. One hand, one marker, and the nib follows every stroke. Real handwriting, brushed on stroke by stroke. A growing library of drawn doodles, your own illustrations, and flip-book animations. It colours things in. It is proven: silent or narrated, vertical or widescreen, ninety-seven automated tests, zero pen collisions. Storyboard in, video out. Even this one."
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "start": 0.0,
+      "end": 7.0,
+      "actions": [
+        {"id": "s1_t1", "type": "write_text", "text": "FROM STORYBOARD", "align": "center", "y": 360, "size": 76, "start": 0.2, "duration": 2.2, "requires_pen": true, "color": "ink"},
+        {"id": "s1_t2", "type": "write_text", "text": "TO SCREEN", "align": "center", "y": 480, "size": 76, "start": 2.5, "duration": 1.6, "requires_pen": true, "color": "accent"},
+        {"id": "s1_swash", "type": "draw_asset", "asset": "underline_swash", "at": [960, 640], "scale": 2.2, "start": 4.3, "duration": 0.7, "requires_pen": true, "color": "teal", "width": 6},
+        {"id": "s1_sub", "type": "fade_text", "text": "how we built a whiteboard video engine", "align": "center", "y": 740, "size": 38, "start": 5.3, "duration": 0.9, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "storyboard",
+      "start": 7.0,
+      "end": 15.0,
+      "actions": [
+        {"id": "s2_h", "type": "write_text", "text": "IT STARTS WITH A STORYBOARD", "align": "center", "y": 130, "size": 52, "start": 7.2, "duration": 2.6, "requires_pen": true, "color": "ink"},
+        {"id": "s2_bulb", "type": "show_image_sequence", "images": ["lightbulb_on_1", "lightbulb_on_2", "lightbulb_on_3", "lightbulb_on_4", "lightbulb_on_5", "lightbulb_on_6"], "at": [960, 560], "height": 440, "start": 10.0, "duration": 2.4, "requires_pen": false},
+        {"id": "s2_cap1", "type": "fade_text", "text": "plain text in - a finished video out", "align": "center", "y": 840, "size": 36, "start": 12.6, "duration": 0.8, "requires_pen": false, "color": "ink"},
+        {"id": "s2_cap2", "type": "fade_text", "text": "no timeline, no dragging clips", "align": "center", "y": 905, "size": 32, "start": 13.5, "duration": 0.7, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "hand",
+      "start": 15.0,
+      "end": 23.0,
+      "actions": [
+        {"id": "s3_h", "type": "write_text", "text": "ONE HAND. ONE MARKER.", "align": "center", "y": 130, "size": 54, "start": 15.2, "duration": 2.4, "requires_pen": true, "color": "teal"},
+        {"id": "s3_person", "type": "draw_asset", "asset": "person_one", "at": [960, 560], "scale": 1.15, "start": 17.8, "duration": 1.8, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "s3_cap", "type": "fade_text", "text": "the nib follows every stroke - it never teleports", "align": "center", "y": 900, "size": 34, "start": 19.9, "duration": 0.9, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "handwriting",
+      "start": 23.0,
+      "end": 30.0,
+      "actions": [
+        {"id": "s4_h", "type": "write_text", "text": "REAL HANDWRITING", "align": "center", "y": 130, "size": 54, "start": 23.2, "duration": 2.2, "requires_pen": true, "color": "ink"},
+        {"id": "s4_demo", "type": "write_text", "text": "drawn, not typed", "align": "center", "y": 500, "size": 92, "start": 25.6, "duration": 2.8, "requires_pen": true, "color": "accent"},
+        {"id": "s4_cap", "type": "fade_text", "text": "every letter brushed on, stroke by stroke", "align": "center", "y": 760, "size": 34, "start": 28.6, "duration": 0.8, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "library",
+      "start": 30.0,
+      "end": 38.0,
+      "actions": [
+        {"id": "s5_h", "type": "write_text", "text": "A GROWING LIBRARY", "align": "center", "y": 130, "size": 54, "start": 30.2, "duration": 2.4, "requires_pen": true, "color": "ink"},
+        {"id": "s5_star", "type": "draw_asset", "asset": "star_five", "at": [560, 540], "scale": 1.0, "start": 32.8, "duration": 0.9, "requires_pen": true, "color": "teal", "width": 6},
+        {"id": "s5_bulb", "type": "draw_asset", "asset": "lightbulb", "at": [960, 540], "scale": 1.0, "start": 33.8, "duration": 1.1, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "s5_gear", "type": "draw_asset", "asset": "gear", "at": [1360, 540], "scale": 1.0, "start": 35.0, "duration": 1.2, "requires_pen": true, "color": "accent", "width": 6},
+        {"id": "s5_cap", "type": "fade_text", "text": "29 drawn doodles, your own illustrations, and animations", "align": "center", "y": 830, "size": 34, "start": 36.4, "duration": 0.9, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "colour",
+      "start": 38.0,
+      "end": 46.5,
+      "actions": [
+        {"id": "s6_h", "type": "write_text", "text": "IT COLOURS IN", "align": "center", "y": 130, "size": 54, "start": 38.2, "duration": 2.2, "requires_pen": true, "color": "teal"},
+        {"id": "s6_heart", "type": "draw_asset", "asset": "heart", "at": [620, 560], "scale": 1.1, "start": 40.6, "duration": 1.0, "requires_pen": true, "color": "accent", "width": 6},
+        {"id": "s6_fill", "type": "draw_fill", "asset": "heart", "at": [620, 560], "scale": 1.1, "width": 20, "start": 41.7, "duration": 1.5, "requires_pen": true, "color": "accent"},
+        {"id": "s6_arch", "type": "show_image_sequence", "images": ["arch_fall_1", "arch_fall_2", "arch_fall_3", "arch_fall_4", "arch_fall_5", "arch_fall_6"], "at": [1320, 560], "height": 480, "start": 43.4, "duration": 2.4, "requires_pen": false},
+        {"id": "s6_cap", "type": "fade_text", "text": "fills, flip-book animations, a hand that glides", "align": "center", "y": 900, "size": 34, "start": 44.0, "duration": 0.9, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "proven",
+      "start": 46.5,
+      "end": 53.0,
+      "actions": [
+        {"id": "s7_h", "type": "write_text", "text": "PROVEN", "align": "center", "y": 120, "size": 60, "start": 46.7, "duration": 1.6, "requires_pen": true, "color": "ink"},
+        {"id": "s7_check", "type": "draw_asset", "asset": "checkmark", "at": [960, 380], "scale": 1.2, "start": 48.4, "duration": 0.9, "requires_pen": true, "color": "teal", "width": 11},
+        {"id": "s7_c1", "type": "fade_text", "text": "silent or narrated", "align": "center", "y": 620, "size": 38, "start": 49.6, "duration": 0.6, "requires_pen": false, "color": "ink"},
+        {"id": "s7_c2", "type": "fade_text", "text": "vertical or widescreen", "align": "center", "y": 700, "size": 38, "start": 50.3, "duration": 0.6, "requires_pen": false, "color": "ink"},
+        {"id": "s7_c3", "type": "fade_text", "text": "97 automated tests, all green", "align": "center", "y": 780, "size": 38, "start": 51.0, "duration": 0.6, "requires_pen": false, "color": "teal"},
+        {"id": "s7_c4", "type": "fade_text", "text": "zero pen collisions, ever", "align": "center", "y": 860, "size": 38, "start": 51.7, "duration": 0.6, "requires_pen": false, "color": "accent"}
+      ]
+    },
+    {
+      "id": "close",
+      "start": 53.0,
+      "end": 60.0,
+      "actions": [
+        {"id": "s8_h", "type": "write_text", "text": "STORYBOARD IN.", "align": "center", "y": 380, "size": 64, "start": 53.3, "duration": 2.0, "requires_pen": true, "color": "ink"},
+        {"id": "s8_h2", "type": "write_text", "text": "VIDEO OUT.", "align": "center", "y": 500, "size": 64, "start": 55.4, "duration": 1.6, "requires_pen": true, "color": "accent"},
+        {"id": "s8_swash", "type": "draw_asset", "asset": "underline_swash", "at": [960, 650], "scale": 2.0, "start": 57.1, "duration": 0.6, "requires_pen": true, "color": "teal", "width": 6},
+        {"id": "s8_cap", "type": "fade_text", "text": "even this one.", "align": "center", "y": 750, "size": 42, "start": 58.1, "duration": 0.9, "requires_pen": false, "color": "faint"}
+      ]
+    }
+  ]
+}
