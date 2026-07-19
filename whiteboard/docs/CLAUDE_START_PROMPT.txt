@@ -1,0 +1,59 @@
+You are taking over a Python whiteboard-animation proof of concept. Read
+CLAUDE_CODE_HANDOFF.md, SHAPE_AND_HAND_AUDIT.md, HAND_ASSET_SPEC.md,
+PYTHON_SOURCE_AUDIT.md, README_V2.md, render_whiteboard_v2.py and
+storyboard_v2.json before editing anything.
+
+First reproduce the current silent baseline exactly:
+
+  python3 render_whiteboard_v2.py --validate-only
+  python3 render_whiteboard_v2.py --storyboard storyboard_v2.json --silent --output reproduced_silent.mp4
+  ffprobe -v error -show_entries stream=codec_type,codec_name,width,height,r_frame_rate -show_entries format=duration,size -of json reproduced_silent.mp4
+  ffmpeg -v error -i reproduced_silent.mp4 -f null -
+
+Record Python/Pillow/NumPy/FFmpeg/font versions, render time, probe output and
+representative frame hashes. Do not rewrite the engine until this baseline is
+frozen in tests.
+
+Mission: turn this proof into a reusable, no-manual-timeline whiteboard renderer
+where storyboard and assets—not Python edits—produce new videos. The immediate
+master must contain no audio stream. One believable hand holding one marker must
+follow the exact stroke tip. At most one pen-down action and one hand may exist
+at any time. Disconnected strokes require explicit pen lifts; no visible
+teleporting. Text must be formed from actual single-line glyph strokes, not a
+horizontal raster wipe. Arrowheads and all semantic shapes must be physically
+drawn rather than popping in.
+
+Proceed in gated vertical slices:
+
+1. Freeze baseline and add smoke/integration tests.
+2. Formalise audio modes with none as default and zero audio streams.
+3. Extract typed StrokePath/AssetRegistry data with geometry preflight.
+4. Compile pen-down, pen-up, hold, fade and cut events; smooth motion while
+   keeping a natural, mostly stable wrist angle.
+5. Implement bundled Hershey/single-line text through the same stroke engine.
+6. Rig a transparent illustrated hand/marker using a measured nib anchor; add a
+   diagnostic overlay and p99 nib-error metric.
+7. Fix arrowheads, identity-break erasure, pen lifts and shape quality.
+8. Prove generality with three unseen 30–60 second storyboards without renderer
+   edits.
+
+Hard acceptance gates:
+
+- active_pen_count <= 1 everywhere;
+- silent MP4 has exactly one H.264 video stream and no audio stream;
+- nib-to-tip error <=2 px at 720p for 99% of pen-down frames;
+- commanded/rendered pose-angle error <=1 degree and wrist rotation remains
+  inside its declared natural range;
+- no undeclared pen-down jump or unintended clipping;
+- at 50% text progress only the first 50% of glyph strokes exists;
+- all arrowheads, branches and pause bars are traced;
+- failed geometry/layout/font/asset checks stop before FFmpeg rendering;
+- every master emits video, build manifest, contact sheet, geometry audit,
+  hand diagnostic, test results and benchmark.
+
+Preserve the current V2 as a reference. Do not add LLM, image-generation, TTS,
+forced-alignment or cloud orchestration until the silent renderer passes the
+visual/geometry gates. Do not generate a different hand on every frame. Start
+with one short vertical slice that combines true stroke text, a typed shape,
+explicit pen lift and a nib-anchored hand; get its diagnostics and tests green,
+then migrate the five existing scenes.

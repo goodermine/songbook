@@ -1,0 +1,43 @@
+{
+  "title": "People Aren't Broken. They're Rehearsed.",
+  "format": "16:9",
+  "duration_seconds": 28,
+  "visual_style": {
+    "background": "warm white paper",
+    "ink": "charcoal",
+    "accent": "burnt orange",
+    "secondary": "deep teal"
+  },
+  "scenes": [
+    {
+      "start": 0,
+      "end": 5,
+      "narration": "People aren't broken.",
+      "visual": "A person appears beneath the word BROKEN, then the label is decisively crossed out."
+    },
+    {
+      "start": 5,
+      "end": 10,
+      "narration": "They're rehearsed.",
+      "visual": "A looping arrow circles the person as repeated reaction marks accumulate."
+    },
+    {
+      "start": 10,
+      "end": 16,
+      "narration": "A reaction repeated becomes a pattern.",
+      "visual": "Reaction becomes Pattern through a sequence of repeated arrows."
+    },
+    {
+      "start": 16,
+      "end": 21.5,
+      "narration": "A pattern repeated can feel like identity.",
+      "visual": "The word PATTERN is placed inside a box labelled THIS IS ME, then the box cracks open."
+    },
+    {
+      "start": 21.5,
+      "end": 28,
+      "narration": "Interrupt the old rehearsal. Practice a different response.",
+      "visual": "A pause symbol interrupts the loop and a new upward path is drawn toward CHOICE."
+    }
+  ]
+}

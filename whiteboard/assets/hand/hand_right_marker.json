@@ -1,0 +1,19 @@
+{
+  "id": "hand_right_marker",
+  "sprite": "hand_right_marker.png",
+  "size": [
+    1300,
+    1632
+  ],
+  "nib": [
+    409.35,
+    407.34
+  ],
+  "pen_angle_deg": 48.0,
+  "wrist": [
+    796.17,
+    1103.0
+  ],
+  "contact": "down",
+  "provenance": "imported once from 05f7dd70-56E165495E2E47BA86B0CCA74D88D99C.png by tools/import_hand.py"
+}

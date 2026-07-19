@@ -1,0 +1,78 @@
+{
+ "id": "cross_out",
+ "board": [
+  1280,
+  720
+ ],
+ "view_box": [
+  665.0,
+  92.0,
+  1025.0,
+  175.0
+ ],
+ "self_intersections": "allow",
+ "strokes": [
+  {
+   "id": "slash_a",
+   "points": [
+    [
+     665.0,
+     105.0
+    ],
+    [
+     1025.0,
+     160.0
+    ]
+   ],
+   "closed": false,
+   "pen_lift_after": true,
+   "arrowhead": [
+    [
+     1003.8012447025502,
+     168.92259905178116
+    ],
+    [
+     1025.0,
+     160.0
+    ],
+    [
+     1007.4324408722023,
+     145.1547695776949
+    ]
+   ],
+   "color_intent": null,
+   "width_intent": null
+  },
+  {
+   "id": "slash_b",
+   "points": [
+    [
+     1010.0,
+     92.0
+    ],
+    [
+     685.0,
+     175.0
+    ]
+   ],
+   "closed": false,
+   "pen_lift_after": false,
+   "arrowhead": [
+    [
+     701.0235930063536,
+     158.5001676624659
+    ],
+    [
+     685.0,
+     175.0
+    ],
+    [
+     706.9730116579741,
+     181.7960840694135
+    ]
+   ],
+   "color_intent": null,
+   "width_intent": null
+  }
+ ]
+}

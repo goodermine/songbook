@@ -1,0 +1,122 @@
+{
+  "gate": "phase-7 generality",
+  "renderer_edited": false,
+  "storyboards": 3,
+  "passed": 3,
+  "results": [
+    {
+      "storyboard": "habits_compound.json",
+      "title": "Habits Compound",
+      "validation": {
+        "actions": 14,
+        "pen_actions": 9,
+        "pen_collisions": 0,
+        "max_active_pens": 1
+      },
+      "preflight": {
+        "assets": 5,
+        "text_actions": 4,
+        "fonts": "ok"
+      },
+      "render_seconds": 13.54,
+      "output": "/home/user/songbook/whiteboard/proof_renders/habits_compound.mp4",
+      "streams": [
+        [
+          "video",
+          "h264"
+        ]
+      ],
+      "duration": 34.625,
+      "size_bytes": 873241,
+      "geometry": {
+        "pen_down_frames": 320,
+        "max_tip_step_px": 48.53,
+        "p99_tip_step_px": 47.18
+      },
+      "hand": {
+        "pen_down_frames": 320,
+        "max_nib_error_px": 0.679,
+        "p99_nib_error_px": 0.659,
+        "max_angle_error_deg": 0.49
+      },
+      "failures": [],
+      "passed": true
+    },
+    {
+      "storyboard": "practice_makes_patterns.json",
+      "title": "Practice Makes Patterns",
+      "validation": {
+        "actions": 12,
+        "pen_actions": 8,
+        "pen_collisions": 0,
+        "max_active_pens": 1
+      },
+      "preflight": {
+        "assets": 4,
+        "text_actions": 4,
+        "fonts": "ok"
+      },
+      "render_seconds": 10.71,
+      "output": "/home/user/songbook/whiteboard/proof_renders/practice_makes_patterns.mp4",
+      "streams": [
+        [
+          "video",
+          "h264"
+        ]
+      ],
+      "duration": 31.625,
+      "size_bytes": 822194,
+      "geometry": {
+        "pen_down_frames": 305,
+        "max_tip_step_px": 53.13,
+        "p99_tip_step_px": 51.11
+      },
+      "hand": {
+        "pen_down_frames": 305,
+        "max_nib_error_px": 0.677,
+        "p99_nib_error_px": 0.639,
+        "max_angle_error_deg": 0.48
+      },
+      "failures": [],
+      "passed": true
+    },
+    {
+      "storyboard": "react_or_respond.json",
+      "title": "React or Respond",
+      "validation": {
+        "actions": 16,
+        "pen_actions": 11,
+        "pen_collisions": 0,
+        "max_active_pens": 1
+      },
+      "preflight": {
+        "assets": 7,
+        "text_actions": 4,
+        "fonts": "ok"
+      },
+      "render_seconds": 10.36,
+      "output": "/home/user/songbook/whiteboard/proof_renders/react_or_respond.mp4",
+      "streams": [
+        [
+          "video",
+          "h264"
+        ]
+      ],
+      "duration": 32.625,
+      "size_bytes": 971675,
+      "geometry": {
+        "pen_down_frames": 340,
+        "max_tip_step_px": 88.68,
+        "p99_tip_step_px": 87.48
+      },
+      "hand": {
+        "pen_down_frames": 340,
+        "max_nib_error_px": 0.699,
+        "p99_nib_error_px": 0.673,
+        "max_angle_error_deg": 0.467
+      },
+      "failures": [],
+      "passed": true
+    }
+  ]
+}

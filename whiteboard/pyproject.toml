@@ -1,0 +1,22 @@
+[project]
+name = "whiteboard-engine"
+version = "2.1.0"
+description = "Programmatic whiteboard-video generator: storyboard JSON in, MP4 out"
+requires-python = ">=3.11"
+dependencies = [
+    "Pillow>=12,<13",
+    "numpy>=2.3,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+]
+
+# FFmpeg/FFprobe are system dependencies (tested with 6.1.x).
+# Fonts: fonts-urw-base35 (URW Bookman) is required until Phase 4 bundles a
+# single-line stroke font; see baseline/BASELINE.md.
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

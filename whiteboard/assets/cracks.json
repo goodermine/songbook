@@ -1,0 +1,113 @@
+{
+ "id": "cracks",
+ "board": [
+  1280,
+  720
+ ],
+ "view_box": [
+  370.0,
+  268.0,
+  414.0,
+  339.0
+ ],
+ "self_intersections": "forbid",
+ "strokes": [
+  {
+   "id": "main",
+   "points": [
+    [
+     390.0,
+     268.0
+    ],
+    [
+     374.0,
+     293.0
+    ],
+    [
+     392.0,
+     310.0
+    ]
+   ],
+   "closed": false,
+   "pen_lift_after": false,
+   "arrowhead": [
+    [
+     369.4902244800465,
+     305.2766530890372
+    ],
+    [
+     392.0,
+     310.0
+    ],
+    [
+     385.99913466116215,
+     287.7966305443265
+    ]
+   ],
+   "color_intent": null,
+   "width_intent": null
+  },
+  {
+   "id": "branch_left",
+   "points": [
+    [
+     392.0,
+     310.0
+    ],
+    [
+     370.0,
+     337.0
+    ]
+   ],
+   "closed": false,
+   "pen_lift_after": true,
+   "arrowhead": [
+    [
+     373.0661588520595,
+     314.20529294125635
+    ],
+    [
+     370.0,
+     337.0
+    ],
+    [
+     391.7056084641656,
+     329.39299262519467
+    ]
+   ],
+   "color_intent": null,
+   "width_intent": null
+  },
+  {
+   "id": "branch_right",
+   "points": [
+    [
+     392.0,
+     310.0
+    ],
+    [
+     414.0,
+     339.0
+    ]
+   ],
+   "closed": false,
+   "pen_lift_after": false,
+   "arrowhead": [
+    [
+     392.57148307589773,
+     330.64424375454485
+    ],
+    [
+     414.0,
+     339.0
+    ],
+    [
+     411.7268193001538,
+     316.11260937752303
+    ]
+   ],
+   "color_intent": null,
+   "width_intent": null
+  }
+ ]
+}

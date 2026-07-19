@@ -1,0 +1,198 @@
+{
+  "version": 2,
+  "title": "The Ultimate Vocal Warm-Up",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "content_duration": 86.0,
+  "safe_content_end": 85.6,
+  "final_hold": 1.2,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "style": {
+    "paper": [249, 247, 240],
+    "ink": [38, 43, 46],
+    "faint": [118, 120, 116],
+    "accent": [202, 83, 48],
+    "teal": [31, 111, 112]
+  },
+  "narration": {
+    "transcript": "The ultimate vocal warm-up. One idea ties it together: balance, not force. Narrow the passage - hum, buzz, or sing through a straw - and a cushion of air holds your folds in the ideal posture. Stage one: body and breath; loosen the frame, stand tall, breathe low, hiss six to eight seconds. Stage two: wake the voice gently with a soft hum. Stage three, the core: straw slides, bubbles, lip trills and ng sirens for five to seven minutes - never sing to the bottom of your breath. Stage four, clean closure: vocal fry blooming into tone, bright nay arpeggios, and messa di voce - soft to loud to soft on one note. Stage five: open the range with long sirens, gliding lightly across the bridge. Stage six: resonance - mah may mee moh moo, ringing in the mask. Stage seven: wake the words. Stage eight: bridge into your song, easy verse first, hardest phrase last. Short on time? Straw, trills, fry, nay, one siren, one phrase. All night? Finish warming fifteen to thirty minutes before you sing, speak light, sip room-temperature water, then cool down with soft descending sirens. Balance, not force. Now go and sing beautifully."
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "start": 0.0,
+      "end": 8.0,
+      "actions": [
+        {"id": "t1", "type": "write_text", "text": "THE ULTIMATE", "x": 400, "y": 90, "size": 46, "width": 4, "start": 0.2, "duration": 1.9, "requires_pen": true, "color": "ink"},
+        {"id": "t2", "type": "write_text", "text": "VOCAL WARM-UP", "x": 330, "y": 185, "size": 58, "width": 5, "start": 2.3, "duration": 2.3, "requires_pen": true, "color": "accent"},
+        {"id": "t_swash", "type": "draw_asset", "asset": "underline_swash", "at": [640, 310], "scale": 1.5, "start": 4.8, "duration": 0.7, "requires_pen": true, "color": "teal", "width": 5},
+        {"id": "t_note", "type": "draw_asset", "asset": "music_note", "at": [640, 490], "scale": 0.8, "start": 5.7, "duration": 1.0, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "t_sub", "type": "fade_text", "text": "from cold and sleepy to concert-ready", "x": 390, "y": 590, "size": 30, "italic": true, "start": 6.9, "duration": 0.8, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "one_idea",
+      "start": 8.0,
+      "end": 16.0,
+      "actions": [
+        {"id": "idea_h", "type": "write_text", "text": "BALANCE, NOT FORCE", "x": 220, "y": 66, "size": 44, "width": 4, "start": 8.2, "duration": 2.4, "requires_pen": true, "color": "ink"},
+        {"id": "idea_target", "type": "draw_asset", "asset": "target", "at": [640, 400], "scale": 1.0, "start": 10.8, "duration": 1.5, "requires_pen": true, "color": "teal", "width": 5},
+        {"id": "idea_labels", "type": "fade_labels", "start": 12.5, "duration": 1.2, "requires_pen": false, "color": "faint", "size": 26,
+          "labels": [
+            {"text": "too loose = breathy", "x": 120, "y": 380},
+            {"text": "too hard = pressed", "x": 890, "y": 380},
+            {"text": "the sweet spot", "x": 555, "y": 560}
+          ]
+        },
+        {"id": "idea_hl", "type": "draw_asset", "asset": "circle_highlight", "at": [640, 573], "scale": 0.62, "start": 14.0, "duration": 0.9, "requires_pen": true, "color": "accent", "width": 4}
+      ]
+    },
+    {
+      "id": "straw_secret",
+      "start": 16.0,
+      "end": 24.0,
+      "actions": [
+        {"id": "ss_h", "type": "write_text", "text": "THE STRAW-AND-LIP SECRET", "x": 160, "y": 66, "size": 38, "width": 4, "start": 16.2, "duration": 2.6, "requires_pen": true, "color": "ink"},
+        {"id": "ss_glass", "type": "draw_asset", "asset": "straw_glass", "at": [400, 400], "scale": 1.1, "start": 19.0, "duration": 1.6, "requires_pen": true, "color": "teal", "width": 5},
+        {"id": "ss_bulb", "type": "draw_asset", "asset": "lightbulb", "at": [880, 400], "scale": 0.8, "start": 20.8, "duration": 1.3, "requires_pen": true, "color": "accent", "width": 5},
+        {"id": "ss_note", "type": "fade_text", "text": "a cushion of air holds the folds", "x": 620, "y": 560, "size": 28, "italic": true, "start": 22.3, "duration": 0.8, "requires_pen": false, "color": "faint"},
+        {"id": "ss_note2", "type": "fade_text", "text": "close, but never pressing", "x": 660, "y": 600, "size": 28, "italic": true, "start": 23.1, "duration": 0.7, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "stage1",
+      "start": 24.0,
+      "end": 32.0,
+      "actions": [
+        {"id": "s1_h", "type": "write_text", "text": "1. BODY & BREATH", "x": 300, "y": 66, "size": 44, "width": 4, "start": 24.2, "duration": 2.2, "requires_pen": true, "color": "teal"},
+        {"id": "s1_person", "type": "draw_asset", "asset": "person_one", "start": 26.6, "duration": 1.3, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "s1_clock", "type": "draw_asset", "asset": "clock", "at": [880, 380], "scale": 0.8, "start": 28.1, "duration": 1.5, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "s1_labels", "type": "fade_labels", "start": 29.8, "duration": 1.2, "requires_pen": false, "color": "faint", "size": 26,
+          "labels": [
+            {"text": "loose jaw, tall spine", "x": 250, "y": 540},
+            {"text": "hiss 6-8 seconds", "x": 790, "y": 540},
+            {"text": "less air, more control", "x": 500, "y": 620}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage2",
+      "start": 32.0,
+      "end": 39.0,
+      "actions": [
+        {"id": "s2_h", "type": "write_text", "text": "2. WAKE IT GENTLY", "x": 290, "y": 66, "size": 44, "width": 4, "start": 32.2, "duration": 2.2, "requires_pen": true, "color": "teal"},
+        {"id": "s2_bubble", "type": "draw_asset", "asset": "speech_bubble", "at": [430, 350], "scale": 0.8, "start": 34.6, "duration": 1.3, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "s2_hum", "type": "write_text", "text": "HMMMM", "x": 330, "y": 300, "size": 44, "width": 4, "start": 36.1, "duration": 1.1, "requires_pen": true, "color": "accent"},
+        {"id": "s2_note", "type": "fade_text", "text": "knock gently on the door of the voice", "x": 620, "y": 520, "size": 28, "italic": true, "start": 37.4, "duration": 0.8, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "stage3",
+      "start": 39.0,
+      "end": 48.0,
+      "actions": [
+        {"id": "s3_h", "type": "write_text", "text": "3. THE CORE", "x": 400, "y": 66, "size": 44, "width": 4, "start": 39.2, "duration": 1.7, "requires_pen": true, "color": "teal"},
+        {"id": "s3_glass", "type": "draw_asset", "asset": "straw_glass", "at": [280, 380], "scale": 0.9, "start": 41.1, "duration": 1.4, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "s3_siren", "type": "draw_asset", "asset": "underline_swash", "at": [730, 380], "scale": 2.2, "start": 42.7, "duration": 1.3, "requires_pen": true, "color": "accent", "width": 6},
+        {"id": "s3_labels", "type": "fade_labels", "start": 44.2, "duration": 1.2, "requires_pen": false, "color": "faint", "size": 26,
+          "labels": [
+            {"text": "straw slides & bubbles", "x": 160, "y": 540},
+            {"text": "lip trills . tongue trills . ng", "x": 600, "y": 540},
+            {"text": "5-7 minutes: the real warming", "x": 430, "y": 620}
+          ]
+        },
+        {"id": "s3_warn", "type": "draw_asset", "asset": "exclamation", "at": [1130, 380], "scale": 0.7, "start": 45.7, "duration": 0.8, "requires_pen": true, "color": "accent", "width": 6},
+        {"id": "s3_tank", "type": "fade_text", "text": "never empty the tank", "x": 990, "y": 480, "size": 26, "italic": true, "start": 46.7, "duration": 0.7, "requires_pen": false, "color": "accent"}
+      ]
+    },
+    {
+      "id": "stage4",
+      "start": 48.0,
+      "end": 56.5,
+      "actions": [
+        {"id": "s4_h", "type": "write_text", "text": "4. CLEAN CLOSURE", "x": 300, "y": 66, "size": 44, "width": 4, "start": 48.2, "duration": 2.2, "requires_pen": true, "color": "teal"},
+        {"id": "s4_fry", "type": "write_text", "text": "FRY - TONE", "x": 160, "y": 300, "size": 40, "width": 4, "start": 50.6, "duration": 1.5, "requires_pen": true, "color": "ink"},
+        {"id": "s4_nay", "type": "write_text", "text": "NAY NAY NAY", "x": 740, "y": 300, "size": 40, "width": 4, "start": 52.3, "duration": 1.6, "requires_pen": true, "color": "accent"},
+        {"id": "s4_messa", "type": "draw_asset", "asset": "underline_swash", "at": [640, 480], "scale": 1.8, "start": 54.1, "duration": 1.1, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "s4_labels", "type": "fade_labels", "start": 55.3, "duration": 1.0, "requires_pen": false, "color": "faint", "size": 26,
+          "labels": [
+            {"text": "creak, then bloom", "x": 170, "y": 380},
+            {"text": "bright & cheeky", "x": 780, "y": 380},
+            {"text": "messa di voce: soft - LOUD - soft", "x": 400, "y": 560}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage5",
+      "start": 56.5,
+      "end": 63.5,
+      "actions": [
+        {"id": "s5_h", "type": "write_text", "text": "5. OPEN THE RANGE", "x": 280, "y": 66, "size": 44, "width": 4, "start": 56.7, "duration": 2.2, "requires_pen": true, "color": "teal"},
+        {"id": "s5_mountain", "type": "draw_asset", "asset": "mountain_flag", "at": [640, 400], "scale": 1.0, "start": 59.1, "duration": 1.6, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "s5_labels", "type": "fade_labels", "start": 60.9, "duration": 1.2, "requires_pen": false, "color": "faint", "size": 26,
+          "labels": [
+            {"text": "sirens: low - high - low", "x": 180, "y": 560},
+            {"text": "glide across the bridge, lightly", "x": 700, "y": 560}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage6",
+      "start": 63.5,
+      "end": 71.0,
+      "actions": [
+        {"id": "s6_h", "type": "write_text", "text": "6. FIND THE RING", "x": 310, "y": 66, "size": 44, "width": 4, "start": 63.7, "duration": 2.1, "requires_pen": true, "color": "teal"},
+        {"id": "s6_vowels", "type": "write_text", "text": "MAH MAY MEE MOH MOO", "x": 190, "y": 330, "size": 40, "width": 4, "start": 66.0, "duration": 2.6, "requires_pen": true, "color": "ink"},
+        {"id": "s6_hl", "type": "draw_asset", "asset": "circle_highlight", "at": [640, 350], "scale": 1.5, "start": 68.8, "duration": 1.1, "requires_pen": true, "color": "accent", "width": 4},
+        {"id": "s6_note", "type": "fade_text", "text": "ring in the mask - efficiency, not loudness", "x": 380, "y": 540, "size": 28, "italic": true, "start": 70.1, "duration": 0.8, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "stage78",
+      "start": 71.0,
+      "end": 78.0,
+      "actions": [
+        {"id": "s78_h", "type": "write_text", "text": "7. CRISP WORDS   8. INTO THE SONG", "x": 130, "y": 66, "size": 34, "width": 4, "start": 71.2, "duration": 2.6, "requires_pen": true, "color": "teal"},
+        {"id": "s78_note", "type": "draw_asset", "asset": "music_note", "at": [880, 400], "scale": 0.9, "start": 74.0, "duration": 1.1, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "s78_check", "type": "draw_asset", "asset": "checkmark", "at": [400, 400], "scale": 0.8, "start": 75.3, "duration": 0.8, "requires_pen": true, "color": "teal", "width": 9},
+        {"id": "s78_labels", "type": "fade_labels", "start": 76.3, "duration": 1.1, "requires_pen": false, "color": "faint", "size": 26,
+          "labels": [
+            {"text": "red leather, yellow leather", "x": 240, "y": 540},
+            {"text": "easy verse first, big phrase last", "x": 720, "y": 540}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "express",
+      "start": 78.0,
+      "end": 82.0,
+      "actions": [
+        {"id": "ex_h", "type": "write_text", "text": "SHORT ON TIME?", "x": 340, "y": 66, "size": 44, "width": 4, "start": 78.2, "duration": 1.9, "requires_pen": true, "color": "accent"},
+        {"id": "ex_clock", "type": "draw_asset", "asset": "clock", "at": [250, 380], "scale": 0.7, "start": 80.3, "duration": 1.2, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "ex_list", "type": "fade_labels", "start": 80.6, "duration": 1.1, "requires_pen": false, "color": "ink", "size": 30,
+          "labels": [
+            {"text": "straw slides . lip trills", "x": 460, "y": 300},
+            {"text": "fry - tone . nay nay", "x": 460, "y": 360},
+            {"text": "one siren . one phrase", "x": 460, "y": 420}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "start": 82.0,
+      "end": 86.0,
+      "actions": [
+        {"id": "cl_heart", "type": "draw_asset", "asset": "heart", "at": [640, 250], "scale": 0.55, "start": 82.2, "duration": 0.8, "requires_pen": true, "color": "accent", "width": 5},
+        {"id": "cl_h", "type": "write_text", "text": "GO SING BEAUTIFULLY.", "x": 240, "y": 400, "size": 44, "width": 4, "start": 83.2, "duration": 2.2, "requires_pen": true, "color": "teal"},
+        {"id": "cl_note", "type": "fade_text", "text": "balance, not force", "x": 520, "y": 540, "size": 30, "italic": true, "start": 85.5, "duration": 0.4, "requires_pen": false, "color": "faint"}
+      ]
+    }
+  ]
+}

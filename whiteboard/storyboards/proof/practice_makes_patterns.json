@@ -1,0 +1,71 @@
+{
+  "version": 2,
+  "title": "Practice Makes Patterns",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "content_duration": 31.0,
+  "safe_content_end": 30.6,
+  "final_hold": 1.0,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "style": {
+    "paper": [249, 247, 240],
+    "ink": [38, 43, 46],
+    "faint": [118, 120, 116],
+    "accent": [202, 83, 48],
+    "teal": [31, 111, 112]
+  },
+  "narration": {
+    "transcript": "Practice makes patterns, not perfect. Try, wobble, adjust, again. Again and again until the reps are yours."
+  },
+  "scenes": [
+    {
+      "id": "claim",
+      "start": 0.0,
+      "end": 7.8,
+      "actions": [
+        {"id": "p1", "type": "write_text", "text": "PRACTICE MAKES", "x": 260, "y": 64, "size": 48, "width": 4, "start": 0.2, "duration": 2.4, "requires_pen": true, "color": "ink"},
+        {"id": "p2", "type": "write_text", "text": "PATTERNS", "x": 430, "y": 150, "size": 62, "width": 5, "start": 2.8, "duration": 1.7, "requires_pen": true, "color": "accent"},
+        {"id": "claim_note", "type": "fade_text", "text": "not perfect. permanent.", "x": 470, "y": 270, "size": 30, "italic": true, "start": 4.8, "duration": 0.8, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "rehearse",
+      "start": 7.8,
+      "end": 15.5,
+      "actions": [
+        {"id": "rehearse_person", "type": "draw_asset", "asset": "person_two", "start": 8.0, "duration": 1.3, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "rehearse_loop", "type": "draw_asset", "asset": "rehearsal_loop", "start": 9.5, "duration": 2.1, "requires_pen": true, "color": "teal", "width": 8, "arrowheads": true},
+        {"id": "rehearse_labels", "type": "fade_labels", "start": 11.8, "duration": 1.5, "requires_pen": false, "color": "faint", "size": 25,
+          "labels": [
+            {"text": "try", "x": 1095, "y": 254},
+            {"text": "wobble", "x": 1018, "y": 520},
+            {"text": "adjust", "x": 355, "y": 470},
+            {"text": "again", "x": 415, "y": 205}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reps",
+      "start": 15.5,
+      "end": 23.3,
+      "actions": [
+        {"id": "reps_arrows", "type": "draw_asset", "asset": "reaction_arrows", "start": 15.8, "duration": 2.3, "requires_pen": true, "color": "ink", "last_color": "teal", "width": 6, "arrowheads": true},
+        {"id": "reps_dots", "type": "fade_asset", "asset": "reaction_dots", "start": 16.1, "duration": 1.7, "requires_pen": false, "color": "accent"},
+        {"id": "p3", "type": "write_text", "text": "AGAIN. AND AGAIN.", "x": 340, "y": 470, "size": 38, "width": 4, "start": 18.4, "duration": 2.5, "requires_pen": true, "color": "teal"}
+      ]
+    },
+    {
+      "id": "own",
+      "start": 23.3,
+      "end": 31.0,
+      "actions": [
+        {"id": "own_path", "type": "draw_asset", "asset": "choice_path", "start": 23.6, "duration": 1.8, "requires_pen": true, "color": "teal", "width": 9, "arrowheads": true},
+        {"id": "p4", "type": "write_text", "text": "OWN YOUR REPS", "x": 430, "y": 490, "size": 46, "width": 4, "start": 25.7, "duration": 2.1, "requires_pen": true, "color": "ink"},
+        {"id": "own_f1", "type": "fade_text", "text": "the pattern is the product.", "x": 440, "y": 580, "size": 28, "italic": true, "start": 28.2, "duration": 0.7, "requires_pen": false, "color": "accent"}
+      ]
+    }
+  ]
+}

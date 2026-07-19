@@ -1,0 +1,30 @@
+{
+  "environment": {
+    "python": "3.11.15",
+    "pillow": "12.3.0",
+    "numpy": "2.4.6",
+    "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "fonts": {
+      "regular": "/usr/share/fonts/opentype/urw-base35/URWBookman-Light.otf",
+      "bold": "/usr/share/fonts/opentype/urw-base35/URWBookman-Demi.otf",
+      "italic": "/usr/share/fonts/opentype/urw-base35/URWBookman-LightItalic.otf"
+    }
+  },
+  "frame_times": {
+    "01_broken": 5.1,
+    "02_rehearsed": 10.1,
+    "03_pattern": 16.1,
+    "04_identity": 21.6,
+    "05_choice": 26.4,
+    "05_choice_final": 27.9
+  },
+  "frame_sha256": {
+    "01_broken": "76bd72431917a7018635cf5ed597a0b7e0894c505234bfa25f9343d0ecacc480",
+    "02_rehearsed": "5cd1f28222567a1d03d12176b48f01b0c06a328fe49be9544cb5de9b67d59070",
+    "03_pattern": "75022fa66cf63d13c0ec33c5963d17155dbf522ef95914c6911e1d5a86cdb7c6",
+    "04_identity": "36a5ea5eb8c81b9bad50e7d4bcf92380c2dd3ccd9d5bc8b126e731ad425810c9",
+    "05_choice": "6574fd4a9bfe6c776506d06ae52bcc6a23e26304090cc7f614e780509b2573d9",
+    "05_choice_final": "fe1ed24906caa00b4f35918bf88f9c2e309709a0b01560028b25dadcb6635a1a"
+  }
+}

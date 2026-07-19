@@ -1,0 +1,76 @@
+{
+  "version": 2,
+  "title": "Doodle Library Showcase",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "content_duration": 28.0,
+  "safe_content_end": 27.6,
+  "final_hold": 1.0,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "style": {
+    "paper": [249, 247, 240],
+    "ink": [38, 43, 46],
+    "faint": [118, 120, 116],
+    "accent": [202, 83, 48],
+    "teal": [31, 111, 112]
+  },
+  "narration": {
+    "transcript": "Fourteen reusable doodles, placed and scaled from storyboard data."
+  },
+  "scenes": [
+    {
+      "id": "ideas",
+      "start": 0.0,
+      "end": 9.6,
+      "actions": [
+        {"id": "sc1_title", "type": "write_text", "text": "REUSABLE DOODLES", "x": 250, "y": 60, "size": 44, "width": 4, "start": 0.2, "duration": 2.3, "requires_pen": true, "color": "ink"},
+        {"id": "sc1_swash", "type": "draw_asset", "asset": "underline_swash", "at": [640, 150], "scale": 1.4, "start": 2.7, "duration": 0.7, "requires_pen": true, "color": "accent", "width": 5},
+        {"id": "sc1_bulb", "type": "draw_asset", "asset": "lightbulb", "at": [250, 400], "start": 3.6, "duration": 1.5, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "sc1_magnifier", "type": "draw_asset", "asset": "magnifier", "at": [640, 400], "scale": 0.95, "start": 5.3, "duration": 1.0, "requires_pen": true, "color": "teal", "width": 6},
+        {"id": "sc1_target", "type": "draw_asset", "asset": "target", "at": [1020, 400], "scale": 0.95, "start": 6.5, "duration": 1.4, "requires_pen": true, "color": "accent", "width": 5},
+        {"id": "sc1_labels", "type": "fade_labels", "start": 8.1, "duration": 1.0, "requires_pen": false, "color": "faint", "size": 24,
+          "labels": [
+            {"text": "lightbulb", "x": 200, "y": 560},
+            {"text": "magnifier", "x": 590, "y": 560},
+            {"text": "target", "x": 985, "y": 560}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "start": 9.6,
+      "end": 19.2,
+      "actions": [
+        {"id": "sc2_speech", "type": "draw_asset", "asset": "speech_bubble", "at": [330, 230], "scale": 0.85, "start": 9.8, "duration": 1.4, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "sc2_thought", "type": "draw_asset", "asset": "thought_bubble", "at": [950, 230], "scale": 0.85, "start": 11.4, "duration": 1.4, "requires_pen": true, "color": "teal", "width": 5},
+        {"id": "sc2_heart", "type": "draw_asset", "asset": "heart", "at": [330, 520], "scale": 0.75, "start": 13.0, "duration": 1.0, "requires_pen": true, "color": "accent", "width": 6},
+        {"id": "sc2_clock", "type": "draw_asset", "asset": "clock", "at": [950, 520], "scale": 0.8, "start": 14.2, "duration": 1.7, "requires_pen": true, "color": "ink", "width": 5},
+        {"id": "sc2_labels", "type": "fade_labels", "start": 16.2, "duration": 1.0, "requires_pen": false, "color": "faint", "size": 24,
+          "labels": [
+            {"text": "say it", "x": 300, "y": 380},
+            {"text": "think it", "x": 915, "y": 380},
+            {"text": "feel it", "x": 300, "y": 640},
+            {"text": "time it", "x": 920, "y": 640}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wins",
+      "start": 19.2,
+      "end": 28.0,
+      "actions": [
+        {"id": "sc3_mountain", "type": "draw_asset", "asset": "mountain_flag", "at": [280, 340], "scale": 0.9, "start": 19.4, "duration": 1.5, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "sc3_gear", "type": "draw_asset", "asset": "gear", "at": [640, 300], "scale": 0.85, "start": 21.1, "duration": 1.4, "requires_pen": true, "color": "teal", "width": 5},
+        {"id": "sc3_star", "type": "draw_asset", "asset": "star_five", "at": [1000, 300], "scale": 0.8, "start": 22.7, "duration": 1.0, "requires_pen": true, "color": "accent", "width": 6},
+        {"id": "sc3_highlight", "type": "draw_asset", "asset": "circle_highlight", "at": [1000, 300], "scale": 0.85, "start": 23.9, "duration": 1.0, "requires_pen": true, "color": "ink", "width": 4},
+        {"id": "sc3_question", "type": "draw_asset", "asset": "question_mark", "at": [500, 560], "scale": 0.65, "start": 25.1, "duration": 0.8, "requires_pen": true, "color": "faint", "width": 5},
+        {"id": "sc3_exclaim", "type": "draw_asset", "asset": "exclamation", "at": [760, 560], "scale": 0.65, "start": 26.0, "duration": 0.7, "requires_pen": true, "color": "accent", "width": 7},
+        {"id": "sc3_check", "type": "draw_asset", "asset": "checkmark", "at": [640, 170], "scale": 0.6, "start": 26.8, "duration": 0.7, "requires_pen": true, "color": "teal", "width": 8}
+      ]
+    }
+  ]
+}

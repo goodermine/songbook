@@ -1,0 +1,722 @@
+{
+  "version": 2,
+  "title": "The Asset Library",
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "content_duration": 60.0,
+  "safe_content_end": 59.6,
+  "final_hold": 1.4,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "chrome": "none",
+  "text_font": "marker",
+  "caption_font": "marker",
+  "stroke_style": "round",
+  "style": {
+    "paper": [
+      249,
+      247,
+      240
+    ],
+    "ink": [
+      38,
+      43,
+      46
+    ],
+    "faint": [
+      118,
+      120,
+      116
+    ],
+    "accent": [
+      202,
+      83,
+      48
+    ],
+    "teal": [
+      31,
+      111,
+      112
+    ]
+  },
+  "narration": {
+    "transcript": "The asset library - every illustration, in action."
+  },
+  "scenes": [
+    {
+      "id": "title",
+      "start": 0.0,
+      "end": 4.5,
+      "actions": [
+        {
+          "id": "tt1",
+          "type": "write_text",
+          "text": "THE ASSET LIBRARY",
+          "align": "center",
+          "y": 400,
+          "size": 72,
+          "start": 0.2,
+          "duration": 2.4,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "tt_sw",
+          "type": "draw_asset",
+          "asset": "underline_swash",
+          "at": [
+            960,
+            560
+          ],
+          "scale": 2.2,
+          "start": 2.7,
+          "duration": 0.7,
+          "requires_pen": true,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "tt_sub",
+          "type": "fade_text",
+          "text": "every illustration, in action",
+          "align": "center",
+          "y": 660,
+          "size": 40,
+          "start": 3.6,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "faint"
+        }
+      ]
+    },
+    {
+      "id": "still_0",
+      "start": 4.5,
+      "end": 7.1,
+      "actions": [
+        {
+          "id": "si_0",
+          "type": "show_image",
+          "image": "iceberg_mind",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 4.6,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_0",
+          "type": "fade_text",
+          "text": "the conscious & unconscious mind",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 5.4,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_1",
+      "start": 7.1,
+      "end": 9.7,
+      "actions": [
+        {
+          "id": "si_1",
+          "type": "show_image",
+          "image": "head_staircase",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 7.2,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_1",
+          "type": "fade_text",
+          "text": "going inward",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 8.0,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_2",
+      "start": 9.7,
+      "end": 12.3,
+      "actions": [
+        {
+          "id": "si_2",
+          "type": "show_image",
+          "image": "two_chairs",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 9.8,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_2",
+          "type": "fade_text",
+          "text": "one real conversation",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 10.6,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_3",
+      "start": 12.3,
+      "end": 14.9,
+      "actions": [
+        {
+          "id": "si_3",
+          "type": "show_image",
+          "image": "presence_triad",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 12.4,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_3",
+          "type": "fade_text",
+          "text": "eyes, voice, pause",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 13.2,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_4",
+      "start": 14.9,
+      "end": 17.5,
+      "actions": [
+        {
+          "id": "si_4",
+          "type": "show_image",
+          "image": "signal_compass",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 15.0,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_4",
+          "type": "fade_text",
+          "text": "the signal is your compass",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 15.8,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_5",
+      "start": 17.5,
+      "end": 20.1,
+      "actions": [
+        {
+          "id": "si_5",
+          "type": "show_image",
+          "image": "question_path",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 17.6,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_5",
+          "type": "fade_text",
+          "text": "a path of questions",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 18.4,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_6",
+      "start": 20.1,
+      "end": 22.7,
+      "actions": [
+        {
+          "id": "si_6",
+          "type": "show_image",
+          "image": "keystone_flaw",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 20.2,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_6",
+          "type": "fade_text",
+          "text": "the flaw in the keystone",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 21.0,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_7",
+      "start": 22.7,
+      "end": 25.3,
+      "actions": [
+        {
+          "id": "si_7",
+          "type": "show_image",
+          "image": "magnifying_glass",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 22.8,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_7",
+          "type": "fade_text",
+          "text": "look closer",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 23.6,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_8",
+      "start": 25.3,
+      "end": 27.9,
+      "actions": [
+        {
+          "id": "si_8",
+          "type": "show_image",
+          "image": "key_keyhole",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 25.4,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_8",
+          "type": "fade_text",
+          "text": "the key that fits",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 26.2,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_9",
+      "start": 27.9,
+      "end": 30.5,
+      "actions": [
+        {
+          "id": "si_9",
+          "type": "show_image",
+          "image": "tangled_thread",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 28.0,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_9",
+          "type": "fade_text",
+          "text": "from tangle to clarity",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 28.8,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_10",
+      "start": 30.5,
+      "end": 33.1,
+      "actions": [
+        {
+          "id": "si_10",
+          "type": "show_image",
+          "image": "arch_hero",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 30.6,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_10",
+          "type": "fade_text",
+          "text": "the keystone arch",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 31.4,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_11",
+      "start": 33.1,
+      "end": 35.7,
+      "actions": [
+        {
+          "id": "si_11",
+          "type": "show_image",
+          "image": "arch_falling",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 33.2,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_11",
+          "type": "fade_text",
+          "text": "and it comes down",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 34.0,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_12",
+      "start": 35.7,
+      "end": 38.3,
+      "actions": [
+        {
+          "id": "si_12",
+          "type": "show_image",
+          "image": "open_ground",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 35.8,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_12",
+          "type": "fade_text",
+          "text": "standing in open ground",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 36.6,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_13",
+      "start": 38.3,
+      "end": 40.9,
+      "actions": [
+        {
+          "id": "si_13",
+          "type": "show_image",
+          "image": "book_cover",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 38.4,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_13",
+          "type": "fade_text",
+          "text": "the book",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 39.2,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "still_14",
+      "start": 40.9,
+      "end": 43.5,
+      "actions": [
+        {
+          "id": "si_14",
+          "type": "show_image",
+          "image": "stopwatch",
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 41.0,
+          "duration": 0.7,
+          "requires_pen": false
+        },
+        {
+          "id": "sc_14",
+          "type": "fade_text",
+          "text": "processing time",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 41.8,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "id": "anim_0",
+      "start": 43.5,
+      "end": 47.5,
+      "actions": [
+        {
+          "id": "ai_0",
+          "type": "show_image_sequence",
+          "images": [
+            "arch_fall_1",
+            "arch_fall_2",
+            "arch_fall_3",
+            "arch_fall_4",
+            "arch_fall_5",
+            "arch_fall_6"
+          ],
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 43.7,
+          "duration": 2.6,
+          "requires_pen": false
+        },
+        {
+          "id": "ac_0",
+          "type": "fade_text",
+          "text": "the arch collapses",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 43.8,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "anim_1",
+      "start": 47.5,
+      "end": 51.5,
+      "actions": [
+        {
+          "id": "ai_1",
+          "type": "show_image_sequence",
+          "images": [
+            "lightbulb_on_1",
+            "lightbulb_on_2",
+            "lightbulb_on_3",
+            "lightbulb_on_4",
+            "lightbulb_on_5",
+            "lightbulb_on_6"
+          ],
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 47.7,
+          "duration": 2.6,
+          "requires_pen": false
+        },
+        {
+          "id": "ac_1",
+          "type": "fade_text",
+          "text": "the idea lands",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 47.8,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "anim_2",
+      "start": 51.5,
+      "end": 55.5,
+      "actions": [
+        {
+          "id": "ai_2",
+          "type": "show_image_sequence",
+          "images": [
+            "seed_grow_1",
+            "seed_grow_2",
+            "seed_grow_3",
+            "seed_grow_4",
+            "seed_grow_5",
+            "seed_grow_6"
+          ],
+          "at": [
+            960,
+            470
+          ],
+          "height": 720,
+          "start": 51.7,
+          "duration": 2.6,
+          "requires_pen": false
+        },
+        {
+          "id": "ac_2",
+          "type": "fade_text",
+          "text": "practice takes root",
+          "align": "center",
+          "y": 900,
+          "size": 40,
+          "start": 51.8,
+          "duration": 0.6,
+          "requires_pen": false,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "start": 55.5,
+      "end": 60.0,
+      "actions": [
+        {
+          "id": "cl1",
+          "type": "write_text",
+          "text": "18 ILLUSTRATIONS.",
+          "align": "center",
+          "y": 400,
+          "size": 60,
+          "start": 55.7,
+          "duration": 2.0,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "cl2",
+          "type": "write_text",
+          "text": "ONE STORYBOARD.",
+          "align": "center",
+          "y": 520,
+          "size": 60,
+          "start": 57.8,
+          "duration": 1.6,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    }
+  ]
+}

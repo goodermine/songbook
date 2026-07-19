@@ -1,0 +1,484 @@
+{
+  "version": 2,
+  "title": "SDH Short - The Keystone",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24,
+  "content_duration": 49.5,
+  "safe_content_end": 49.1,
+  "final_hold": 1.2,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "chrome": "none",
+  "text_font": "marker",
+  "caption_font": "marker",
+  "style": {
+    "paper": [
+      249,
+      247,
+      240
+    ],
+    "ink": [
+      38,
+      43,
+      46
+    ],
+    "faint": [
+      118,
+      120,
+      116
+    ],
+    "accent": [
+      202,
+      83,
+      48
+    ],
+    "teal": [
+      31,
+      111,
+      112
+    ]
+  },
+  "narration": {
+    "transcript": "Why willpower fails - and what actually works. Your problem is an arch: conclusions leaning on each other, built years ago under pressure. Push one stone and the rest hold it in place. But every arch has a keystone - the oldest conclusion, the one the others depend on. Loosen it with questions, and the whole problem loses its shape. Strategic Dialogue Hypnotherapy: question-led change."
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0.0,
+      "end": 7.0,
+      "actions": [
+        {
+          "id": "hook_1",
+          "type": "write_text",
+          "text": "WHY WILLPOWER",
+          "x": 95,
+          "y": 220,
+          "size": 50,
+          "width": 4,
+          "start": 0.2,
+          "duration": 2.0,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "hook_2",
+          "type": "write_text",
+          "text": "FAILS",
+          "x": 310,
+          "y": 330,
+          "size": 74,
+          "width": 6,
+          "start": 2.4,
+          "duration": 1.2,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "hook_swash",
+          "type": "draw_asset",
+          "asset": "underline_swash",
+          "at": [
+            540,
+            500
+          ],
+          "scale": 1.6,
+          "start": 3.8,
+          "duration": 0.7,
+          "requires_pen": true,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "hook_excl",
+          "type": "draw_asset",
+          "asset": "exclamation",
+          "at": [
+            800,
+            330
+          ],
+          "scale": 0.75,
+          "start": 4.7,
+          "duration": 0.6,
+          "requires_pen": true,
+          "color": "teal",
+          "width": 7
+        },
+        {
+          "id": "hook_sub",
+          "type": "fade_text",
+          "text": "and what actually works",
+          "x": 300,
+          "y": 580,
+          "size": 30,
+          "start": 5.6,
+          "duration": 0.9,
+          "requires_pen": false,
+          "color": "faint"
+        }
+      ]
+    },
+    {
+      "id": "arch",
+      "start": 7.0,
+      "end": 35.0,
+      "actions": [
+        {
+          "id": "arch_h1",
+          "type": "write_text",
+          "text": "YOUR PROBLEM",
+          "x": 160,
+          "y": 170,
+          "size": 48,
+          "width": 4,
+          "start": 7.2,
+          "duration": 2.0,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "arch_h2",
+          "type": "write_text",
+          "text": "IS AN ARCH",
+          "x": 230,
+          "y": 280,
+          "size": 48,
+          "width": 4,
+          "start": 9.4,
+          "duration": 1.8,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "arch_draw",
+          "type": "draw_asset",
+          "asset": "stone_arch",
+          "at": [
+            540,
+            950
+          ],
+          "scale": 1.05,
+          "start": 11.6,
+          "duration": 4.8,
+          "requires_pen": true,
+          "color": "ink",
+          "width": 6
+        },
+        {
+          "id": "arch_lbl1",
+          "type": "fade_text",
+          "text": "conclusions leaning on each other",
+          "x": 240,
+          "y": 1270,
+          "size": 32,
+          "italic": true,
+          "start": 16.8,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "faint"
+        },
+        {
+          "id": "arch_lbl2",
+          "type": "fade_text",
+          "text": "built years ago, under pressure",
+          "x": 265,
+          "y": 1330,
+          "size": 32,
+          "italic": true,
+          "start": 17.7,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "faint"
+        },
+        {
+          "id": "arch_cracks_side",
+          "type": "draw_asset",
+          "asset": "cracks",
+          "at": [
+            400,
+            1000
+          ],
+          "scale": 1.2,
+          "start": 18.8,
+          "duration": 0.8,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "arch_lbl3",
+          "type": "fade_text",
+          "text": "push one stone - the rest hold it",
+          "x": 245,
+          "y": 1400,
+          "size": 32,
+          "italic": true,
+          "start": 19.8,
+          "duration": 0.9,
+          "requires_pen": false,
+          "color": "ink"
+        },
+        {
+          "id": "key_h1",
+          "type": "write_text",
+          "text": "EVERY ARCH HAS A",
+          "x": 130,
+          "y": 420,
+          "size": 40,
+          "width": 4,
+          "start": 21.2,
+          "duration": 2.2,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "key_h2",
+          "type": "write_text",
+          "text": "KEYSTONE",
+          "x": 215,
+          "y": 510,
+          "size": 66,
+          "width": 5,
+          "start": 23.6,
+          "duration": 1.7,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "key_hl",
+          "type": "draw_asset",
+          "asset": "circle_highlight",
+          "at": [
+            540,
+            830
+          ],
+          "scale": 0.55,
+          "start": 25.7,
+          "duration": 0.8,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "key_fill",
+          "type": "draw_fill",
+          "polygon": [
+            [
+              500.6,
+              780.4
+            ],
+            [
+              579.4,
+              780.4
+            ],
+            [
+              564.6,
+              857.8
+            ],
+            [
+              515.4,
+              857.8
+            ]
+          ],
+          "width": 16,
+          "start": 26.7,
+          "duration": 0.9,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "key_lbl1",
+          "type": "fade_text",
+          "text": "the oldest conclusion -",
+          "x": 330,
+          "y": 1470,
+          "size": 28,
+          "start": 27.9,
+          "duration": 0.7,
+          "requires_pen": false,
+          "color": "ink"
+        },
+        {
+          "id": "key_lbl2",
+          "type": "fade_text",
+          "text": "the one the others depend on",
+          "x": 280,
+          "y": 1530,
+          "size": 28,
+          "start": 28.7,
+          "duration": 0.7,
+          "requires_pen": false,
+          "color": "ink"
+        },
+        {
+          "id": "key_cracks",
+          "type": "draw_asset",
+          "asset": "cracks",
+          "at": [
+            540,
+            820
+          ],
+          "scale": 1.0,
+          "start": 29.6,
+          "duration": 0.7,
+          "requires_pen": true,
+          "color": "ink",
+          "width": 5
+        },
+        {
+          "id": "key_magnifier",
+          "type": "draw_asset",
+          "asset": "magnifier",
+          "at": [
+            830,
+            1130
+          ],
+          "scale": 0.85,
+          "start": 30.5,
+          "duration": 0.9,
+          "requires_pen": true,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "key_lbl3",
+          "type": "fade_text",
+          "text": "loosen it with questions...",
+          "x": 320,
+          "y": 1620,
+          "size": 30,
+          "start": 31.6,
+          "duration": 0.7,
+          "requires_pen": false,
+          "color": "accent"
+        },
+        {
+          "id": "key_lbl4",
+          "type": "fade_text",
+          "text": "and the whole problem loses its shape",
+          "x": 190,
+          "y": 1690,
+          "size": 30,
+          "start": 32.5,
+          "duration": 0.8,
+          "requires_pen": false,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "start": 35.0,
+      "end": 49.5,
+      "actions": [
+        {
+          "id": "cl_h1",
+          "type": "write_text",
+          "text": "STRATEGIC DIALOGUE",
+          "x": 95,
+          "y": 320,
+          "size": 38,
+          "width": 4,
+          "start": 35.4,
+          "duration": 2.3,
+          "requires_pen": true,
+          "color": "ink"
+        },
+        {
+          "id": "cl_h2",
+          "type": "write_text",
+          "text": "HYPNOTHERAPY",
+          "x": 130,
+          "y": 410,
+          "size": 52,
+          "width": 5,
+          "start": 37.9,
+          "duration": 2.0,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "cl_sub",
+          "type": "fade_text",
+          "text": "question-led change",
+          "x": 350,
+          "y": 560,
+          "size": 36,
+          "italic": true,
+          "start": 40.2,
+          "duration": 0.7,
+          "requires_pen": false,
+          "color": "teal"
+        },
+        {
+          "id": "cl_book",
+          "type": "show_image",
+          "image": "book_cover",
+          "at": [
+            540,
+            940
+          ],
+          "height": 560,
+          "start": 41.0,
+          "duration": 1.2,
+          "requires_pen": false
+        },
+        {
+          "id": "cl_cta",
+          "type": "write_text",
+          "text": "LEARN MORE",
+          "x": 280,
+          "y": 1200,
+          "size": 40,
+          "width": 4,
+          "start": 43.4,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        },
+        {
+          "id": "cl_url",
+          "type": "write_text",
+          "text": "AARONELLIS.AU",
+          "x": 105,
+          "y": 1310,
+          "size": 50,
+          "width": 5,
+          "start": 44.8,
+          "duration": 1.7,
+          "requires_pen": true,
+          "color": "teal"
+        },
+        {
+          "id": "cl_swash",
+          "type": "draw_asset",
+          "asset": "underline_swash",
+          "at": [
+            540,
+            1460
+          ],
+          "scale": 1.4,
+          "start": 46.8,
+          "duration": 0.7,
+          "requires_pen": true,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "cl_author",
+          "type": "fade_text",
+          "text": "from the book by Aaron Ellis",
+          "x": 300,
+          "y": 1560,
+          "size": 32,
+          "italic": true,
+          "start": 47.8,
+          "duration": 0.9,
+          "requires_pen": false,
+          "color": "faint"
+        }
+      ]
+    }
+  ],
+  "stroke_style": "round"
+}

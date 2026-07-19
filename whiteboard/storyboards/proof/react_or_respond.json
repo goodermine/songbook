@@ -1,0 +1,68 @@
+{
+  "version": 2,
+  "title": "React or Respond",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "content_duration": 32.0,
+  "safe_content_end": 31.6,
+  "final_hold": 1.0,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "style": {
+    "paper": [249, 247, 240],
+    "ink": [38, 43, 46],
+    "faint": [118, 120, 116],
+    "accent": [202, 83, 48],
+    "teal": [31, 111, 112]
+  },
+  "narration": {
+    "transcript": "Same trigger, same reflex. Insert a pause: one breath is enough. Break the old script and respond on purpose. Practice the pause."
+  },
+  "scenes": [
+    {
+      "id": "stimulus",
+      "start": 0.0,
+      "end": 8.2,
+      "actions": [
+        {"id": "r1", "type": "write_text", "text": "REACT OR RESPOND?", "x": 150, "y": 64, "size": 44, "width": 4, "start": 0.2, "duration": 2.7, "requires_pen": true, "color": "ink"},
+        {"id": "stim_arrows", "type": "draw_asset", "asset": "reaction_arrows", "start": 3.1, "duration": 2.4, "requires_pen": true, "color": "ink", "last_color": "teal", "width": 6, "arrowheads": true},
+        {"id": "stim_dots", "type": "fade_asset", "asset": "reaction_dots", "start": 3.4, "duration": 1.8, "requires_pen": false, "color": "accent"},
+        {"id": "stim_note", "type": "fade_text", "text": "same trigger, same reflex.", "x": 430, "y": 440, "size": 30, "italic": true, "start": 5.8, "duration": 0.8, "requires_pen": false, "color": "faint"}
+      ]
+    },
+    {
+      "id": "pause",
+      "start": 8.2,
+      "end": 16.0,
+      "actions": [
+        {"id": "pause_loop", "type": "draw_asset", "asset": "old_loop", "start": 8.4, "duration": 0.9, "requires_pen": true, "color": "faint", "width": 6},
+        {"id": "pause_bars", "type": "draw_asset", "asset": "pause_symbol", "start": 9.5, "duration": 0.6, "requires_pen": true, "color": "accent", "width": 14},
+        {"id": "r2", "type": "write_text", "text": "INSERT A PAUSE", "x": 540, "y": 300, "size": 38, "width": 4, "start": 10.4, "duration": 2.2, "requires_pen": true, "color": "teal"},
+        {"id": "pause_note", "type": "fade_text", "text": "one breath is enough.", "x": 560, "y": 380, "size": 27, "italic": true, "start": 12.9, "duration": 0.7, "requires_pen": false, "color": "ink"}
+      ]
+    },
+    {
+      "id": "rewrite",
+      "start": 16.0,
+      "end": 24.2,
+      "actions": [
+        {"id": "box", "type": "draw_asset", "asset": "identity_box", "start": 16.3, "duration": 1.2, "requires_pen": true, "color": "ink", "width": 7},
+        {"id": "script_note", "type": "fade_text", "text": "THE OLD SCRIPT", "x": 490, "y": 250, "size": 34, "italic": true, "start": 17.7, "duration": 0.6, "requires_pen": false, "color": "ink"},
+        {"id": "break", "type": "draw_break", "asset": "identity_break", "start": 18.5, "duration": 0.9, "requires_pen": true, "color": "accent", "width": 5},
+        {"id": "r3", "type": "write_text", "text": "BREAK THE SCRIPT", "x": 360, "y": 470, "size": 40, "width": 4, "start": 19.6, "duration": 2.4, "requires_pen": true, "color": "teal"}
+      ]
+    },
+    {
+      "id": "choose",
+      "start": 24.2,
+      "end": 32.0,
+      "actions": [
+        {"id": "choose_person", "type": "draw_asset", "asset": "person_one", "start": 24.5, "duration": 1.4, "requires_pen": true, "color": "ink", "width": 6},
+        {"id": "choose_check", "type": "draw_asset", "asset": "checkmark", "start": 26.1, "duration": 0.8, "requires_pen": true, "color": "accent", "width": 10},
+        {"id": "r4", "type": "write_text", "text": "RESPOND ON PURPOSE.", "x": 180, "y": 88, "size": 40, "width": 4, "start": 27.2, "duration": 2.6, "requires_pen": true, "color": "ink"},
+        {"id": "choose_note", "type": "fade_text", "text": "practice the pause.", "x": 520, "y": 560, "size": 28, "italic": true, "start": 30.0, "duration": 0.7, "requires_pen": false, "color": "accent"}
+      ]
+    }
+  ]
+}
