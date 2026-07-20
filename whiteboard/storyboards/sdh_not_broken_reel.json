@@ -1,0 +1,987 @@
+{
+  "version": 2,
+  "title": "SDH Reel - You're Not Broken",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24,
+  "content_duration": 63.0,
+  "safe_content_end": 62.6,
+  "final_hold": 1.8,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "chrome": "none",
+  "text_font": "marker",
+  "caption_font": "marker",
+  "stroke_style": "round",
+  "style": {
+    "paper": [
+      249,
+      247,
+      240
+    ],
+    "ink": [
+      38,
+      43,
+      46
+    ],
+    "faint": [
+      118,
+      120,
+      116
+    ],
+    "accent": [
+      202,
+      83,
+      48
+    ],
+    "teal": [
+      31,
+      111,
+      112
+    ],
+    "amber": [
+      232,
+      163,
+      61
+    ]
+  },
+  "narration": {
+    "transcript": "If you feel stuck, like something's wrong with you, read this. You are not broken. Your mind is doing exactly what it was built to do: protect you. Years ago some part of you drew a conclusion - I'm not safe, I'm not enough - and built everything on top of it. So the anxiety, the doubt, the stuck feeling? That's not a fault. It's an old protection, still running. You're not a knot that can't be undone. You're a thread that got tangled, and threads can be smoothed. You don't need fixing. You need to meet that old conclusion, and gently update it. You were never broken. You were protecting yourself. And that can change."
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0.0,
+      "end": 7.0,
+      "actions": [
+        {
+          "id": "a001",
+          "type": "write_text",
+          "start": 0.2,
+          "duration": 1.4,
+          "requires_pen": true,
+          "text": "YOU'RE NOT",
+          "x": 210,
+          "y": 360,
+          "size": 64,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a002",
+          "type": "write_text",
+          "start": 1.72,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "BROKEN",
+          "x": 250,
+          "y": 470,
+          "size": 96,
+          "width": 8,
+          "color": "accent"
+        },
+        {
+          "id": "a003",
+          "type": "draw_asset",
+          "start": 3.04,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "circle_highlight",
+          "at": [
+            540,
+            470
+          ],
+          "scale": 2.0,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "a004",
+          "type": "draw_asset",
+          "start": 3.86,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "question_mark",
+          "at": [
+            170,
+            250
+          ],
+          "scale": 0.5,
+          "color": "faint",
+          "width": 5
+        },
+        {
+          "id": "a005",
+          "type": "draw_asset",
+          "start": 4.38,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "question_mark",
+          "at": [
+            900,
+            300
+          ],
+          "scale": 0.42,
+          "color": "faint",
+          "width": 5
+        },
+        {
+          "id": "a006",
+          "type": "draw_asset",
+          "start": 4.9,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "exclamation",
+          "at": [
+            840,
+            560
+          ],
+          "scale": 0.5,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a007",
+          "type": "draw_asset",
+          "start": 5.42,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            200,
+            620
+          ],
+          "scale": 0.32,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a008",
+          "type": "draw_asset",
+          "start": 5.94,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            880,
+            660
+          ],
+          "scale": 0.28,
+          "color": "teal",
+          "width": 5
+        }
+      ]
+    },
+    {
+      "id": "job",
+      "start": 7.0,
+      "end": 15.0,
+      "actions": [
+        {
+          "id": "a009",
+          "type": "write_text",
+          "start": 7.2,
+          "duration": 1.4,
+          "requires_pen": true,
+          "text": "YOUR MIND IS",
+          "x": 250,
+          "y": 230,
+          "size": 52,
+          "width": 4,
+          "color": "ink"
+        },
+        {
+          "id": "a010",
+          "type": "write_text",
+          "start": 8.72,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "DOING ITS JOB",
+          "x": 210,
+          "y": 320,
+          "size": 56,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a011",
+          "type": "draw_asset",
+          "start": 10.14,
+          "duration": 0.6,
+          "requires_pen": true,
+          "asset": "underline_swash",
+          "at": [
+            540,
+            380
+          ],
+          "scale": 1.7,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "a012",
+          "type": "draw_asset",
+          "start": 10.86,
+          "duration": 0.5,
+          "requires_pen": true,
+          "asset": "reaction_arrows",
+          "at": [
+            540,
+            560
+          ],
+          "scale": 0.42,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a013",
+          "type": "draw_asset",
+          "start": 11.48,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            180,
+            700
+          ],
+          "scale": 0.3,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a014",
+          "type": "draw_asset",
+          "start": 12.0,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            900,
+            720
+          ],
+          "scale": 0.3,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a015",
+          "type": "draw_asset",
+          "start": 12.52,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "heart",
+          "at": [
+            860,
+            620
+          ],
+          "scale": 0.32,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a016",
+          "type": "show_image",
+          "start": 7.3,
+          "duration": 6.9,
+          "requires_pen": false,
+          "image": "two_chairs",
+          "at": [
+            540,
+            1150
+          ],
+          "height": 780
+        },
+        {
+          "id": "a017",
+          "type": "fade_text",
+          "start": 13.6,
+          "duration": 0.9,
+          "requires_pen": false,
+          "text": "not against you - for you",
+          "x": 300,
+          "y": 1640,
+          "size": 34,
+          "italic": true,
+          "color": "faint"
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "start": 15.0,
+      "end": 24.0,
+      "actions": [
+        {
+          "id": "a018",
+          "type": "write_text",
+          "start": 15.2,
+          "duration": 1.4,
+          "requires_pen": true,
+          "text": "AN OLD",
+          "x": 330,
+          "y": 230,
+          "size": 58,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a019",
+          "type": "write_text",
+          "start": 16.72,
+          "duration": 1.4,
+          "requires_pen": true,
+          "text": "CONCLUSION",
+          "x": 250,
+          "y": 330,
+          "size": 58,
+          "width": 5,
+          "color": "teal"
+        },
+        {
+          "id": "a020",
+          "type": "draw_asset",
+          "start": 18.24,
+          "duration": 0.5,
+          "requires_pen": true,
+          "asset": "old_loop",
+          "at": [
+            190,
+            260
+          ],
+          "scale": 0.5,
+          "color": "faint",
+          "width": 5
+        },
+        {
+          "id": "a021",
+          "type": "draw_asset",
+          "start": 18.86,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "question_mark",
+          "at": [
+            200,
+            1500
+          ],
+          "scale": 0.5,
+          "color": "faint",
+          "width": 5
+        },
+        {
+          "id": "a022",
+          "type": "draw_asset",
+          "start": 19.38,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "question_mark",
+          "at": [
+            880,
+            1520
+          ],
+          "scale": 0.45,
+          "color": "faint",
+          "width": 5
+        },
+        {
+          "id": "a023",
+          "type": "draw_asset",
+          "start": 19.9,
+          "duration": 0.5,
+          "requires_pen": true,
+          "asset": "cracks",
+          "at": [
+            760,
+            980
+          ],
+          "scale": 0.7,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a024",
+          "type": "show_image",
+          "start": 15.3,
+          "duration": 7.9,
+          "requires_pen": false,
+          "image": "iceberg_mind",
+          "at": [
+            540,
+            1150
+          ],
+          "height": 820
+        },
+        {
+          "id": "a025",
+          "type": "fade_text",
+          "start": 22.4,
+          "duration": 0.9,
+          "requires_pen": false,
+          "text": "I'm not safe. I'm not enough.",
+          "x": 270,
+          "y": 1640,
+          "size": 36,
+          "italic": true,
+          "color": "faint"
+        }
+      ]
+    },
+    {
+      "id": "guard",
+      "start": 24.0,
+      "end": 32.0,
+      "actions": [
+        {
+          "id": "a026",
+          "type": "write_text",
+          "start": 24.2,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "NOT A FAULT",
+          "x": 290,
+          "y": 230,
+          "size": 56,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a027",
+          "type": "write_text",
+          "start": 25.62,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "A GUARD",
+          "x": 340,
+          "y": 330,
+          "size": 64,
+          "width": 6,
+          "color": "accent"
+        },
+        {
+          "id": "a028",
+          "type": "draw_asset",
+          "start": 26.94,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "circle_highlight",
+          "at": [
+            550,
+            330
+          ],
+          "scale": 1.7,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "a029",
+          "type": "draw_asset",
+          "start": 27.76,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            200,
+            560
+          ],
+          "scale": 0.3,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a030",
+          "type": "draw_asset",
+          "start": 28.28,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "exclamation",
+          "at": [
+            880,
+            520
+          ],
+          "scale": 0.45,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a031",
+          "type": "draw_asset",
+          "start": 28.8,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            900,
+            720
+          ],
+          "scale": 0.28,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a032",
+          "type": "show_image",
+          "start": 24.3,
+          "duration": 6.9,
+          "requires_pen": false,
+          "image": "key_keyhole",
+          "at": [
+            540,
+            1180
+          ],
+          "height": 760
+        },
+        {
+          "id": "a033",
+          "type": "fade_text",
+          "start": 30.4,
+          "duration": 0.9,
+          "requires_pen": false,
+          "text": "an old protection, still running",
+          "x": 290,
+          "y": 1660,
+          "size": 34,
+          "italic": true,
+          "color": "faint"
+        }
+      ]
+    },
+    {
+      "id": "tangled",
+      "start": 32.0,
+      "end": 41.0,
+      "actions": [
+        {
+          "id": "a034",
+          "type": "write_text",
+          "start": 32.2,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "NOT BROKEN.",
+          "x": 280,
+          "y": 230,
+          "size": 54,
+          "width": 5,
+          "color": "faint"
+        },
+        {
+          "id": "a035",
+          "type": "draw_asset",
+          "start": 33.52,
+          "duration": 0.5,
+          "requires_pen": true,
+          "asset": "cross_out",
+          "at": [
+            550,
+            215
+          ],
+          "scale": 1.5,
+          "color": "accent",
+          "width": 6
+        },
+        {
+          "id": "a036",
+          "type": "write_text",
+          "start": 34.14,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "JUST TANGLED",
+          "x": 250,
+          "y": 350,
+          "size": 60,
+          "width": 6,
+          "color": "teal"
+        },
+        {
+          "id": "a037",
+          "type": "draw_asset",
+          "start": 35.56,
+          "duration": 0.5,
+          "requires_pen": true,
+          "asset": "reaction_arrows",
+          "at": [
+            540,
+            560
+          ],
+          "scale": 0.42,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a038",
+          "type": "draw_asset",
+          "start": 36.18,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            200,
+            700
+          ],
+          "scale": 0.32,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a039",
+          "type": "draw_asset",
+          "start": 36.7,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            880,
+            720
+          ],
+          "scale": 0.3,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a040",
+          "type": "show_image",
+          "start": 32.4,
+          "duration": 7.9,
+          "requires_pen": false,
+          "image": "tangled_thread",
+          "at": [
+            540,
+            1200
+          ],
+          "height": 620
+        },
+        {
+          "id": "a041",
+          "type": "fade_text",
+          "start": 39.4,
+          "duration": 0.9,
+          "requires_pen": false,
+          "text": "and threads can be smoothed",
+          "x": 300,
+          "y": 1660,
+          "size": 34,
+          "italic": true,
+          "color": "faint"
+        }
+      ]
+    },
+    {
+      "id": "fixing",
+      "start": 41.0,
+      "end": 49.0,
+      "actions": [
+        {
+          "id": "a042",
+          "type": "write_text",
+          "start": 41.2,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "YOU DON'T",
+          "x": 320,
+          "y": 230,
+          "size": 56,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a043",
+          "type": "write_text",
+          "start": 42.62,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "NEED FIXING",
+          "x": 270,
+          "y": 330,
+          "size": 60,
+          "width": 6,
+          "color": "ink"
+        },
+        {
+          "id": "a044",
+          "type": "draw_asset",
+          "start": 44.04,
+          "duration": 0.6,
+          "requires_pen": true,
+          "asset": "underline_swash",
+          "at": [
+            540,
+            390
+          ],
+          "scale": 1.7,
+          "color": "accent",
+          "width": 6
+        },
+        {
+          "id": "a045",
+          "type": "draw_asset",
+          "start": 44.76,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "heart",
+          "at": [
+            870,
+            600
+          ],
+          "scale": 0.55,
+          "color": "accent",
+          "width": 6
+        },
+        {
+          "id": "a046",
+          "type": "draw_fill",
+          "start": 45.58,
+          "duration": 1.1,
+          "requires_pen": true,
+          "asset": "heart",
+          "at": [
+            870,
+            600
+          ],
+          "scale": 0.55,
+          "width": 18,
+          "color": "accent"
+        },
+        {
+          "id": "a047",
+          "type": "draw_asset",
+          "start": 46.8,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            200,
+            620
+          ],
+          "scale": 0.3,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a048",
+          "type": "show_image",
+          "start": 41.3,
+          "duration": 6.9,
+          "requires_pen": false,
+          "image": "head_staircase",
+          "at": [
+            540,
+            1180
+          ],
+          "height": 780
+        },
+        {
+          "id": "a049",
+          "type": "fade_text",
+          "start": 47.4,
+          "duration": 0.9,
+          "requires_pen": false,
+          "text": "meet it - and gently update it",
+          "x": 300,
+          "y": 1660,
+          "size": 34,
+          "italic": true,
+          "color": "faint"
+        }
+      ]
+    },
+    {
+      "id": "protect",
+      "start": 49.0,
+      "end": 56.0,
+      "actions": [
+        {
+          "id": "a050",
+          "type": "write_text",
+          "start": 49.2,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "YOU WERE",
+          "x": 340,
+          "y": 230,
+          "size": 56,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a051",
+          "type": "write_text",
+          "start": 50.62,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "PROTECTING YOU",
+          "x": 190,
+          "y": 330,
+          "size": 52,
+          "width": 5,
+          "color": "teal"
+        },
+        {
+          "id": "a052",
+          "type": "draw_asset",
+          "start": 52.04,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "checkmark",
+          "at": [
+            540,
+            560
+          ],
+          "scale": 1.1,
+          "color": "teal",
+          "width": 9
+        },
+        {
+          "id": "a053",
+          "type": "draw_asset",
+          "start": 52.86,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            210,
+            700
+          ],
+          "scale": 0.32,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a054",
+          "type": "draw_asset",
+          "start": 53.38,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            880,
+            680
+          ],
+          "scale": 0.3,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a055",
+          "type": "show_image_sequence",
+          "start": 49.3,
+          "duration": 5.9,
+          "requires_pen": false,
+          "images": [
+            "seed_grow_1",
+            "seed_grow_2",
+            "seed_grow_3",
+            "seed_grow_4",
+            "seed_grow_5",
+            "seed_grow_6"
+          ],
+          "at": [
+            540,
+            1200
+          ],
+          "height": 720
+        }
+      ]
+    },
+    {
+      "id": "change",
+      "start": 56.0,
+      "end": 63.0,
+      "actions": [
+        {
+          "id": "a056",
+          "type": "write_text",
+          "start": 56.2,
+          "duration": 1.4,
+          "requires_pen": true,
+          "text": "AND THAT",
+          "x": 330,
+          "y": 430,
+          "size": 62,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a057",
+          "type": "write_text",
+          "start": 57.72,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "CAN CHANGE.",
+          "x": 270,
+          "y": 540,
+          "size": 68,
+          "width": 6,
+          "color": "accent"
+        },
+        {
+          "id": "a058",
+          "type": "draw_asset",
+          "start": 59.14,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "underline_swash",
+          "at": [
+            540,
+            620
+          ],
+          "scale": 2.0,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "a059",
+          "type": "draw_asset",
+          "start": 59.96,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            210,
+            360
+          ],
+          "scale": 0.3,
+          "color": "teal",
+          "width": 5
+        },
+        {
+          "id": "a060",
+          "type": "draw_asset",
+          "start": 60.48,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            880,
+            380
+          ],
+          "scale": 0.28,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a061",
+          "type": "show_image",
+          "start": 56.3,
+          "duration": 5.4,
+          "requires_pen": false,
+          "image": "open_ground",
+          "at": [
+            540,
+            1200
+          ],
+          "height": 720
+        },
+        {
+          "id": "a062",
+          "type": "fade_text",
+          "start": 61.3,
+          "duration": 1.2,
+          "requires_pen": false,
+          "text": "Aaron Ellis",
+          "x": 390,
+          "y": 1680,
+          "size": 46,
+          "color": "faint"
+        }
+      ]
+    }
+  ]
+}
