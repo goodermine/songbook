@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "title": "SDH Reel - You're Not Broken (square)",
+  "title": "SDH Reel - You're Not Broken (square, hand-drawn)",
   "width": 1080,
   "height": 1080,
   "fps": 24,
-  "content_duration": 63.0,
-  "safe_content_end": 62.6,
+  "content_duration": 64.04,
+  "safe_content_end": 63.64,
   "final_hold": 1.8,
   "pen_physics": "lift",
   "hand": "sprite",
@@ -43,6 +43,36 @@
       232,
       163,
       61
+    ],
+    "pgreen": [
+      178,
+      206,
+      168
+    ],
+    "pmint": [
+      190,
+      216,
+      202
+    ],
+    "psage": [
+      196,
+      214,
+      180
+    ],
+    "psky": [
+      192,
+      210,
+      214
+    ],
+    "ppeach": [
+      234,
+      208,
+      186
+    ],
+    "pamber": [
+      232,
+      216,
+      172
     ]
   },
   "narration": {
@@ -52,103 +82,82 @@
     {
       "id": "hook",
       "start": 0.0,
-      "end": 7.0,
+      "end": 7.93,
       "actions": [
         {
           "id": "a001",
-          "type": "show_image",
-          "start": 0.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            733,
-            707
+          "type": "draw_fill",
+          "start": 0.2,
+          "duration": 0.7,
+          "requires_pen": true,
+          "polygon": [
+            [
+              60.0,
+              470
+            ],
+            [
+              120.0,
+              370.0
+            ],
+            [
+              240.0,
+              370.0
+            ],
+            [
+              300.0,
+              470
+            ],
+            [
+              240.0,
+              570.0
+            ],
+            [
+              120.0,
+              570.0
+            ]
           ],
-          "height": 445
+          "width": 30,
+          "color": "pgreen"
         },
         {
           "id": "a002",
-          "type": "show_image",
-          "start": 0.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sage",
-          "at": [
-            537,
-            502
+          "type": "draw_fill",
+          "start": 1.02,
+          "duration": 0.7,
+          "requires_pen": true,
+          "polygon": [
+            [
+              790.0,
+              720
+            ],
+            [
+              845.0,
+              630.0
+            ],
+            [
+              955.0,
+              630.0
+            ],
+            [
+              1010.0,
+              720
+            ],
+            [
+              955.0,
+              810.0
+            ],
+            [
+              845.0,
+              810.0
+            ]
           ],
-          "height": 330
+          "width": 30,
+          "color": "ppeach"
         },
         {
           "id": "a003",
-          "type": "show_image",
-          "start": 0.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            716,
-            263
-          ],
-          "height": 397
-        },
-        {
-          "id": "a004",
-          "type": "show_image",
-          "start": 0.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_green",
-          "at": [
-            488,
-            601
-          ],
-          "height": 513
-        },
-        {
-          "id": "a005",
-          "type": "show_image",
-          "start": 0.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_green",
-          "at": [
-            512,
-            673
-          ],
-          "height": 478
-        },
-        {
-          "id": "a006",
-          "type": "show_image",
-          "start": 0.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            784,
-            792
-          ],
-          "height": 451
-        },
-        {
-          "id": "a007",
-          "type": "show_image",
-          "start": 0.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_green",
-          "at": [
-            199,
-            572
-          ],
-          "height": 305
-        },
-        {
-          "id": "a008",
           "type": "write_text",
-          "start": 0.2,
+          "start": 1.84,
           "duration": 1.4,
           "requires_pen": true,
           "text": "YOU'RE NOT",
@@ -159,10 +168,10 @@
           "color": "ink"
         },
         {
-          "id": "a009",
+          "id": "a004",
           "type": "write_text",
-          "start": 1.72,
-          "duration": 1.2,
+          "start": 3.36,
+          "duration": 1.3,
           "requires_pen": true,
           "text": "BROKEN",
           "x": 290,
@@ -172,9 +181,9 @@
           "color": "accent"
         },
         {
-          "id": "a010",
+          "id": "a005",
           "type": "draw_asset",
-          "start": 3.04,
+          "start": 4.78,
           "duration": 0.7,
           "requires_pen": true,
           "asset": "circle_highlight",
@@ -187,9 +196,9 @@
           "width": 6
         },
         {
-          "id": "a011",
+          "id": "a006",
           "type": "draw_asset",
-          "start": 3.86,
+          "start": 5.6,
           "duration": 0.4,
           "requires_pen": true,
           "asset": "question_mark",
@@ -202,9 +211,9 @@
           "width": 5
         },
         {
-          "id": "a012",
+          "id": "a007",
           "type": "draw_asset",
-          "start": 4.38,
+          "start": 6.12,
           "duration": 0.4,
           "requires_pen": true,
           "asset": "question_mark",
@@ -217,9 +226,9 @@
           "width": 5
         },
         {
-          "id": "a013",
+          "id": "a008",
           "type": "draw_asset",
-          "start": 4.9,
+          "start": 6.64,
           "duration": 0.4,
           "requires_pen": true,
           "asset": "exclamation",
@@ -232,32 +241,17 @@
           "width": 5
         },
         {
-          "id": "a014",
+          "id": "a009",
           "type": "draw_asset",
-          "start": 5.42,
+          "start": 7.16,
           "duration": 0.4,
           "requires_pen": true,
           "asset": "star_five",
           "at": [
             150,
-            560
+            700
           ],
-          "scale": 0.34,
-          "color": "teal",
-          "width": 5
-        },
-        {
-          "id": "a015",
-          "type": "draw_asset",
-          "start": 5.94,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            930,
-            800
-          ],
-          "scale": 0.3,
+          "scale": 0.32,
           "color": "teal",
           "width": 5
         }
@@ -265,91 +259,48 @@
     },
     {
       "id": "job",
-      "start": 7.0,
-      "end": 15.0,
+      "start": 7.93,
+      "end": 16.0,
       "actions": [
         {
-          "id": "a016",
-          "type": "show_image",
-          "start": 7.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_green",
-          "at": [
-            250,
-            794
+          "id": "a010",
+          "type": "draw_fill",
+          "start": 8.13,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              55.0,
+              720
+            ],
+            [
+              107.5,
+              645.0
+            ],
+            [
+              212.5,
+              645.0
+            ],
+            [
+              265.0,
+              720
+            ],
+            [
+              212.5,
+              795.0
+            ],
+            [
+              107.5,
+              795.0
+            ]
           ],
-          "height": 323
+          "width": 30,
+          "color": "pmint"
         },
         {
-          "id": "a017",
-          "type": "show_image",
-          "start": 7.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            622,
-            430
-          ],
-          "height": 507
-        },
-        {
-          "id": "a018",
-          "type": "show_image",
-          "start": 7.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            611,
-            599
-          ],
-          "height": 354
-        },
-        {
-          "id": "a019",
-          "type": "show_image",
-          "start": 7.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            622,
-            743
-          ],
-          "height": 410
-        },
-        {
-          "id": "a020",
-          "type": "show_image",
-          "start": 7.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            567,
-            502
-          ],
-          "height": 395
-        },
-        {
-          "id": "a021",
-          "type": "show_image",
-          "start": 7.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sage",
-          "at": [
-            805,
-            435
-          ],
-          "height": 309
-        },
-        {
-          "id": "a022",
+          "id": "a011",
           "type": "write_text",
-          "start": 7.2,
+          "start": 8.85,
           "duration": 1.3,
           "requires_pen": true,
           "text": "YOUR MIND IS",
@@ -360,9 +311,9 @@
           "color": "ink"
         },
         {
-          "id": "a023",
+          "id": "a012",
           "type": "write_text",
-          "start": 8.62,
+          "start": 10.27,
           "duration": 1.3,
           "requires_pen": true,
           "text": "DOING ITS JOB",
@@ -373,9 +324,9 @@
           "color": "ink"
         },
         {
-          "id": "a024",
+          "id": "a013",
           "type": "draw_asset",
-          "start": 10.04,
+          "start": 11.69,
           "duration": 0.6,
           "requires_pen": true,
           "asset": "underline_swash",
@@ -388,165 +339,113 @@
           "width": 6
         },
         {
-          "id": "a025",
-          "type": "show_image",
-          "start": 7.3,
-          "duration": 6.9,
-          "requires_pen": false,
+          "id": "a014",
+          "type": "sketch_image",
+          "start": 12.41,
+          "duration": 1.9,
+          "requires_pen": true,
           "image": "two_chairs",
           "at": [
             540,
-            690
+            700
           ],
           "height": 520
         },
         {
-          "id": "a026",
-          "type": "fade_text",
-          "start": 13.6,
-          "duration": 0.9,
-          "requires_pen": false,
-          "text": "not against you - for you",
-          "x": 330,
+          "id": "a015",
+          "type": "write_text",
+          "start": 14.43,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "for you - not against you",
+          "x": null,
           "y": 1000,
-          "size": 32,
-          "italic": true,
-          "color": "faint"
-        },
-        {
-          "id": "a027",
-          "type": "draw_asset",
-          "start": 10.76,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            150,
-            520
-          ],
-          "scale": 0.3,
-          "color": "teal",
-          "width": 5
-        },
-        {
-          "id": "a028",
-          "type": "draw_asset",
-          "start": 11.28,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "heart",
-          "at": [
-            930,
-            470
-          ],
-          "scale": 0.32,
-          "color": "accent",
-          "width": 5
-        },
-        {
-          "id": "a029",
-          "type": "draw_asset",
-          "start": 11.8,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            930,
-            860
-          ],
-          "scale": 0.28,
-          "color": "accent",
-          "width": 5
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
         }
       ]
     },
     {
       "id": "conclusion",
-      "start": 15.0,
-      "end": 24.0,
+      "start": 16.0,
+      "end": 24.99,
       "actions": [
         {
-          "id": "a030",
-          "type": "show_image",
-          "start": 15.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            564,
-            458
+          "id": "a016",
+          "type": "draw_fill",
+          "start": 16.2,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              815.0,
+              470
+            ],
+            [
+              867.5,
+              395.0
+            ],
+            [
+              972.5,
+              395.0
+            ],
+            [
+              1025.0,
+              470
+            ],
+            [
+              972.5,
+              545.0
+            ],
+            [
+              867.5,
+              545.0
+            ]
           ],
-          "height": 451
+          "width": 30,
+          "color": "psky"
         },
         {
-          "id": "a031",
-          "type": "show_image",
-          "start": 15.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            613,
-            254
+          "id": "a017",
+          "type": "draw_fill",
+          "start": 16.92,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              55.0,
+              780
+            ],
+            [
+              107.5,
+              705.0
+            ],
+            [
+              212.5,
+              705.0
+            ],
+            [
+              265.0,
+              780
+            ],
+            [
+              212.5,
+              855.0
+            ],
+            [
+              107.5,
+              855.0
+            ]
           ],
-          "height": 421
+          "width": 30,
+          "color": "psage"
         },
         {
-          "id": "a032",
-          "type": "show_image",
-          "start": 15.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_green",
-          "at": [
-            525,
-            569
-          ],
-          "height": 514
-        },
-        {
-          "id": "a033",
-          "type": "show_image",
-          "start": 15.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            525,
-            741
-          ],
-          "height": 483
-        },
-        {
-          "id": "a034",
-          "type": "show_image",
-          "start": 15.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sky",
-          "at": [
-            624,
-            303
-          ],
-          "height": 401
-        },
-        {
-          "id": "a035",
-          "type": "show_image",
-          "start": 15.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            790,
-            557
-          ],
-          "height": 338
-        },
-        {
-          "id": "a036",
+          "id": "a018",
           "type": "write_text",
-          "start": 15.2,
+          "start": 17.64,
           "duration": 1.3,
           "requires_pen": true,
           "text": "AN OLD",
@@ -557,9 +456,9 @@
           "color": "ink"
         },
         {
-          "id": "a037",
+          "id": "a019",
           "type": "write_text",
-          "start": 16.62,
+          "start": 19.06,
           "duration": 1.4,
           "requires_pen": true,
           "text": "CONCLUSION",
@@ -570,9 +469,9 @@
           "color": "teal"
         },
         {
-          "id": "a038",
+          "id": "a020",
           "type": "draw_asset",
-          "start": 18.14,
+          "start": 20.58,
           "duration": 0.5,
           "requires_pen": true,
           "asset": "old_loop",
@@ -585,11 +484,11 @@
           "width": 5
         },
         {
-          "id": "a039",
-          "type": "show_image",
-          "start": 15.3,
-          "duration": 7.9,
-          "requires_pen": false,
+          "id": "a021",
+          "type": "sketch_image",
+          "start": 21.2,
+          "duration": 2.1,
+          "requires_pen": true,
           "image": "iceberg_mind",
           "at": [
             540,
@@ -598,137 +497,65 @@
           "height": 540
         },
         {
-          "id": "a040",
-          "type": "fade_text",
-          "start": 22.4,
-          "duration": 0.9,
-          "requires_pen": false,
+          "id": "a022",
+          "type": "write_text",
+          "start": 23.42,
+          "duration": 1.2,
+          "requires_pen": true,
           "text": "I'm not safe. I'm not enough.",
-          "x": 300,
+          "x": null,
           "y": 1005,
-          "size": 34,
-          "italic": true,
-          "color": "faint"
-        },
-        {
-          "id": "a041",
-          "type": "draw_asset",
-          "start": 18.76,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "question_mark",
-          "at": [
-            150,
-            840
-          ],
-          "scale": 0.5,
+          "size": 30,
+          "width": 3,
           "color": "faint",
-          "width": 5
-        },
-        {
-          "id": "a042",
-          "type": "draw_asset",
-          "start": 19.28,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "question_mark",
-          "at": [
-            940,
-            860
-          ],
-          "scale": 0.45,
-          "color": "faint",
-          "width": 5
+          "align": "center"
         }
       ]
     },
     {
       "id": "guard",
-      "start": 24.0,
-      "end": 32.0,
+      "start": 24.99,
+      "end": 33.06,
       "actions": [
         {
-          "id": "a043",
-          "type": "show_image",
-          "start": 24.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            288,
-            467
+          "id": "a023",
+          "type": "draw_fill",
+          "start": 25.19,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              65.0,
+              470
+            ],
+            [
+              117.5,
+              395.0
+            ],
+            [
+              222.5,
+              395.0
+            ],
+            [
+              275.0,
+              470
+            ],
+            [
+              222.5,
+              545.0
+            ],
+            [
+              117.5,
+              545.0
+            ]
           ],
-          "height": 377
+          "width": 30,
+          "color": "pamber"
         },
         {
-          "id": "a044",
-          "type": "show_image",
-          "start": 24.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            237,
-            466
-          ],
-          "height": 323
-        },
-        {
-          "id": "a045",
-          "type": "show_image",
-          "start": 24.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sage",
-          "at": [
-            777,
-            286
-          ],
-          "height": 504
-        },
-        {
-          "id": "a046",
-          "type": "show_image",
-          "start": 24.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            461,
-            720
-          ],
-          "height": 437
-        },
-        {
-          "id": "a047",
-          "type": "show_image",
-          "start": 24.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_green",
-          "at": [
-            355,
-            845
-          ],
-          "height": 367
-        },
-        {
-          "id": "a048",
-          "type": "show_image",
-          "start": 24.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            424,
-            409
-          ],
-          "height": 506
-        },
-        {
-          "id": "a049",
+          "id": "a024",
           "type": "write_text",
-          "start": 24.2,
+          "start": 25.91,
           "duration": 1.3,
           "requires_pen": true,
           "text": "NOT A FAULT",
@@ -739,9 +566,9 @@
           "color": "ink"
         },
         {
-          "id": "a050",
+          "id": "a025",
           "type": "write_text",
-          "start": 25.62,
+          "start": 27.33,
           "duration": 1.2,
           "requires_pen": true,
           "text": "A GUARD",
@@ -752,9 +579,9 @@
           "color": "accent"
         },
         {
-          "id": "a051",
+          "id": "a026",
           "type": "draw_asset",
-          "start": 26.94,
+          "start": 28.65,
           "duration": 0.7,
           "requires_pen": true,
           "asset": "circle_highlight",
@@ -767,11 +594,11 @@
           "width": 6
         },
         {
-          "id": "a052",
-          "type": "show_image",
-          "start": 24.3,
-          "duration": 6.9,
-          "requires_pen": false,
+          "id": "a027",
+          "type": "sketch_image",
+          "start": 29.47,
+          "duration": 1.9,
+          "requires_pen": true,
           "image": "key_keyhole",
           "at": [
             540,
@@ -780,152 +607,65 @@
           "height": 500
         },
         {
-          "id": "a053",
-          "type": "fade_text",
-          "start": 30.4,
-          "duration": 0.9,
-          "requires_pen": false,
+          "id": "a028",
+          "type": "write_text",
+          "start": 31.49,
+          "duration": 1.2,
+          "requires_pen": true,
           "text": "an old protection, still running",
-          "x": 310,
+          "x": null,
           "y": 1010,
-          "size": 32,
-          "italic": true,
-          "color": "faint"
-        },
-        {
-          "id": "a054",
-          "type": "draw_asset",
-          "start": 27.76,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            150,
-            470
-          ],
-          "scale": 0.3,
-          "color": "teal",
-          "width": 5
-        },
-        {
-          "id": "a055",
-          "type": "draw_asset",
-          "start": 28.28,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "exclamation",
-          "at": [
-            940,
-            440
-          ],
-          "scale": 0.45,
-          "color": "accent",
-          "width": 5
-        },
-        {
-          "id": "a056",
-          "type": "draw_asset",
-          "start": 28.8,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            940,
-            880
-          ],
-          "scale": 0.28,
-          "color": "teal",
-          "width": 5
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
         }
       ]
     },
     {
       "id": "tangled",
-      "start": 32.0,
-      "end": 41.0,
+      "start": 33.06,
+      "end": 40.73,
       "actions": [
         {
-          "id": "a057",
-          "type": "show_image",
-          "start": 32.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            697,
-            751
+          "id": "a029",
+          "type": "draw_fill",
+          "start": 33.26,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              815.0,
+              760
+            ],
+            [
+              867.5,
+              685.0
+            ],
+            [
+              972.5,
+              685.0
+            ],
+            [
+              1025.0,
+              760
+            ],
+            [
+              972.5,
+              835.0
+            ],
+            [
+              867.5,
+              835.0
+            ]
           ],
-          "height": 365
+          "width": 30,
+          "color": "pgreen"
         },
         {
-          "id": "a058",
-          "type": "show_image",
-          "start": 32.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            764,
-            251
-          ],
-          "height": 466
-        },
-        {
-          "id": "a059",
-          "type": "show_image",
-          "start": 32.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sky",
-          "at": [
-            758,
-            627
-          ],
-          "height": 498
-        },
-        {
-          "id": "a060",
-          "type": "show_image",
-          "start": 32.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            451,
-            817
-          ],
-          "height": 328
-        },
-        {
-          "id": "a061",
-          "type": "show_image",
-          "start": 32.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sky",
-          "at": [
-            317,
-            379
-          ],
-          "height": 439
-        },
-        {
-          "id": "a062",
-          "type": "show_image",
-          "start": 32.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            479,
-            310
-          ],
-          "height": 355
-        },
-        {
-          "id": "a063",
+          "id": "a030",
           "type": "write_text",
-          "start": 32.2,
+          "start": 33.98,
           "duration": 1.2,
           "requires_pen": true,
           "text": "NOT BROKEN.",
@@ -936,9 +676,9 @@
           "color": "faint"
         },
         {
-          "id": "a064",
+          "id": "a031",
           "type": "draw_asset",
-          "start": 33.52,
+          "start": 35.3,
           "duration": 0.5,
           "requires_pen": true,
           "asset": "cross_out",
@@ -951,9 +691,9 @@
           "width": 6
         },
         {
-          "id": "a065",
+          "id": "a032",
           "type": "write_text",
-          "start": 34.14,
+          "start": 35.92,
           "duration": 1.3,
           "requires_pen": true,
           "text": "JUST TANGLED",
@@ -964,11 +704,11 @@
           "color": "teal"
         },
         {
-          "id": "a066",
-          "type": "show_image",
-          "start": 32.4,
-          "duration": 7.9,
-          "requires_pen": false,
+          "id": "a033",
+          "type": "sketch_image",
+          "start": 37.34,
+          "duration": 1.7,
+          "requires_pen": true,
           "image": "tangled_thread",
           "at": [
             540,
@@ -977,137 +717,65 @@
           "height": 440
         },
         {
-          "id": "a067",
-          "type": "fade_text",
-          "start": 39.4,
-          "duration": 0.9,
-          "requires_pen": false,
-          "text": "and threads can be smoothed",
-          "x": 320,
+          "id": "a034",
+          "type": "write_text",
+          "start": 39.16,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "threads can be smoothed",
+          "x": null,
           "y": 1010,
-          "size": 32,
-          "italic": true,
-          "color": "faint"
-        },
-        {
-          "id": "a068",
-          "type": "draw_asset",
-          "start": 35.56,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            150,
-            560
-          ],
-          "scale": 0.32,
-          "color": "accent",
-          "width": 5
-        },
-        {
-          "id": "a069",
-          "type": "draw_asset",
-          "start": 36.08,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            940,
-            560
-          ],
-          "scale": 0.3,
-          "color": "teal",
-          "width": 5
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
         }
       ]
     },
     {
       "id": "fixing",
-      "start": 41.0,
-      "end": 49.0,
+      "start": 40.73,
+      "end": 49.52,
       "actions": [
         {
-          "id": "a070",
-          "type": "show_image",
-          "start": 41.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            340,
-            689
+          "id": "a035",
+          "type": "draw_fill",
+          "start": 40.93,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              45.0,
+              760
+            ],
+            [
+              97.5,
+              685.0
+            ],
+            [
+              202.5,
+              685.0
+            ],
+            [
+              255.0,
+              760
+            ],
+            [
+              202.5,
+              835.0
+            ],
+            [
+              97.5,
+              835.0
+            ]
           ],
-          "height": 510
+          "width": 30,
+          "color": "pmint"
         },
         {
-          "id": "a071",
-          "type": "show_image",
-          "start": 41.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_green",
-          "at": [
-            283,
-            607
-          ],
-          "height": 300
-        },
-        {
-          "id": "a072",
-          "type": "show_image",
-          "start": 41.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            429,
-            212
-          ],
-          "height": 395
-        },
-        {
-          "id": "a073",
-          "type": "show_image",
-          "start": 41.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sky",
-          "at": [
-            394,
-            754
-          ],
-          "height": 505
-        },
-        {
-          "id": "a074",
-          "type": "show_image",
-          "start": 41.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            642,
-            343
-          ],
-          "height": 438
-        },
-        {
-          "id": "a075",
-          "type": "show_image",
-          "start": 41.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            697,
-            399
-          ],
-          "height": 479
-        },
-        {
-          "id": "a076",
+          "id": "a036",
           "type": "write_text",
-          "start": 41.2,
+          "start": 41.65,
           "duration": 1.3,
           "requires_pen": true,
           "text": "YOU DON'T",
@@ -1118,9 +786,9 @@
           "color": "ink"
         },
         {
-          "id": "a077",
+          "id": "a037",
           "type": "write_text",
-          "start": 42.62,
+          "start": 43.07,
           "duration": 1.3,
           "requires_pen": true,
           "text": "NEED FIXING",
@@ -1131,9 +799,9 @@
           "color": "ink"
         },
         {
-          "id": "a078",
+          "id": "a038",
           "type": "draw_asset",
-          "start": 44.04,
+          "start": 44.49,
           "duration": 0.6,
           "requires_pen": true,
           "asset": "underline_swash",
@@ -1146,11 +814,11 @@
           "width": 6
         },
         {
-          "id": "a079",
-          "type": "show_image",
-          "start": 41.3,
-          "duration": 6.9,
-          "requires_pen": false,
+          "id": "a039",
+          "type": "sketch_image",
+          "start": 45.21,
+          "duration": 1.9,
+          "requires_pen": true,
           "image": "head_staircase",
           "at": [
             540,
@@ -1159,10 +827,10 @@
           "height": 500
         },
         {
-          "id": "a080",
+          "id": "a040",
           "type": "draw_asset",
-          "start": 44.76,
-          "duration": 0.7,
+          "start": 47.23,
+          "duration": 0.6,
           "requires_pen": true,
           "asset": "heart",
           "at": [
@@ -1174,137 +842,65 @@
           "width": 6
         },
         {
-          "id": "a081",
-          "type": "draw_fill",
-          "start": 45.58,
-          "duration": 1.1,
+          "id": "a041",
+          "type": "write_text",
+          "start": 47.95,
+          "duration": 1.2,
           "requires_pen": true,
-          "asset": "heart",
-          "at": [
-            935,
-            470
-          ],
-          "scale": 0.5,
-          "width": 16,
-          "color": "accent"
-        },
-        {
-          "id": "a082",
-          "type": "fade_text",
-          "start": 47.4,
-          "duration": 0.9,
-          "requires_pen": false,
-          "text": "meet it - and gently update it",
-          "x": 320,
+          "text": "just meet it, and update it",
+          "x": null,
           "y": 1010,
-          "size": 32,
-          "italic": true,
-          "color": "faint"
-        },
-        {
-          "id": "a083",
-          "type": "draw_asset",
-          "start": 46.8,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            140,
-            470
-          ],
-          "scale": 0.3,
-          "color": "teal",
-          "width": 5
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
         }
       ]
     },
     {
       "id": "protect",
-      "start": 49.0,
-      "end": 56.0,
+      "start": 49.52,
+      "end": 56.07,
       "actions": [
         {
-          "id": "a084",
-          "type": "show_image",
-          "start": 49.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sage",
-          "at": [
-            468,
-            205
+          "id": "a042",
+          "type": "draw_fill",
+          "start": 49.72,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              815.0,
+              500
+            ],
+            [
+              867.5,
+              425.0
+            ],
+            [
+              972.5,
+              425.0
+            ],
+            [
+              1025.0,
+              500
+            ],
+            [
+              972.5,
+              575.0
+            ],
+            [
+              867.5,
+              575.0
+            ]
           ],
-          "height": 338
+          "width": 30,
+          "color": "psage"
         },
         {
-          "id": "a085",
-          "type": "show_image",
-          "start": 49.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            446,
-            206
-          ],
-          "height": 324
-        },
-        {
-          "id": "a086",
-          "type": "show_image",
-          "start": 49.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            234,
-            492
-          ],
-          "height": 354
-        },
-        {
-          "id": "a087",
-          "type": "show_image",
-          "start": 49.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_green",
-          "at": [
-            273,
-            486
-          ],
-          "height": 361
-        },
-        {
-          "id": "a088",
-          "type": "show_image",
-          "start": 49.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            848,
-            638
-          ],
-          "height": 331
-        },
-        {
-          "id": "a089",
-          "type": "show_image",
-          "start": 49.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            595,
-            461
-          ],
-          "height": 315
-        },
-        {
-          "id": "a090",
+          "id": "a043",
           "type": "write_text",
-          "start": 49.2,
+          "start": 50.44,
           "duration": 1.3,
           "requires_pen": true,
           "text": "YOU WERE",
@@ -1315,9 +911,9 @@
           "color": "ink"
         },
         {
-          "id": "a091",
+          "id": "a044",
           "type": "write_text",
-          "start": 50.62,
+          "start": 51.86,
           "duration": 1.3,
           "requires_pen": true,
           "text": "PROTECTING YOU",
@@ -1328,9 +924,9 @@
           "color": "teal"
         },
         {
-          "id": "a092",
+          "id": "a045",
           "type": "draw_asset",
-          "start": 52.04,
+          "start": 53.28,
           "duration": 0.7,
           "requires_pen": true,
           "asset": "checkmark",
@@ -1343,144 +939,64 @@
           "width": 9
         },
         {
-          "id": "a093",
-          "type": "show_image_sequence",
-          "start": 49.3,
-          "duration": 5.9,
-          "requires_pen": false,
-          "images": [
-            "seed_grow_1",
-            "seed_grow_2",
-            "seed_grow_3",
-            "seed_grow_4",
-            "seed_grow_5",
-            "seed_grow_6"
-          ],
+          "id": "a046",
+          "type": "sketch_image",
+          "start": 54.1,
+          "duration": 1.6,
+          "requires_pen": true,
+          "image": "seed_grow_6",
           "at": [
             540,
             730
           ],
           "height": 430
-        },
-        {
-          "id": "a094",
-          "type": "draw_asset",
-          "start": 52.86,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            160,
-            560
-          ],
-          "scale": 0.32,
-          "color": "accent",
-          "width": 5
-        },
-        {
-          "id": "a095",
-          "type": "draw_asset",
-          "start": 53.38,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            940,
-            560
-          ],
-          "scale": 0.3,
-          "color": "teal",
-          "width": 5
         }
       ]
     },
     {
       "id": "change",
-      "start": 56.0,
-      "end": 63.0,
+      "start": 56.07,
+      "end": 64.04,
       "actions": [
         {
-          "id": "a096",
-          "type": "show_image",
-          "start": 56.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_mint",
-          "at": [
-            824,
-            284
+          "id": "a047",
+          "type": "draw_fill",
+          "start": 56.27,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              65.0,
+              470
+            ],
+            [
+              117.5,
+              395.0
+            ],
+            [
+              222.5,
+              395.0
+            ],
+            [
+              275.0,
+              470
+            ],
+            [
+              222.5,
+              545.0
+            ],
+            [
+              117.5,
+              545.0
+            ]
           ],
-          "height": 394
+          "width": 30,
+          "color": "ppeach"
         },
         {
-          "id": "a097",
-          "type": "show_image",
-          "start": 56.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            244,
-            346
-          ],
-          "height": 311
-        },
-        {
-          "id": "a098",
-          "type": "show_image",
-          "start": 56.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_peach",
-          "at": [
-            474,
-            199
-          ],
-          "height": 353
-        },
-        {
-          "id": "a099",
-          "type": "show_image",
-          "start": 56.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sky",
-          "at": [
-            476,
-            589
-          ],
-          "height": 416
-        },
-        {
-          "id": "a100",
-          "type": "show_image",
-          "start": 56.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_sky",
-          "at": [
-            530,
-            736
-          ],
-          "height": 322
-        },
-        {
-          "id": "a101",
-          "type": "show_image",
-          "start": 56.05,
-          "duration": 1.2,
-          "requires_pen": false,
-          "image": "wash_amber",
-          "at": [
-            553,
-            522
-          ],
-          "height": 368
-        },
-        {
-          "id": "a102",
+          "id": "a048",
           "type": "write_text",
-          "start": 56.2,
+          "start": 56.99,
           "duration": 1.3,
           "requires_pen": true,
           "text": "AND THAT",
@@ -1491,9 +1007,9 @@
           "color": "ink"
         },
         {
-          "id": "a103",
+          "id": "a049",
           "type": "write_text",
-          "start": 57.62,
+          "start": 58.41,
           "duration": 1.3,
           "requires_pen": true,
           "text": "CAN CHANGE.",
@@ -1504,9 +1020,9 @@
           "color": "accent"
         },
         {
-          "id": "a104",
+          "id": "a050",
           "type": "draw_asset",
-          "start": 59.04,
+          "start": 59.83,
           "duration": 0.7,
           "requires_pen": true,
           "asset": "underline_swash",
@@ -1519,59 +1035,31 @@
           "width": 6
         },
         {
-          "id": "a105",
-          "type": "show_image",
-          "start": 56.3,
-          "duration": 5.4,
-          "requires_pen": false,
+          "id": "a051",
+          "type": "sketch_image",
+          "start": 60.65,
+          "duration": 1.7,
+          "requires_pen": true,
           "image": "open_ground",
           "at": [
             540,
-            710
+            700
           ],
           "height": 470
         },
         {
-          "id": "a106",
-          "type": "fade_text",
-          "start": 61.3,
+          "id": "a052",
+          "type": "write_text",
+          "start": 62.47,
           "duration": 1.2,
-          "requires_pen": false,
+          "requires_pen": true,
           "text": "Aaron Ellis",
-          "x": 410,
-          "y": 1010,
+          "x": null,
+          "y": 1000,
           "size": 44,
-          "color": "faint"
-        },
-        {
-          "id": "a107",
-          "type": "draw_asset",
-          "start": 59.86,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            160,
-            470
-          ],
-          "scale": 0.3,
-          "color": "teal",
-          "width": 5
-        },
-        {
-          "id": "a108",
-          "type": "draw_asset",
-          "start": 60.38,
-          "duration": 0.4,
-          "requires_pen": true,
-          "asset": "star_five",
-          "at": [
-            940,
-            480
-          ],
-          "scale": 0.28,
-          "color": "accent",
-          "width": 5
+          "width": 3,
+          "color": "faint",
+          "align": "center"
         }
       ]
     }

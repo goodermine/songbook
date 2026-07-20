@@ -363,6 +363,41 @@ def show_image(state: FrameState, action: dict[str, Any], p: float) -> None:
                                         round(float(at[1]) - image.height / 2)))
 
 
+def sketch_image(state: FrameState, action: dict[str, Any], p: float) -> None:
+    """Reveal a raster image left-to-right behind the nib, like the hand is
+    drawing it in. The pen is claimed at the reveal front so the sprite rides
+    across the artwork; nothing pops into place."""
+    height = int(action.get("height", 400))
+    image = load_image_asset(action["image"], height)
+    at = action.get("at")
+    if not (isinstance(at, (list, tuple)) and len(at) == 2):
+        raise BuildError(f"Action {action.get('id')!r}: sketch_image requires \"at\": [x, y]")
+    bw, bh = state.image.size
+    ox = round(float(at[0]) - image.width / 2)
+    oy = round(float(at[1]) - image.height / 2)
+    prog = clamp(p)
+    reveal_x = ox + image.width * prog
+    feather = 40
+    mask = Image.new("L", (bw, bh), 0)
+    md = ImageDraw.Draw(mask)
+    md.rectangle((0, 0, reveal_x - feather, bh), fill=255)
+    for i in range(feather):
+        xx = reveal_x - feather + i
+        md.line((xx, 0, xx, bh), fill=int(255 * (1 - i / feather)))
+    layer = Image.new("RGBA", (bw, bh), (0, 0, 0, 0))
+    layer.alpha_composite(image, (ox, oy))
+    revealed = layer.copy()
+    revealed.putalpha(ImageChops.multiply(layer.getchannel("A"), mask))
+    state.image.alpha_composite(revealed)
+    if 0.0 < p < 1.0:
+        alpha = np.asarray(image.getchannel("A"))
+        col = int(prog * (image.width - 1))
+        band = alpha[:, max(0, col - 6):min(image.width, col + 7)]
+        rows = np.where(band.sum(axis=1) > 8)[0]
+        yc = oy + (float(rows.mean()) if rows.size else image.height / 2)
+        state.claim_pen(action["id"], (reveal_x, yc), (0.3, 1.0))
+
+
 @lru_cache(maxsize=128)
 def marker_text_layer(width: int, height: int, text: str, x: int, y: int, size: int,
                       color: tuple[int, int, int]) -> tuple[Image.Image, tuple[int, int, int, int]]:
@@ -717,7 +752,7 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
     names = set()
     images = 0
     for action in flatten_actions(storyboard):
-        if action["type"] in {"show_image", "show_image_sequence"}:
+        if action["type"] in {"show_image", "show_image_sequence", "sketch_image"}:
             frame_names = (action["images"] if action["type"] == "show_image_sequence"
                            else [action["image"]])
             if not frame_names:
@@ -845,6 +880,8 @@ class WhiteboardProject:
                             caps=self.round_strokes)
             elif action_type == "show_image":
                 show_image(state, action, p)
+            elif action_type == "sketch_image":
+                sketch_image(state, action, p)
             elif action_type == "show_image_sequence":
                 show_image_sequence(state, action, time_s)
             elif action_type == "fade_asset" and action["asset"] == "reaction_dots":
