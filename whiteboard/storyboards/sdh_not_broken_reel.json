@@ -56,6 +56,32 @@
       "actions": [
         {
           "id": "a001",
+          "type": "show_image",
+          "start": 0.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_green",
+          "at": [
+            190,
+            1180
+          ],
+          "height": 1120
+        },
+        {
+          "id": "a002",
+          "type": "show_image",
+          "start": 0.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_amber",
+          "at": [
+            890,
+            760
+          ],
+          "height": 900
+        },
+        {
+          "id": "a003",
           "type": "write_text",
           "start": 0.2,
           "duration": 1.4,
@@ -68,7 +94,7 @@
           "color": "ink"
         },
         {
-          "id": "a002",
+          "id": "a004",
           "type": "write_text",
           "start": 1.72,
           "duration": 1.2,
@@ -81,7 +107,7 @@
           "color": "accent"
         },
         {
-          "id": "a003",
+          "id": "a005",
           "type": "draw_asset",
           "start": 3.04,
           "duration": 0.7,
@@ -96,7 +122,7 @@
           "width": 6
         },
         {
-          "id": "a004",
+          "id": "a006",
           "type": "draw_asset",
           "start": 3.86,
           "duration": 0.4,
@@ -111,7 +137,7 @@
           "width": 5
         },
         {
-          "id": "a005",
+          "id": "a007",
           "type": "draw_asset",
           "start": 4.38,
           "duration": 0.4,
@@ -126,7 +152,7 @@
           "width": 5
         },
         {
-          "id": "a006",
+          "id": "a008",
           "type": "draw_asset",
           "start": 4.9,
           "duration": 0.4,
@@ -141,7 +167,7 @@
           "width": 5
         },
         {
-          "id": "a007",
+          "id": "a009",
           "type": "draw_asset",
           "start": 5.42,
           "duration": 0.4,
@@ -156,7 +182,7 @@
           "width": 5
         },
         {
-          "id": "a008",
+          "id": "a010",
           "type": "draw_asset",
           "start": 5.94,
           "duration": 0.4,
@@ -178,7 +204,33 @@
       "end": 15.0,
       "actions": [
         {
-          "id": "a009",
+          "id": "a011",
+          "type": "show_image",
+          "start": 7.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_teal",
+          "at": [
+            190,
+            1150
+          ],
+          "height": 1120
+        },
+        {
+          "id": "a012",
+          "type": "show_image",
+          "start": 7.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_orange",
+          "at": [
+            890,
+            1250
+          ],
+          "height": 980
+        },
+        {
+          "id": "a013",
           "type": "write_text",
           "start": 7.2,
           "duration": 1.4,
@@ -191,7 +243,7 @@
           "color": "ink"
         },
         {
-          "id": "a010",
+          "id": "a014",
           "type": "write_text",
           "start": 8.72,
           "duration": 1.3,
@@ -204,7 +256,7 @@
           "color": "ink"
         },
         {
-          "id": "a011",
+          "id": "a015",
           "type": "draw_asset",
           "start": 10.14,
           "duration": 0.6,
@@ -212,14 +264,14 @@
           "asset": "underline_swash",
           "at": [
             540,
-            380
+            430
           ],
           "scale": 1.7,
           "color": "teal",
           "width": 6
         },
         {
-          "id": "a012",
+          "id": "a016",
           "type": "draw_asset",
           "start": 10.86,
           "duration": 0.5,
@@ -234,7 +286,7 @@
           "width": 5
         },
         {
-          "id": "a013",
+          "id": "a017",
           "type": "draw_asset",
           "start": 11.48,
           "duration": 0.4,
@@ -249,7 +301,7 @@
           "width": 5
         },
         {
-          "id": "a014",
+          "id": "a018",
           "type": "draw_asset",
           "start": 12.0,
           "duration": 0.4,
@@ -264,7 +316,7 @@
           "width": 5
         },
         {
-          "id": "a015",
+          "id": "a019",
           "type": "draw_asset",
           "start": 12.52,
           "duration": 0.4,
@@ -279,7 +331,7 @@
           "width": 5
         },
         {
-          "id": "a016",
+          "id": "a020",
           "type": "show_image",
           "start": 7.3,
           "duration": 6.9,
@@ -292,7 +344,7 @@
           "height": 780
         },
         {
-          "id": "a017",
+          "id": "a021",
           "type": "fade_text",
           "start": 13.6,
           "duration": 0.9,
@@ -312,7 +364,33 @@
       "end": 24.0,
       "actions": [
         {
-          "id": "a018",
+          "id": "a022",
+          "type": "show_image",
+          "start": 15.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_green",
+          "at": [
+            890,
+            1150
+          ],
+          "height": 1120
+        },
+        {
+          "id": "a023",
+          "type": "show_image",
+          "start": 15.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_teal",
+          "at": [
+            190,
+            1250
+          ],
+          "height": 980
+        },
+        {
+          "id": "a024",
           "type": "write_text",
           "start": 15.2,
           "duration": 1.4,
@@ -325,7 +403,7 @@
           "color": "ink"
         },
         {
-          "id": "a019",
+          "id": "a025",
           "type": "write_text",
           "start": 16.72,
           "duration": 1.4,
@@ -338,7 +416,7 @@
           "color": "teal"
         },
         {
-          "id": "a020",
+          "id": "a026",
           "type": "draw_asset",
           "start": 18.24,
           "duration": 0.5,
@@ -353,7 +431,7 @@
           "width": 5
         },
         {
-          "id": "a021",
+          "id": "a027",
           "type": "draw_asset",
           "start": 18.86,
           "duration": 0.4,
@@ -368,7 +446,7 @@
           "width": 5
         },
         {
-          "id": "a022",
+          "id": "a028",
           "type": "draw_asset",
           "start": 19.38,
           "duration": 0.4,
@@ -383,7 +461,7 @@
           "width": 5
         },
         {
-          "id": "a023",
+          "id": "a029",
           "type": "draw_asset",
           "start": 19.9,
           "duration": 0.5,
@@ -398,7 +476,7 @@
           "width": 5
         },
         {
-          "id": "a024",
+          "id": "a030",
           "type": "show_image",
           "start": 15.3,
           "duration": 7.9,
@@ -411,7 +489,7 @@
           "height": 820
         },
         {
-          "id": "a025",
+          "id": "a031",
           "type": "fade_text",
           "start": 22.4,
           "duration": 0.9,
@@ -431,7 +509,33 @@
       "end": 32.0,
       "actions": [
         {
-          "id": "a026",
+          "id": "a032",
+          "type": "show_image",
+          "start": 24.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_amber",
+          "at": [
+            190,
+            1180
+          ],
+          "height": 1120
+        },
+        {
+          "id": "a033",
+          "type": "show_image",
+          "start": 24.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_teal",
+          "at": [
+            890,
+            1200
+          ],
+          "height": 980
+        },
+        {
+          "id": "a034",
           "type": "write_text",
           "start": 24.2,
           "duration": 1.3,
@@ -444,7 +548,7 @@
           "color": "ink"
         },
         {
-          "id": "a027",
+          "id": "a035",
           "type": "write_text",
           "start": 25.62,
           "duration": 1.2,
@@ -457,7 +561,7 @@
           "color": "accent"
         },
         {
-          "id": "a028",
+          "id": "a036",
           "type": "draw_asset",
           "start": 26.94,
           "duration": 0.7,
@@ -472,7 +576,7 @@
           "width": 6
         },
         {
-          "id": "a029",
+          "id": "a037",
           "type": "draw_asset",
           "start": 27.76,
           "duration": 0.4,
@@ -487,7 +591,7 @@
           "width": 5
         },
         {
-          "id": "a030",
+          "id": "a038",
           "type": "draw_asset",
           "start": 28.28,
           "duration": 0.4,
@@ -502,7 +606,7 @@
           "width": 5
         },
         {
-          "id": "a031",
+          "id": "a039",
           "type": "draw_asset",
           "start": 28.8,
           "duration": 0.4,
@@ -517,7 +621,7 @@
           "width": 5
         },
         {
-          "id": "a032",
+          "id": "a040",
           "type": "show_image",
           "start": 24.3,
           "duration": 6.9,
@@ -530,7 +634,7 @@
           "height": 760
         },
         {
-          "id": "a033",
+          "id": "a041",
           "type": "fade_text",
           "start": 30.4,
           "duration": 0.9,
@@ -550,7 +654,33 @@
       "end": 41.0,
       "actions": [
         {
-          "id": "a034",
+          "id": "a042",
+          "type": "show_image",
+          "start": 32.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_green",
+          "at": [
+            190,
+            1200
+          ],
+          "height": 1120
+        },
+        {
+          "id": "a043",
+          "type": "show_image",
+          "start": 32.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_teal",
+          "at": [
+            890,
+            1150
+          ],
+          "height": 900
+        },
+        {
+          "id": "a044",
           "type": "write_text",
           "start": 32.2,
           "duration": 1.2,
@@ -563,7 +693,7 @@
           "color": "faint"
         },
         {
-          "id": "a035",
+          "id": "a045",
           "type": "draw_asset",
           "start": 33.52,
           "duration": 0.5,
@@ -578,7 +708,7 @@
           "width": 6
         },
         {
-          "id": "a036",
+          "id": "a046",
           "type": "write_text",
           "start": 34.14,
           "duration": 1.3,
@@ -591,7 +721,7 @@
           "color": "teal"
         },
         {
-          "id": "a037",
+          "id": "a047",
           "type": "draw_asset",
           "start": 35.56,
           "duration": 0.5,
@@ -606,7 +736,7 @@
           "width": 5
         },
         {
-          "id": "a038",
+          "id": "a048",
           "type": "draw_asset",
           "start": 36.18,
           "duration": 0.4,
@@ -621,7 +751,7 @@
           "width": 5
         },
         {
-          "id": "a039",
+          "id": "a049",
           "type": "draw_asset",
           "start": 36.7,
           "duration": 0.4,
@@ -636,7 +766,7 @@
           "width": 5
         },
         {
-          "id": "a040",
+          "id": "a050",
           "type": "show_image",
           "start": 32.4,
           "duration": 7.9,
@@ -649,7 +779,7 @@
           "height": 620
         },
         {
-          "id": "a041",
+          "id": "a051",
           "type": "fade_text",
           "start": 39.4,
           "duration": 0.9,
@@ -669,7 +799,33 @@
       "end": 49.0,
       "actions": [
         {
-          "id": "a042",
+          "id": "a052",
+          "type": "show_image",
+          "start": 41.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_orange",
+          "at": [
+            190,
+            1180
+          ],
+          "height": 1120
+        },
+        {
+          "id": "a053",
+          "type": "show_image",
+          "start": 41.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_green",
+          "at": [
+            890,
+            1250
+          ],
+          "height": 980
+        },
+        {
+          "id": "a054",
           "type": "write_text",
           "start": 41.2,
           "duration": 1.3,
@@ -682,7 +838,7 @@
           "color": "ink"
         },
         {
-          "id": "a043",
+          "id": "a055",
           "type": "write_text",
           "start": 42.62,
           "duration": 1.3,
@@ -695,7 +851,7 @@
           "color": "ink"
         },
         {
-          "id": "a044",
+          "id": "a056",
           "type": "draw_asset",
           "start": 44.04,
           "duration": 0.6,
@@ -703,14 +859,14 @@
           "asset": "underline_swash",
           "at": [
             540,
-            390
+            440
           ],
           "scale": 1.7,
           "color": "accent",
           "width": 6
         },
         {
-          "id": "a045",
+          "id": "a057",
           "type": "draw_asset",
           "start": 44.76,
           "duration": 0.7,
@@ -725,7 +881,7 @@
           "width": 6
         },
         {
-          "id": "a046",
+          "id": "a058",
           "type": "draw_fill",
           "start": 45.58,
           "duration": 1.1,
@@ -740,7 +896,7 @@
           "color": "accent"
         },
         {
-          "id": "a047",
+          "id": "a059",
           "type": "draw_asset",
           "start": 46.8,
           "duration": 0.4,
@@ -755,7 +911,7 @@
           "width": 5
         },
         {
-          "id": "a048",
+          "id": "a060",
           "type": "show_image",
           "start": 41.3,
           "duration": 6.9,
@@ -768,7 +924,7 @@
           "height": 780
         },
         {
-          "id": "a049",
+          "id": "a061",
           "type": "fade_text",
           "start": 47.4,
           "duration": 0.9,
@@ -788,7 +944,33 @@
       "end": 56.0,
       "actions": [
         {
-          "id": "a050",
+          "id": "a062",
+          "type": "show_image",
+          "start": 49.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_green",
+          "at": [
+            190,
+            1200
+          ],
+          "height": 1120
+        },
+        {
+          "id": "a063",
+          "type": "show_image",
+          "start": 49.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_amber",
+          "at": [
+            890,
+            1200
+          ],
+          "height": 980
+        },
+        {
+          "id": "a064",
           "type": "write_text",
           "start": 49.2,
           "duration": 1.3,
@@ -801,7 +983,7 @@
           "color": "ink"
         },
         {
-          "id": "a051",
+          "id": "a065",
           "type": "write_text",
           "start": 50.62,
           "duration": 1.3,
@@ -814,7 +996,7 @@
           "color": "teal"
         },
         {
-          "id": "a052",
+          "id": "a066",
           "type": "draw_asset",
           "start": 52.04,
           "duration": 0.7,
@@ -829,7 +1011,7 @@
           "width": 9
         },
         {
-          "id": "a053",
+          "id": "a067",
           "type": "draw_asset",
           "start": 52.86,
           "duration": 0.4,
@@ -844,7 +1026,7 @@
           "width": 5
         },
         {
-          "id": "a054",
+          "id": "a068",
           "type": "draw_asset",
           "start": 53.38,
           "duration": 0.4,
@@ -859,7 +1041,7 @@
           "width": 5
         },
         {
-          "id": "a055",
+          "id": "a069",
           "type": "show_image_sequence",
           "start": 49.3,
           "duration": 5.9,
@@ -886,7 +1068,33 @@
       "end": 63.0,
       "actions": [
         {
-          "id": "a056",
+          "id": "a070",
+          "type": "show_image",
+          "start": 56.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_teal",
+          "at": [
+            190,
+            1220
+          ],
+          "height": 1120
+        },
+        {
+          "id": "a071",
+          "type": "show_image",
+          "start": 56.05,
+          "duration": 1.0,
+          "requires_pen": false,
+          "image": "wash_amber",
+          "at": [
+            890,
+            1220
+          ],
+          "height": 980
+        },
+        {
+          "id": "a072",
           "type": "write_text",
           "start": 56.2,
           "duration": 1.4,
@@ -899,7 +1107,7 @@
           "color": "ink"
         },
         {
-          "id": "a057",
+          "id": "a073",
           "type": "write_text",
           "start": 57.72,
           "duration": 1.3,
@@ -912,7 +1120,7 @@
           "color": "accent"
         },
         {
-          "id": "a058",
+          "id": "a074",
           "type": "draw_asset",
           "start": 59.14,
           "duration": 0.7,
@@ -920,14 +1128,14 @@
           "asset": "underline_swash",
           "at": [
             540,
-            620
+            665
           ],
           "scale": 2.0,
           "color": "teal",
           "width": 6
         },
         {
-          "id": "a059",
+          "id": "a075",
           "type": "draw_asset",
           "start": 59.96,
           "duration": 0.4,
@@ -942,7 +1150,7 @@
           "width": 5
         },
         {
-          "id": "a060",
+          "id": "a076",
           "type": "draw_asset",
           "start": 60.48,
           "duration": 0.4,
@@ -957,7 +1165,7 @@
           "width": 5
         },
         {
-          "id": "a061",
+          "id": "a077",
           "type": "show_image",
           "start": 56.3,
           "duration": 5.4,
@@ -970,7 +1178,7 @@
           "height": 720
         },
         {
-          "id": "a062",
+          "id": "a078",
           "type": "fade_text",
           "start": 61.3,
           "duration": 1.2,

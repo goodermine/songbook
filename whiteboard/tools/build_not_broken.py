@@ -34,6 +34,7 @@ GAP = 0.12
 scenes: list[dict] = []
 _actions: list[dict] = []
 _pen_t = 0.0
+_scene_start = 0.0
 _uid = 0
 
 
@@ -44,9 +45,18 @@ def _next_id() -> str:
 
 
 def open_scene(sid: str, start: float) -> None:
-    global _actions, _pen_t
+    global _actions, _pen_t, _scene_start
     _actions = []
     _pen_t = start + 0.2
+    _scene_start = start
+
+
+def wash(color: str, side: str, y: float = 1120, h: int = 1120) -> None:
+    """Soft colour band in a side margin, drawn behind the scene's content."""
+    x = 190 if side == "left" else W - 190
+    _actions.append({"id": _next_id(), "type": "show_image", "start": round(_scene_start + 0.05, 2),
+                     "duration": 1.0, "requires_pen": False,
+                     "image": f"wash_{color}", "at": [x, y], "height": h})
 
 
 def close_scene(sid: str, start: float, end: float) -> None:
@@ -72,6 +82,8 @@ def scribble(asset, at, scale, color, dur=0.4, width=5):
 # =========================================================================
 # S1  HOOK  0-7
 open_scene("hook", 0.0)
+wash("green", "left", y=1180)
+wash("amber", "right", y=760, h=900)
 pen("write_text", 1.4, text="YOU'RE NOT", x=210, y=360, size=64, width=5, color="ink")
 pen("write_text", 1.2, text="BROKEN", x=250, y=470, size=96, width=8, color="accent")
 scribble("circle_highlight", (CX, 470), 2.0, "teal", dur=0.7, width=6)
@@ -84,9 +96,11 @@ close_scene("hook", 0.0, 7.0)
 
 # S2  your mind is doing its job  7-15
 open_scene("job", 7.0)
+wash("teal", "left", y=1150)
+wash("orange", "right", y=1250, h=980)
 pen("write_text", 1.4, text="YOUR MIND IS", x=250, y=230, size=52, width=4, color="ink")
 pen("write_text", 1.3, text="DOING ITS JOB", x=210, y=320, size=56, width=5, color="ink")
-scribble("underline_swash", (CX, 380), 1.7, "teal", dur=0.6, width=6)
+scribble("underline_swash", (CX, 430), 1.7, "teal", dur=0.6, width=6)
 scribble("reaction_arrows", (CX, 560), 0.42, "accent", dur=0.5)
 scribble("star_five", (180, 700), 0.3, "teal")
 scribble("star_five", (900, 720), 0.3, "accent")
@@ -98,6 +112,8 @@ close_scene("job", 7.0, 15.0)
 
 # S3  an old conclusion  15-24
 open_scene("conclusion", 15.0)
+wash("green", "right", y=1150)
+wash("teal", "left", y=1250, h=980)
 pen("write_text", 1.4, text="AN OLD", x=330, y=230, size=58, width=5, color="ink")
 pen("write_text", 1.4, text="CONCLUSION", x=250, y=330, size=58, width=5, color="teal")
 scribble("old_loop", (190, 260), 0.5, "faint", dur=0.5)
@@ -111,6 +127,8 @@ close_scene("conclusion", 15.0, 24.0)
 
 # S4  not a fault, a guard  24-32
 open_scene("guard", 24.0)
+wash("amber", "left", y=1180)
+wash("teal", "right", y=1200, h=980)
 pen("write_text", 1.3, text="NOT A FAULT", x=290, y=230, size=56, width=5, color="ink")
 pen("write_text", 1.2, text="A GUARD", x=340, y=330, size=64, width=6, color="accent")
 scribble("circle_highlight", (CX + 10, 330), 1.7, "teal", dur=0.7, width=6)
@@ -124,6 +142,8 @@ close_scene("guard", 24.0, 32.0)
 
 # S5  just tangled  32-41
 open_scene("tangled", 32.0)
+wash("green", "left", y=1200)
+wash("teal", "right", y=1150, h=900)
 pen("write_text", 1.2, text="NOT BROKEN.", x=280, y=230, size=54, width=5, color="faint")
 scribble("cross_out", (CX + 10, 215), 1.5, "accent", dur=0.5, width=6)
 pen("write_text", 1.3, text="JUST TANGLED", x=250, y=350, size=60, width=6, color="teal")
@@ -137,9 +157,11 @@ close_scene("tangled", 32.0, 41.0)
 
 # S6  you don't need fixing  41-49
 open_scene("fixing", 41.0)
+wash("orange", "left", y=1180)
+wash("green", "right", y=1250, h=980)
 pen("write_text", 1.3, text="YOU DON'T", x=320, y=230, size=56, width=5, color="ink")
 pen("write_text", 1.3, text="NEED FIXING", x=270, y=330, size=60, width=6, color="ink")
-scribble("underline_swash", (CX, 390), 1.7, "accent", dur=0.6, width=6)
+scribble("underline_swash", (CX, 440), 1.7, "accent", dur=0.6, width=6)
 pen("draw_asset", 0.7, asset="heart", at=[870, 600], scale=0.55, color="accent", width=6)
 pen("draw_fill", 1.1, asset="heart", at=[870, 600], scale=0.55, width=18, color="accent")
 scribble("star_five", (200, 620), 0.3, "teal")
@@ -150,6 +172,8 @@ close_scene("fixing", 41.0, 49.0)
 
 # S7  you were protecting yourself  49-56
 open_scene("protect", 49.0)
+wash("green", "left", y=1200)
+wash("amber", "right", y=1200, h=980)
 pen("write_text", 1.3, text="YOU WERE", x=340, y=230, size=56, width=5, color="ink")
 pen("write_text", 1.3, text="PROTECTING YOU", x=190, y=330, size=52, width=5, color="teal")
 scribble("checkmark", (CX, 560), 1.1, "teal", dur=0.7, width=9)
@@ -161,9 +185,11 @@ close_scene("protect", 49.0, 56.0)
 
 # S8  and that can change  56-63
 open_scene("change", 56.0)
+wash("teal", "left", y=1220)
+wash("amber", "right", y=1220, h=980)
 pen("write_text", 1.4, text="AND THAT", x=330, y=430, size=62, width=5, color="ink")
 pen("write_text", 1.3, text="CAN CHANGE.", x=270, y=540, size=68, width=6, color="accent")
-scribble("underline_swash", (CX, 620), 2.0, "teal", dur=0.7, width=6)
+scribble("underline_swash", (CX, 665), 2.0, "teal", dur=0.7, width=6)
 scribble("star_five", (210, 360), 0.3, "teal")
 scribble("star_five", (880, 380), 0.28, "accent")
 floats("show_image", 56.3, 5.4, image="open_ground", at=[CX, 1200], height=720)
