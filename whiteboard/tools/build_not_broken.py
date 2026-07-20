@@ -84,9 +84,12 @@ def doodle(asset, at, scale, color, dur=0.4, width=5):
     pen("draw_asset", dur, asset=asset, at=list(at), scale=scale, color=color, width=width)
 
 
-def shade(cx, cy, color, w=210, h=150, dur=0.6, width=30):
-    poly = [[cx - w / 2, cy], [cx - w / 4, cy - h / 2], [cx + w / 4, cy - h / 2],
-            [cx + w / 2, cy], [cx + w / 4, cy + h / 2], [cx - w / 4, cy + h / 2]]
+def shade(cx, cy, color, w=230, h=165, dur=0.7, width=17):
+    # Octagon-ish blob; a narrower fill width leaves the serpentine passes
+    # visible so it reads as loose scribbled shading, not a solid sticker.
+    poly = [[cx - w / 2, cy - h / 6], [cx - w / 3, cy - h / 2], [cx + w / 3, cy - h / 2],
+            [cx + w / 2, cy - h / 6], [cx + w / 2, cy + h / 6], [cx + w / 3, cy + h / 2],
+            [cx - w / 3, cy + h / 2], [cx - w / 2, cy + h / 6]]
     pen("draw_fill", dur, polygon=poly, width=width, color=color)
 
 
