@@ -363,12 +363,33 @@ def show_image(state: FrameState, action: dict[str, Any], p: float) -> None:
                                         round(float(at[1]) - image.height / 2)))
 
 
-def sketch_image(state: FrameState, action: dict[str, Any], p: float) -> None:
+@lru_cache(maxsize=64)
+def ink_layer(name: str, height: int, ink: tuple[int, int, int]) -> Image.Image:
+    """Charcoal outline-only version of a flat colour doodle: dark, opaque
+    pixels become ink; fills and light areas drop out. Lets the hand 'ink' the
+    linework first, then a full-colour pass fills it in."""
+    image = load_image_asset(name, height)
+    arr = np.asarray(image).astype(np.int32)
+    lum = (arr[..., 0] * 299 + arr[..., 1] * 587 + arr[..., 2] * 114) // 1000
+    darkness = np.clip((150 - lum) / 150.0, 0.0, 1.0) * (arr[..., 3] / 255.0)
+    alpha = (darkness * 255).astype(np.uint8)
+    out = np.zeros_like(arr, dtype=np.uint8)
+    out[..., 0], out[..., 1], out[..., 2] = ink
+    out[..., 3] = alpha
+    return Image.fromarray(out, "RGBA")
+
+
+def sketch_image(state: FrameState, action: dict[str, Any], p: float,
+                 ink: tuple[int, int, int] = (38, 43, 46)) -> None:
     """Reveal a raster image left-to-right behind the nib, like the hand is
     drawing it in. The pen is claimed at the reveal front so the sprite rides
-    across the artwork; nothing pops into place."""
+    across the artwork; nothing pops into place. With ``"layer": "ink"`` only
+    the charcoal outline is revealed (first pass of an ink-then-colour draw)."""
     height = int(action.get("height", 400))
-    image = load_image_asset(action["image"], height)
+    if action.get("layer") == "ink":
+        image = ink_layer(action["image"], height, ink)
+    else:
+        image = load_image_asset(action["image"], height)
     at = action.get("at")
     if not (isinstance(at, (list, tuple)) and len(at) == 2):
         raise BuildError(f"Action {action.get('id')!r}: sketch_image requires \"at\": [x, y]")
@@ -881,7 +902,7 @@ class WhiteboardProject:
             elif action_type == "show_image":
                 show_image(state, action, p)
             elif action_type == "sketch_image":
-                sketch_image(state, action, p)
+                sketch_image(state, action, p, self.style.get("ink", (38, 43, 46)))
             elif action_type == "show_image_sequence":
                 show_image_sequence(state, action, time_s)
             elif action_type == "fade_asset" and action["asset"] == "reaction_dots":
