@@ -1,0 +1,293 @@
+{
+  "version": 2,
+  "title": "Doodle draw",
+  "width": 1080,
+  "height": 1080,
+  "fps": 24,
+  "content_duration": 36.96,
+  "safe_content_end": 36.56,
+  "final_hold": 1.6,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "chrome": "none",
+  "text_font": "marker",
+  "caption_font": "marker",
+  "stroke_style": "round",
+  "style": {
+    "paper": [
+      249,
+      247,
+      240
+    ],
+    "ink": [
+      38,
+      43,
+      46
+    ],
+    "faint": [
+      118,
+      120,
+      116
+    ],
+    "accent": [
+      202,
+      83,
+      48
+    ],
+    "teal": [
+      31,
+      111,
+      112
+    ],
+    "amber": [
+      232,
+      163,
+      61
+    ]
+  },
+  "scenes": [
+    {
+      "id": "doodle_0",
+      "start": 0.0,
+      "end": 6.22,
+      "actions": [
+        {
+          "id": "d0_ink",
+          "type": "sketch_image",
+          "image": "mega/doodle-05",
+          "layer": "ink",
+          "at": [
+            540,
+            600
+          ],
+          "height": 665,
+          "start": 0.2,
+          "duration": 1.5,
+          "requires_pen": true
+        },
+        {
+          "id": "d0_col",
+          "type": "sketch_image",
+          "image": "mega/doodle-05",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            600
+          ],
+          "height": 665,
+          "start": 1.82,
+          "duration": 2.6,
+          "requires_pen": true
+        },
+        {
+          "id": "d0_lbl",
+          "type": "write_text",
+          "text": "BURGER",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 4.72,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "doodle_1",
+      "start": 6.22,
+      "end": 12.32,
+      "actions": [
+        {
+          "id": "d1_ink",
+          "type": "sketch_image",
+          "image": "iconoodle/nature-01",
+          "at": [
+            540,
+            600
+          ],
+          "height": 760,
+          "start": 6.42,
+          "duration": 4.1,
+          "requires_pen": true
+        },
+        {
+          "id": "d1_lbl",
+          "type": "write_text",
+          "text": "BIRD",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 10.82,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "doodle_2",
+      "start": 12.32,
+      "end": 18.54,
+      "actions": [
+        {
+          "id": "d2_ink",
+          "type": "sketch_image",
+          "image": "mega/doodle-103",
+          "layer": "ink",
+          "at": [
+            540,
+            600
+          ],
+          "height": 760,
+          "start": 12.52,
+          "duration": 1.5,
+          "requires_pen": true
+        },
+        {
+          "id": "d2_col",
+          "type": "sketch_image",
+          "image": "mega/doodle-103",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            600
+          ],
+          "height": 760,
+          "start": 14.14,
+          "duration": 2.6,
+          "requires_pen": true
+        },
+        {
+          "id": "d2_lbl",
+          "type": "write_text",
+          "text": "PINEAPPLE",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 17.04,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "doodle_3",
+      "start": 18.54,
+      "end": 24.64,
+      "actions": [
+        {
+          "id": "d3_ink",
+          "type": "sketch_image",
+          "image": "iconoodle/edu-08",
+          "at": [
+            540,
+            600
+          ],
+          "height": 760,
+          "start": 18.74,
+          "duration": 4.1,
+          "requires_pen": true
+        },
+        {
+          "id": "d3_lbl",
+          "type": "write_text",
+          "text": "BOOK",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 23.14,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "doodle_4",
+      "start": 24.64,
+      "end": 30.86,
+      "actions": [
+        {
+          "id": "d4_ink",
+          "type": "sketch_image",
+          "image": "mega/doodle-104",
+          "layer": "ink",
+          "at": [
+            540,
+            600
+          ],
+          "height": 737,
+          "start": 24.84,
+          "duration": 1.5,
+          "requires_pen": true
+        },
+        {
+          "id": "d4_col",
+          "type": "sketch_image",
+          "image": "mega/doodle-104",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            600
+          ],
+          "height": 737,
+          "start": 26.46,
+          "duration": 2.6,
+          "requires_pen": true
+        },
+        {
+          "id": "d4_lbl",
+          "type": "write_text",
+          "text": "BEAR",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 29.36,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "doodle_5",
+      "start": 30.86,
+      "end": 36.96,
+      "actions": [
+        {
+          "id": "d5_ink",
+          "type": "sketch_image",
+          "image": "iconoodle/fruitveg-19",
+          "at": [
+            540,
+            600
+          ],
+          "height": 659,
+          "start": 31.06,
+          "duration": 4.1,
+          "requires_pen": true
+        },
+        {
+          "id": "d5_lbl",
+          "type": "write_text",
+          "text": "GRAPES",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 35.46,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    }
+  ]
+}
