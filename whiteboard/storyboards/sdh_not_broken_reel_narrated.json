@@ -929,8 +929,8 @@
         {
           "id": "a042",
           "type": "draw_fill",
-          "start": 48.969,
-          "duration": 0.267,
+          "start": 48.951,
+          "duration": 0.212,
           "requires_pen": true,
           "polygon": [
             [
@@ -972,8 +972,8 @@
         {
           "id": "a043",
           "type": "write_text",
-          "start": 49.29,
-          "duration": 0.58,
+          "start": 49.205,
+          "duration": 0.459,
           "requires_pen": true,
           "text": "YOU WERE",
           "x": 370,
@@ -985,8 +985,8 @@
         {
           "id": "a044",
           "type": "write_text",
-          "start": 49.923,
-          "duration": 0.58,
+          "start": 49.706,
+          "duration": 0.459,
           "requires_pen": true,
           "text": "PROTECTING YOU",
           "x": 210,
@@ -998,8 +998,8 @@
         {
           "id": "a045",
           "type": "draw_asset",
-          "start": 50.556,
-          "duration": 0.312,
+          "start": 50.208,
+          "duration": 0.247,
           "requires_pen": true,
           "asset": "checkmark",
           "at": [
@@ -1013,15 +1013,30 @@
         {
           "id": "a046",
           "type": "sketch_image",
-          "start": 50.922,
-          "duration": 0.713,
+          "start": 50.497,
+          "duration": 0.459,
           "requires_pen": true,
-          "image": "seed_grow_6",
+          "image": "mega/doodle-13",
+          "layer": "ink",
           "at": [
             540,
-            730
+            720
           ],
-          "height": 430
+          "height": 449
+        },
+        {
+          "id": "a047",
+          "type": "sketch_image",
+          "start": 50.999,
+          "duration": 0.671,
+          "requires_pen": true,
+          "image": "mega/doodle-13",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            720
+          ],
+          "height": 449
         }
       ]
     },
@@ -1031,10 +1046,10 @@
       "end": 55.24,
       "actions": [
         {
-          "id": "a047",
+          "id": "a048",
           "type": "draw_fill",
-          "start": 51.886,
-          "duration": 0.259,
+          "start": 51.872,
+          "duration": 0.215,
           "requires_pen": true,
           "polygon": [
             [
@@ -1074,10 +1089,10 @@
           "color": "ppeach"
         },
         {
-          "id": "a048",
+          "id": "a049",
           "type": "write_text",
-          "start": 52.197,
-          "duration": 0.561,
+          "start": 52.13,
+          "duration": 0.466,
           "requires_pen": true,
           "text": "AND THAT",
           "x": 360,
@@ -1087,10 +1102,10 @@
           "color": "ink"
         },
         {
-          "id": "a049",
+          "id": "a050",
           "type": "write_text",
-          "start": 52.81,
-          "duration": 0.561,
+          "start": 52.639,
+          "duration": 0.466,
           "requires_pen": true,
           "text": "CAN CHANGE.",
           "x": 290,
@@ -1100,10 +1115,10 @@
           "color": "accent"
         },
         {
-          "id": "a050",
+          "id": "a051",
           "type": "draw_asset",
-          "start": 53.423,
-          "duration": 0.302,
+          "start": 53.149,
+          "duration": 0.251,
           "requires_pen": true,
           "asset": "underline_swash",
           "at": [
@@ -1115,23 +1130,38 @@
           "width": 6
         },
         {
-          "id": "a051",
+          "id": "a052",
           "type": "sketch_image",
-          "start": 53.777,
-          "duration": 0.734,
+          "start": 53.443,
+          "duration": 0.466,
           "requires_pen": true,
-          "image": "open_ground",
+          "image": "mega/doodle-124",
+          "layer": "ink",
           "at": [
             540,
             700
           ],
-          "height": 470
+          "height": 346
         },
         {
-          "id": "a052",
+          "id": "a053",
+          "type": "sketch_image",
+          "start": 53.952,
+          "duration": 0.682,
+          "requires_pen": true,
+          "image": "mega/doodle-124",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            700
+          ],
+          "height": 346
+        },
+        {
+          "id": "a054",
           "type": "write_text",
-          "start": 54.562,
-          "duration": 0.518,
+          "start": 54.677,
+          "duration": 0.43,
           "requires_pen": true,
           "text": "Aaron Ellis",
           "x": null,

@@ -80,6 +80,16 @@ def sketch(image, at, height, dur):
     pen("sketch_image", dur, image=image, at=list(at), height=height)
 
 
+def mega_draw(name, at, box, ink_dur=1.3, col_dur=1.9):
+    """Draw a Mega colour doodle ink-then-colour, height auto-fitted to a box."""
+    from PIL import Image as _I
+    with _I.open(ROOT / "assets" / "images" / "mega" / f"{name}.png") as im:
+        h = int(min(box, box * im.height / im.width))
+    ref = f"mega/{name}"
+    pen("sketch_image", ink_dur, image=ref, layer="ink", at=list(at), height=h)
+    pen("sketch_image", col_dur, image=ref, reveal="serpentine", at=list(at), height=h)
+
+
 def doodle(asset, at, scale, color, dur=0.4, width=5):
     pen("draw_asset", dur, asset=asset, at=list(at), scale=scale, color=color, width=width)
 
@@ -165,7 +175,7 @@ shade(920, 500, "psage", dur=0.6)
 text("YOU WERE", 370, 95, 56, "ink", 1.3)
 text("PROTECTING YOU", 210, 190, 52, "teal", 1.3)
 doodle("checkmark", (CX, 330), 1.0, "teal", dur=0.7, width=9)
-sketch("seed_grow_6", (CX, 730), 430, 1.6)
+mega_draw("doodle-13", (CX, 720), 470)  # flower - the protected self blooms
 close_scene("protect")
 
 # S8  and that can change
@@ -174,7 +184,7 @@ shade(170, 470, "ppeach", dur=0.6)
 text("AND THAT", 360, 110, 60, "ink", 1.3)
 text("CAN CHANGE.", 290, 210, 66, "accent", 1.3, width=6)
 doodle("underline_swash", (CX, 320), 1.9, "teal", dur=0.7, width=6)
-sketch("open_ground", (CX, 700), 470, 1.7)
+mega_draw("doodle-124", (CX, 700), 500)  # rainbow - hope / change
 caption("Aaron Ellis", 1000, size=44, color="faint", dur=1.2)
 close_scene("change")
 

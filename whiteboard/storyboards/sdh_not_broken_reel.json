@@ -4,8 +4,8 @@
   "width": 1080,
   "height": 1080,
   "fps": 24,
-  "content_duration": 64.04,
-  "safe_content_end": 63.64,
+  "content_duration": 67.38,
+  "safe_content_end": 66.98,
   "final_hold": 1.8,
   "pen_physics": "lift",
   "hand": "sprite",
@@ -924,7 +924,7 @@
     {
       "id": "protect",
       "start": 49.52,
-      "end": 56.07,
+      "end": 57.79,
       "actions": [
         {
           "id": "a042",
@@ -1014,26 +1014,41 @@
           "id": "a046",
           "type": "sketch_image",
           "start": 54.1,
-          "duration": 1.6,
+          "duration": 1.3,
           "requires_pen": true,
-          "image": "seed_grow_6",
+          "image": "mega/doodle-13",
+          "layer": "ink",
           "at": [
             540,
-            730
+            720
           ],
-          "height": 430
+          "height": 449
+        },
+        {
+          "id": "a047",
+          "type": "sketch_image",
+          "start": 55.52,
+          "duration": 1.9,
+          "requires_pen": true,
+          "image": "mega/doodle-13",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            720
+          ],
+          "height": 449
         }
       ]
     },
     {
       "id": "change",
-      "start": 56.07,
-      "end": 64.04,
+      "start": 57.79,
+      "end": 67.38,
       "actions": [
         {
-          "id": "a047",
+          "id": "a048",
           "type": "draw_fill",
-          "start": 56.27,
+          "start": 57.99,
           "duration": 0.6,
           "requires_pen": true,
           "polygon": [
@@ -1074,9 +1089,9 @@
           "color": "ppeach"
         },
         {
-          "id": "a048",
+          "id": "a049",
           "type": "write_text",
-          "start": 56.99,
+          "start": 58.71,
           "duration": 1.3,
           "requires_pen": true,
           "text": "AND THAT",
@@ -1087,9 +1102,9 @@
           "color": "ink"
         },
         {
-          "id": "a049",
+          "id": "a050",
           "type": "write_text",
-          "start": 58.41,
+          "start": 60.13,
           "duration": 1.3,
           "requires_pen": true,
           "text": "CAN CHANGE.",
@@ -1100,9 +1115,9 @@
           "color": "accent"
         },
         {
-          "id": "a050",
+          "id": "a051",
           "type": "draw_asset",
-          "start": 59.83,
+          "start": 61.55,
           "duration": 0.7,
           "requires_pen": true,
           "asset": "underline_swash",
@@ -1115,22 +1130,37 @@
           "width": 6
         },
         {
-          "id": "a051",
+          "id": "a052",
           "type": "sketch_image",
-          "start": 60.65,
-          "duration": 1.7,
+          "start": 62.37,
+          "duration": 1.3,
           "requires_pen": true,
-          "image": "open_ground",
+          "image": "mega/doodle-124",
+          "layer": "ink",
           "at": [
             540,
             700
           ],
-          "height": 470
+          "height": 346
         },
         {
-          "id": "a052",
+          "id": "a053",
+          "type": "sketch_image",
+          "start": 63.79,
+          "duration": 1.9,
+          "requires_pen": true,
+          "image": "mega/doodle-124",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            700
+          ],
+          "height": 346
+        },
+        {
+          "id": "a054",
           "type": "write_text",
-          "start": 62.47,
+          "start": 65.81,
           "duration": 1.2,
           "requires_pen": true,
           "text": "Aaron Ellis",
