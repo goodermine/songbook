@@ -25,17 +25,26 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-MEGA_DIR = ROOT / "assets" / "images" / "mega"
+IMG_DIR = ROOT / "assets" / "images"
+# Where bare names are looked up, in order. mega = colour doodles,
+# iconoodle = charcoal line-art / silhouettes.
+LIBS = ("mega", "iconoodle")
 GAP = 0.12
 
 
 def _resolve(name: str) -> tuple[str, Path]:
-    """Accept 'doodle-05' or 'mega/doodle-05'; return (image_ref, png_path)."""
-    stem = name.split("/")[-1]
-    path = MEGA_DIR / f"{stem}.png"
-    if not path.is_file():
-        raise FileNotFoundError(f"No doodle {stem!r} at {path}")
-    return f"mega/{stem}", path
+    """Accept 'doodle-05', 'mega/doodle-05' or 'iconoodle/edu-05'; return
+    (image_ref, png_path). Bare names are searched across LIBS in order."""
+    if "/" in name:
+        lib, stem = name.split("/", 1)
+        cands = [(lib, stem)]
+    else:
+        cands = [(lib, name) for lib in LIBS]
+    for lib, stem in cands:
+        path = IMG_DIR / lib / f"{stem}.png"
+        if path.is_file():
+            return f"{lib}/{stem}", path
+    raise FileNotFoundError(f"No doodle {name!r} under {[l for l in LIBS]}")
 
 
 def fit_height(name: str, box: int) -> int:
@@ -50,26 +59,40 @@ def draw_doodle(name: str, at: tuple[float, float] = (540, 560), box: int = 760,
                 start: float = 0.2, ink_dur: float = 1.5, colour_dur: float = 2.6,
                 id_prefix: str = "dd", label: str | None = None,
                 label_y: float = 120, label_size: int = 60,
-                label_color: str = "accent") -> tuple[list[dict], float]:
-    """Actions to draw one doodle ink-then-colour. Returns (actions, end_time).
+                label_color: str = "accent", mono: bool | None = None
+                ) -> tuple[list[dict], float]:
+    """Actions to draw one doodle. Returns (actions, end_time).
 
-    - ink pass: ``sketch_image`` with ``layer:"ink"`` (charcoal outline sweep)
-    - colour pass: ``sketch_image`` with ``reveal:"serpentine"`` (scribble fill)
-    - optional hand-written label above it
+    Colour doodles (mega) draw ink-then-colour:
+      - ink pass: ``sketch_image`` ``layer:"ink"`` (charcoal outline sweep)
+      - colour pass: ``sketch_image`` ``reveal:"serpentine"`` (scribble fill)
+    Line-art doodles (iconoodle) are single-colour, so they draw in one ink
+    reveal. ``mono`` forces that mode; when ``None`` it is auto-set for
+    iconoodle names.
     """
     image, _ = _resolve(name)
     height = fit_height(name, box)
+    if mono is None:
+        mono = image.startswith("iconoodle/")
     ink_start = round(start, 2)
-    col_start = round(ink_start + ink_dur + GAP, 2)
-    actions = [
-        {"id": f"{id_prefix}_ink", "type": "sketch_image", "image": image, "layer": "ink",
-         "at": [at[0], at[1]], "height": height, "start": ink_start,
-         "duration": ink_dur, "requires_pen": True},
-        {"id": f"{id_prefix}_col", "type": "sketch_image", "image": image, "reveal": "serpentine",
-         "at": [at[0], at[1]], "height": height, "start": col_start,
-         "duration": colour_dur, "requires_pen": True},
-    ]
-    end = round(col_start + colour_dur, 2)
+    if mono:
+        actions = [
+            {"id": f"{id_prefix}_ink", "type": "sketch_image", "image": image,
+             "at": [at[0], at[1]], "height": height, "start": ink_start,
+             "duration": ink_dur + colour_dur, "requires_pen": True},
+        ]
+        end = round(ink_start + ink_dur + colour_dur, 2)
+    else:
+        col_start = round(ink_start + ink_dur + GAP, 2)
+        actions = [
+            {"id": f"{id_prefix}_ink", "type": "sketch_image", "image": image, "layer": "ink",
+             "at": [at[0], at[1]], "height": height, "start": ink_start,
+             "duration": ink_dur, "requires_pen": True},
+            {"id": f"{id_prefix}_col", "type": "sketch_image", "image": image, "reveal": "serpentine",
+             "at": [at[0], at[1]], "height": height, "start": col_start,
+             "duration": colour_dur, "requires_pen": True},
+        ]
+        end = round(col_start + colour_dur, 2)
     if label:
         actions.append({"id": f"{id_prefix}_lbl", "type": "write_text", "text": label,
                         "align": "center", "y": label_y, "size": label_size, "width": 5,
