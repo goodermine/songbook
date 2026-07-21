@@ -396,27 +396,53 @@ def sketch_image(state: FrameState, action: dict[str, Any], p: float,
     bw, bh = state.image.size
     ox = round(float(at[0]) - image.width / 2)
     oy = round(float(at[1]) - image.height / 2)
+    iw, ih = image.width, image.height
     prog = clamp(p)
-    reveal_x = ox + image.width * prog
-    feather = 40
     mask = Image.new("L", (bw, bh), 0)
     md = ImageDraw.Draw(mask)
-    md.rectangle((0, 0, reveal_x - feather, bh), fill=255)
-    for i in range(feather):
-        xx = reveal_x - feather + i
-        md.line((xx, 0, xx, bh), fill=int(255 * (1 - i / feather)))
+    front = None  # (x, y, tangent) where the nib should sit this frame
+    if action.get("reveal") == "serpentine":
+        # Colour it in like a person: back-and-forth bands working downward,
+        # each row swept the opposite way to the last.
+        bands = max(5, round(ih / 78))
+        bl = ih / bands
+        pos = prog * bands
+        full = int(pos)
+        frac = pos - full
+        for b in range(min(full, bands)):
+            md.rectangle((ox, oy + b * bl, ox + iw, oy + (b + 1) * bl), fill=255)
+        if full < bands:
+            ext = frac * iw
+            top, bot = oy + full * bl, oy + (full + 1) * bl
+            if full % 2 == 0:            # left to right
+                md.rectangle((ox, top, ox + ext, bot), fill=255)
+                fx, tan = ox + ext, (1.0, 0.25)
+            else:                        # right to left
+                md.rectangle((ox + iw - ext, top, ox + iw, bot), fill=255)
+                fx, tan = ox + iw - ext, (-1.0, 0.25)
+            front = (fx, oy + (full + 0.5) * bl, tan)
+    else:
+        # Outline / plain draw: a single clean sweep behind the nib.
+        reveal_x = ox + iw * prog
+        feather = 40
+        md.rectangle((0, 0, reveal_x - feather, bh), fill=255)
+        for i in range(feather):
+            xx = reveal_x - feather + i
+            md.line((xx, 0, xx, bh), fill=int(255 * (1 - i / feather)))
+        if 0.0 < p < 1.0:
+            alpha = np.asarray(image.getchannel("A"))
+            col = int(prog * (iw - 1))
+            colband = alpha[:, max(0, col - 6):min(iw, col + 7)]
+            rows = np.where(colband.sum(axis=1) > 8)[0]
+            yc = oy + (float(rows.mean()) if rows.size else ih / 2)
+            front = (reveal_x, yc, (0.3, 1.0))
     layer = Image.new("RGBA", (bw, bh), (0, 0, 0, 0))
     layer.alpha_composite(image, (ox, oy))
     revealed = layer.copy()
     revealed.putalpha(ImageChops.multiply(layer.getchannel("A"), mask))
     state.image.alpha_composite(revealed)
-    if 0.0 < p < 1.0:
-        alpha = np.asarray(image.getchannel("A"))
-        col = int(prog * (image.width - 1))
-        band = alpha[:, max(0, col - 6):min(image.width, col + 7)]
-        rows = np.where(band.sum(axis=1) > 8)[0]
-        yc = oy + (float(rows.mean()) if rows.size else image.height / 2)
-        state.claim_pen(action["id"], (reveal_x, yc), (0.3, 1.0))
+    if front is not None and 0.0 < p < 1.0:
+        state.claim_pen(action["id"], (front[0], front[1]), front[2])
 
 
 @lru_cache(maxsize=128)

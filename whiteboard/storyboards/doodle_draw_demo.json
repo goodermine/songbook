@@ -4,8 +4,8 @@
   "width": 1080,
   "height": 1080,
   "fps": 24,
-  "content_duration": 20.8,
-  "safe_content_end": 20.4,
+  "content_duration": 24.4,
+  "safe_content_end": 24.0,
   "final_hold": 1.6,
   "pen_physics": "lift",
   "hand": "sprite",
@@ -49,7 +49,7 @@
     {
       "id": "burger",
       "start": 0.0,
-      "end": 5.2,
+      "end": 6.1,
       "actions": [
         {
           "id": "a001",
@@ -62,20 +62,21 @@
           ],
           "height": 717,
           "start": 0.2,
-          "duration": 1.6,
+          "duration": 1.5,
           "requires_pen": true
         },
         {
           "id": "a002",
           "type": "sketch_image",
           "image": "mega/doodle-05",
+          "reveal": "serpentine",
           "at": [
             540,
             580
           ],
           "height": 717,
-          "start": 1.92,
-          "duration": 1.6,
+          "start": 1.82,
+          "duration": 2.6,
           "requires_pen": true
         },
         {
@@ -86,7 +87,7 @@
           "y": 120,
           "size": 60,
           "width": 5,
-          "start": 3.7,
+          "start": 4.6,
           "duration": 1.1,
           "requires_pen": true,
           "color": "accent"
@@ -95,8 +96,8 @@
     },
     {
       "id": "bear",
-      "start": 5.2,
-      "end": 10.4,
+      "start": 6.1,
+      "end": 12.2,
       "actions": [
         {
           "id": "a004",
@@ -108,21 +109,22 @@
             580
           ],
           "height": 760,
-          "start": 5.4,
-          "duration": 1.6,
+          "start": 6.3,
+          "duration": 1.5,
           "requires_pen": true
         },
         {
           "id": "a005",
           "type": "sketch_image",
           "image": "mega/doodle-104",
+          "reveal": "serpentine",
           "at": [
             540,
             580
           ],
           "height": 760,
-          "start": 7.12,
-          "duration": 1.6,
+          "start": 7.92,
+          "duration": 2.6,
           "requires_pen": true
         },
         {
@@ -133,7 +135,7 @@
           "y": 120,
           "size": 60,
           "width": 5,
-          "start": 8.9,
+          "start": 10.7,
           "duration": 1.1,
           "requires_pen": true,
           "color": "accent"
@@ -142,8 +144,8 @@
     },
     {
       "id": "pineapple",
-      "start": 10.4,
-      "end": 15.6,
+      "start": 12.2,
+      "end": 18.3,
       "actions": [
         {
           "id": "a007",
@@ -155,21 +157,22 @@
             580
           ],
           "height": 760,
-          "start": 10.6,
-          "duration": 1.6,
+          "start": 12.4,
+          "duration": 1.5,
           "requires_pen": true
         },
         {
           "id": "a008",
           "type": "sketch_image",
           "image": "mega/doodle-103",
+          "reveal": "serpentine",
           "at": [
             540,
             580
           ],
           "height": 760,
-          "start": 12.32,
-          "duration": 1.6,
+          "start": 14.02,
+          "duration": 2.6,
           "requires_pen": true
         },
         {
@@ -180,7 +183,7 @@
           "y": 120,
           "size": 60,
           "width": 5,
-          "start": 14.1,
+          "start": 16.8,
           "duration": 1.1,
           "requires_pen": true,
           "color": "accent"
@@ -189,8 +192,8 @@
     },
     {
       "id": "campfire",
-      "start": 15.6,
-      "end": 20.8,
+      "start": 18.3,
+      "end": 24.4,
       "actions": [
         {
           "id": "a010",
@@ -202,21 +205,22 @@
             580
           ],
           "height": 760,
-          "start": 15.8,
-          "duration": 1.6,
+          "start": 18.5,
+          "duration": 1.5,
           "requires_pen": true
         },
         {
           "id": "a011",
           "type": "sketch_image",
           "image": "mega/doodle-108",
+          "reveal": "serpentine",
           "at": [
             540,
             580
           ],
           "height": 760,
-          "start": 17.52,
-          "duration": 1.6,
+          "start": 20.12,
+          "duration": 2.6,
           "requires_pen": true
         },
         {
@@ -227,7 +231,7 @@
           "y": 120,
           "size": 60,
           "width": 5,
-          "start": 19.3,
+          "start": 22.9,
           "duration": 1.1,
           "requires_pen": true,
           "color": "accent"
