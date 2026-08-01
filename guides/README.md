@@ -38,5 +38,8 @@ angle.
 
 ## Index
 
-_No guides yet — the index is built as guides land. Keep this list sorted by
-artist._
+_Sorted by artist._
+
+- **John Farnham** — [You're the Voice](john-farnham/youre-the-voice.md) —
+  vowel workbook + 12 practice sets, measured range/register demands, breath
+  control map, two-week preparation plan.
