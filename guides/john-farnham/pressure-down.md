@@ -6,12 +6,15 @@
 > This guide has two halves. **Parts One–Five** are the vowel workbook: the
 > complete song vowel breakdown and twelve legato practice sets built from it.
 > **Parts Six–Eight** are the song-demands layer: measured range, breath
-> control map and specific preparation. Unlike *You're the Voice* (measured
-> from the original Farnham vocal), the measurements here come from the
-> vox-analysis engine's analyses of **Aaron's own nine takes of this song** —
-> including the Captain Cook Tavern live take, whose breath diagnosis produced
-> the drill sheet `aaroncodex/docs/practice/pressure-down-breath-support.pdf`.
-> Raw measures only; no scores live in this document.
+> control map and specific preparation. The measurements come from two
+> engine sources in aaroncodex: **Aaron's own nine takes of this song**
+> (including the Captain Cook Tavern live take, whose breath diagnosis
+> produced the drill sheet `docs/practice/pressure-down-breath-support.pdf`)
+> and, since 1 Aug 2026, a **verified reference analysis of Farnham's
+> original studio vocal** (full 3:47 master, separated stem —
+> `2026-08-01-john-farnham-pressure-down-reference_analysis.json`; not part
+> of the 50-reference calibration pack). Raw measures only; no scores live
+> in this document.
 
 ---
 
@@ -439,19 +442,45 @@ Technique back-up:
 `aaroncodex/vocal-knowledge-base/03-technique-deep-dives/mixed-voice-development-exercises.md`,
 `smooth-vocal-register-transitions.md`, `vocal-register-training-and-blending.md`.
 
-### Style targets
+### What the original vocal proves (measured 1 Aug 2026)
 
-- **Vibrato:** the takes show vibrato on 30–40% of sustained notes at ~4.6–4.9
-  Hz — on the slow side. Where it appears (*storm*, held *down*s), let it
-  settle within the first half-second rather than arriving late on a straining
-  note.
-- **Onsets:** the measured signature early in the song is sliding **up** into
-  notes (scooping) — the blueprint rule applies verbatim: *land the note
-  first, keep the ribs wide, then let the colour arrive.* Farnham's own style
-  has bite and swagger, but the pitch centre comes first.
-- **Dynamics:** verses conversational, choruses committed — the arrangement's
-  contrast is the drama. Spending verse energy at chorus level flattens the
-  song and costs the tank you need from the bridge onward.
+The engine's reference analysis of Farnham's own studio vocal settles the
+"how is this song supposed to be sung" question with numbers:
+
+- **He lives in the same place.** Farnham's most-lived note is **C♯4**
+  (13.4 s), core F♯3–G5 with the chorus riding C♯4–F♯4 — the seam is the
+  song, for him too.
+- **He sings it light.** ~**76% of the reference is in a light production**,
+  not full chest. The working prescription above is not a workaround for
+  Aaron — it is how the record was made.
+- **Power arrives after the pitch is centred.** 57% of his entrances are
+  direct (only 14% scooped), and his held notes move a mere **15.1 cents**.
+  The bite and swagger are applied *to an already-landed note*.
+- **Short phrases, constant resets.** 74 phrases, median just **1.08 s** —
+  he takes air constantly and punches lines rather than chaining them.
+
+### Style targets — original vs current takes
+
+| Measure | Farnham reference | Aaron (best natural take) |
+|---|---|---|
+| Direct entrances | 57.1% | 24.2% |
+| Scooped entrances | 14.3% | 40.6% |
+| Held-note movement | 15.1 cents | 32.8 cents |
+| Vibrato on long notes | 67.3% (5.47 Hz, 52 cents) | 30.2% |
+| Timing vs backing | −6.7 ms at 112.3 BPM — in the pocket | (groove not yet measured vs backing) |
+
+The three gaps that matter, in order: **entrances** (land direct, don't
+slide up), **holds** (keep the first two beats dead still), **vibrato**
+(twice as present on the original — a settled 5.5 Hz shimmer on held notes
+is part of the Farnham sound, and it can only sit on a note that isn't
+drifting). Timing note: the reference sits fractionally *ahead* of the beat
+all song — committed, driving, never dragging — with its only rushed patch
+at 1:40–2:00.
+
+- **Dynamics:** verses conversational, choruses committed — the original
+  uses ~34 dB of effective range and the arrangement's contrast is the
+  drama. Spending verse energy at chorus level flattens the song and costs
+  the tank you need from the bridge onward.
 
 ---
 
@@ -484,6 +513,13 @@ falls on "down" — so not every measured "sag" is a fault. The fault is
 specifically the **held note that drifts flat before its release**. Judge by
 ear: a chosen fall happens *after* a level hold and sounds the same every
 chorus; a leak drifts during the hold and gets bigger as the song goes on.
+
+The reference analysis now puts a number on it: **Farnham's original falls
+on 29.7% of its phrase endings** — the song as written does have falling
+releases — while Aaron's takes measure ~40–56%. That song-relative gap
+(roughly +10 to +26 points over the original, worst on the live take) is
+the honest size of the breath issue on this song: real, but about the
+*held* hook notes, not every ending the analyser flags.
 
 ### Where the breaths go
 
@@ -546,6 +582,14 @@ chorus"**. Two-week shape, sessions ~25–30 minutes.
 - Stages 1–2 (hum + straw). Log steady-bubble seconds.
 - Practice Sets 5 and 6 only, at low volume: land–hold–release on *take* and
   *down*. Every hold level, ribs wide to the release.
+- The engine's sanctioned hook drill — **Straight Beat to Chosen Release**
+  (cue: *"Home first, bite second"*): pick a sustained hook word, above all
+  *down*; hear the pitch silently; sing at 65–70% effort; keep the first
+  **two beats** straight and dead-centre; add vibrato, grit or a fall-off
+  only on beat three. Five reps, then one chorus line. Pass: four of five
+  land direct and stay centred for two beats without extra volume or throat
+  pressure. This is Set 6 with a pass/fail bar — and it is exactly what the
+  reference measurements show Farnham doing.
 - One chorus, 70% volume, marked breaths. Stop there — do not run the song.
 
 ### Days 4–7 — Own the seam (C♯4–D4)
@@ -601,7 +645,10 @@ chorus"**. Two-week shape, sessions ~25–30 minutes.
 *Sources: vowel breakdown by Aaron (ChatGPT-assisted vowel mapping); practice
 sets built to match the* You're the Voice *workbook method. Range, register,
 phrasing and breath measures: vox-analysis engine analyses of Aaron's nine
-Pressure Down takes (`aaroncodex/voxanalysis/archive/scratch-analyses/`),
+Pressure Down takes and of Farnham's original studio vocal
+(`2026-08-01-john-farnham-pressure-down-reference_analysis.json`, full 3:47
+master; not in the calibration pack)
+(`aaroncodex/voxanalysis/archive/scratch-analyses/`),
 the Captain Cook Tavern breath diagnosis and drill sheet
 (`aaroncodex/docs/practice/pressure-down-breath-support.pdf`), the
 song-specific sag diagnosis
