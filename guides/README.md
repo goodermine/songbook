@@ -40,6 +40,10 @@ angle.
 
 _Sorted by artist._
 
+- **John Farnham** — [Pressure Down](john-farnham/pressure-down.md) —
+  vowel workbook + 12 legato practice sets, measured range (fits the working
+  core; the fight is the C♯4/D4 seam), tavern-take breath diagnosis and
+  second-half stamina plan.
 - **John Farnham** — [You're the Voice](john-farnham/youre-the-voice.md) —
   vowel workbook + 12 practice sets, measured range/register demands, breath
   control map, two-week preparation plan.
