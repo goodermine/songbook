@@ -6,13 +6,13 @@
 > complete song vowel breakdown and twelve practice sets built from it.
 > **Parts Six–Eight** are the song-demands layer.
 >
-> **Measurement status: none yet.** Unlike the two Farnham guides, this song
-> has no engine data in aaroncodex — no reference analysis in the calibration
-> pack and no recorded takes. Parts Six–Eight are therefore descriptive, not
-> measured. **Record one take and run it through the vox-analysis engine and
-> this section can be replaced with real numbers** (range map, phrase map,
-> timing/groove measures — the engine measures groove directly, which is the
-> whole game in this song).
+> **Measurement status: measured from Aaron's two live takes** — the first
+> live take (30 Jul 2026) and the Brighton take (31 Jul 2026, analysed despite
+> unusually loud backing), both analysed by the vox-analysis engine
+> (`aaroncodex/voxanalysis/archive/scratch-analyses/…kung-fu-fighting-take-00[12]_analysis.json`).
+> No original-artist reference exists in the calibration pack yet, so
+> comparisons are between Aaron's own takes. Raw measures only; no scores
+> live in this document.
 
 ---
 
@@ -422,17 +422,53 @@ The song alternates bright AY/AE/EE vowels with rounder AH/OE/OO/OW vowels. The 
 
 ## PART SIX: WHAT THE SONG DEMANDS
 
-*⚠ Not yet measured. No engine analysis of this song exists in aaroncodex —
-no calibration reference and no recorded takes. What follows is descriptive.
-After the first recorded take is analysed, replace this section with the
-measured range map, phrase map and timing/groove figures.*
+*Measured from Aaron's two live takes (30 & 31 Jul 2026). No original-artist
+reference is in the calibration pack yet, so the numbers describe the song as
+Aaron sings it.*
+
+### The measured range, as sung
+
+| Measure | Take 1 (first live) | Take 2 (Brighton) |
+|---|---|---|
+| Working core | G3 – F♯4 | F♯3 – F♯4 |
+| Most-lived-in note | **E4** (~32 s) | **E4** (~30 s) |
+| Next most | F♯4, F4, D♯4 | F♯4, F4, D♯4 |
+| Register balance | 84.5% light | 67.7% light |
+| Delivery density | ~3.4 onsets/sec | ~4.05 onsets/sec |
+
+The picture is consistent across both nights: the chant lives on **E4–F♯4 at
+the top of the speech range**, sung mostly in a light production — which is
+the right call for this song. The extremes the tracker logged are brief
+flicks and ad-lib noise, not sustained demands. Roughly four vocal onsets
+per second confirms this is an articulation song, not a sustain song.
+
+### The one measured weakness: held notes that wander
+
+Both takes tell the same story, and it is *not* range or breath — it is
+**held-note drift**. The chant's sustained syllables (the AY of *fight-ing /
+light-ning / fright-ening / tim-ing*, sitting on E4/F4/F♯4) land on pitch
+and then wander instead of sitting still: median intra-note drift of 41.6
+cents on take 1, improving to 31.2 cents at Brighton. The trouble-spot lists
+cluster exactly there — repeated F4 holds through the choruses drifting
+150–200 cents. The note histogram shows the fingerprint: E4, F4 and F♯4
+*all* heavily used — three adjacent semitones where the melody really wants
+two pitch centres, cleanly held.
+
+The engine's prescribed fix (take 1's primary focus) is **Messa di Voce on
+single pitches** — *still first, shape second*: settle each sustained chant
+note dead-centre for its first two seconds before adding any swell, bounce
+or character. Practice Set 2 (the "-ightning" line) is where to apply it.
+
+Also measured: ~40% of onsets are scooped (median ~1 semitone). On a song
+made of short notes, a scoop eats the whole note — the blueprint rule (*land
+the note first*) applies at patter speed.
 
 ### The shape of the job
 
 This is a different animal from the two Farnham guides. There is almost no
-sustained singing in it: the melody is narrow, chant-like and sits in the
-low-mid speech range, moving in short rhythmic cells. Nothing camps on a
-passaggio; nothing demands a held climax note. The demands are, in order:
+long-sustain singing in it: the melody is narrow, chant-like and sits at the
+top of the speech range, moving in short rhythmic cells. Nothing demands a
+held climax note. The demands are, in order:
 
 1. **Groove** — funk placement, relaxed and slightly behind the beat, for
    three-plus minutes without rushing. In this song timing *is* the
@@ -472,7 +508,13 @@ character *last* is the method (Part Four, Stage 6).
 
 ## PART SEVEN: BREATH CONTROL MAP
 
-*Unmeasured — patterns below are from the song's structure, not engine data.*
+*Measured: take 1 — 39 phrases, median 3.7 s, 48.7% of endings falling;
+take 2 (Brighton) — 23 phrases, median 5.3 s, 43.5% falling. Phrases are
+short, and in a funk chant many falling endings are stylistic releases
+rather than leaks — the caveat from the repo's sag-diagnosis work applies
+in full here. The real breath signal in this song is not the endings; it is
+the held-note drift covered in Part Six (drift is the classic sound of
+breath pressure decaying under a note) plus the interjection economy below.*
 
 This is not a long-phrase song; it is a **death-by-a-thousand-cuts** song.
 No single line challenges the tank, but the interjections, refrains and
@@ -543,10 +585,12 @@ and economy.
   (backing-track or a cappella over a metronome): the groove must live in
   you, not be borrowed from Carl Douglas.
 - Add character last: the grin, the swagger, the ha!s at performance energy.
-- **Record one take and run it through the aaroncodex engine.** This song has
-  no measured data yet — the first take turns Part Six into real numbers,
-  and the engine's timing/groove section will grade the one thing this song
-  is actually about.
+- **Messa di voce transfer** (the engine's prescribed drill for this song):
+  three comfortable chant notes (E4 area), four seconds each, dead still for
+  the first two seconds, one small swell, return — then one chorus at 70%
+  keeping every held AY centred before any bounce is added. The measured
+  target: held-note drift trending down take-over-take (41.6 → 31.2 cents so
+  far; the pro-reference median is ~24).
 
 ### Day 7 — Performance simulation
 
@@ -579,10 +623,14 @@ and economy.
 ---
 
 *Sources: vowel breakdown by Aaron (ChatGPT-assisted vowel mapping); practice
-sets built to match the reference-library workbook method. Song-demands layer
-is descriptive — no engine data exists for this song yet (no calibration
-reference, no takes). Voice-fit statements from
+sets built to match the reference-library workbook method. Range, register,
+phrasing, breath, onset and drift measures: vox-analysis engine analyses of
+Aaron's two live takes —
+`2026-07-30-aaron-kung-fu-fighting-take-001_analysis.json` and
+`2026-07-31-aaron-kung-fu-fighting-take-002_analysis.json` (Brighton) in
+`aaroncodex/voxanalysis/archive/scratch-analyses/`. Voice-fit statements from
 `aaroncodex/vocal-knowledge-base/06-voxai-system/aaron-vocal-blueprint-v2.md`.
 Breath-pulse technique:
-`01-vocal-science-technique/accent-splat-breathing-for-singing.md`. This
-guide contains no scores.*
+`01-vocal-science-technique/accent-splat-breathing-for-singing.md`. No
+original-artist reference in the calibration pack yet. This guide contains no
+scores — the scored reports live with the engine.*

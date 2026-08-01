@@ -42,8 +42,8 @@ _Sorted by artist._
 
 - **Carl Douglas** — [Kung Fu Fighting](carl-douglas/kung-fu-fighting.md) —
   vowel workbook + 12 practice sets (groove/patter focus: refrain, interjection
-  pulses, metronome placement). No engine data yet — first recorded take
-  upgrades Part Six to measured numbers.
+  pulses, metronome placement); measured from two live takes — chant lives on
+  E4–F♯4, the coachable fault is held-note drift.
 - **John Farnham** — [Pressure Down](john-farnham/pressure-down.md) —
   vowel workbook + 12 legato practice sets, measured range (fits the working
   core; the fight is the C♯4/D4 seam), tavern-take breath diagnosis and
