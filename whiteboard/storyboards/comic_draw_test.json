@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "title": "Comic Draw Test - sketch then polish",
+  "width": 1080,
+  "height": 1080,
+  "fps": 24,
+  "content_duration": 18.0,
+  "safe_content_end": 17.6,
+  "final_hold": 2.2,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "chrome": "none",
+  "text_font": "marker",
+  "caption_font": "marker",
+  "stroke_style": "round",
+  "style": {
+    "paper": [249, 247, 240],
+    "ink": [38, 43, 46],
+    "faint": [118, 120, 116],
+    "accent": [202, 83, 48],
+    "teal": [31, 111, 112],
+    "amber": [232, 163, 61]
+  },
+  "scenes": [
+    {
+      "id": "draw",
+      "start": 0.0,
+      "end": 18.0,
+      "actions": [
+        {"id": "sketch_pass", "type": "sketch_image", "image": "comic_sketch", "at": [540, 540], "height": 960, "start": 0.3, "duration": 8.4, "requires_pen": true},
+        {"id": "polish_pass", "type": "sketch_image", "image": "comic_final", "at": [540, 540], "height": 960, "start": 9.0, "duration": 8.4, "requires_pen": true}
+      ]
+    }
+  ]
+}

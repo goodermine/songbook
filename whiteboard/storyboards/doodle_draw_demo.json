@@ -1,0 +1,242 @@
+{
+  "version": 2,
+  "title": "Doodle draw demo - ink then colour",
+  "width": 1080,
+  "height": 1080,
+  "fps": 24,
+  "content_duration": 24.4,
+  "safe_content_end": 24.0,
+  "final_hold": 1.6,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "chrome": "none",
+  "text_font": "marker",
+  "caption_font": "marker",
+  "stroke_style": "round",
+  "style": {
+    "paper": [
+      249,
+      247,
+      240
+    ],
+    "ink": [
+      38,
+      43,
+      46
+    ],
+    "faint": [
+      118,
+      120,
+      116
+    ],
+    "accent": [
+      202,
+      83,
+      48
+    ],
+    "teal": [
+      31,
+      111,
+      112
+    ],
+    "amber": [
+      232,
+      163,
+      61
+    ]
+  },
+  "scenes": [
+    {
+      "id": "burger",
+      "start": 0.0,
+      "end": 6.1,
+      "actions": [
+        {
+          "id": "a001",
+          "type": "sketch_image",
+          "image": "mega/doodle-05",
+          "layer": "ink",
+          "at": [
+            540,
+            580
+          ],
+          "height": 717,
+          "start": 0.2,
+          "duration": 1.5,
+          "requires_pen": true
+        },
+        {
+          "id": "a002",
+          "type": "sketch_image",
+          "image": "mega/doodle-05",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            580
+          ],
+          "height": 717,
+          "start": 1.82,
+          "duration": 2.6,
+          "requires_pen": true
+        },
+        {
+          "id": "a003",
+          "type": "write_text",
+          "text": "BURGER",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 4.6,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "bear",
+      "start": 6.1,
+      "end": 12.2,
+      "actions": [
+        {
+          "id": "a004",
+          "type": "sketch_image",
+          "image": "mega/doodle-104",
+          "layer": "ink",
+          "at": [
+            540,
+            580
+          ],
+          "height": 760,
+          "start": 6.3,
+          "duration": 1.5,
+          "requires_pen": true
+        },
+        {
+          "id": "a005",
+          "type": "sketch_image",
+          "image": "mega/doodle-104",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            580
+          ],
+          "height": 760,
+          "start": 7.92,
+          "duration": 2.6,
+          "requires_pen": true
+        },
+        {
+          "id": "a006",
+          "type": "write_text",
+          "text": "BEAR",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 10.7,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "pineapple",
+      "start": 12.2,
+      "end": 18.3,
+      "actions": [
+        {
+          "id": "a007",
+          "type": "sketch_image",
+          "image": "mega/doodle-103",
+          "layer": "ink",
+          "at": [
+            540,
+            580
+          ],
+          "height": 760,
+          "start": 12.4,
+          "duration": 1.5,
+          "requires_pen": true
+        },
+        {
+          "id": "a008",
+          "type": "sketch_image",
+          "image": "mega/doodle-103",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            580
+          ],
+          "height": 760,
+          "start": 14.02,
+          "duration": 2.6,
+          "requires_pen": true
+        },
+        {
+          "id": "a009",
+          "type": "write_text",
+          "text": "PINEAPPLE",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 16.8,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "campfire",
+      "start": 18.3,
+      "end": 24.4,
+      "actions": [
+        {
+          "id": "a010",
+          "type": "sketch_image",
+          "image": "mega/doodle-108",
+          "layer": "ink",
+          "at": [
+            540,
+            580
+          ],
+          "height": 760,
+          "start": 18.5,
+          "duration": 1.5,
+          "requires_pen": true
+        },
+        {
+          "id": "a011",
+          "type": "sketch_image",
+          "image": "mega/doodle-108",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            580
+          ],
+          "height": 760,
+          "start": 20.12,
+          "duration": 2.6,
+          "requires_pen": true
+        },
+        {
+          "id": "a012",
+          "type": "write_text",
+          "text": "CAMPFIRE",
+          "align": "center",
+          "y": 120,
+          "size": 60,
+          "width": 5,
+          "start": 22.9,
+          "duration": 1.1,
+          "requires_pen": true,
+          "color": "accent"
+        }
+      ]
+    }
+  ]
+}

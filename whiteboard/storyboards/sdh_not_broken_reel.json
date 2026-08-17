@@ -1,0 +1,1177 @@
+{
+  "version": 2,
+  "title": "SDH Reel - You're Not Broken (square, hand-drawn)",
+  "width": 1080,
+  "height": 1080,
+  "fps": 24,
+  "content_duration": 67.38,
+  "safe_content_end": 66.98,
+  "final_hold": 1.8,
+  "pen_physics": "lift",
+  "hand": "sprite",
+  "chrome": "none",
+  "text_font": "marker",
+  "caption_font": "marker",
+  "stroke_style": "round",
+  "style": {
+    "paper": [
+      249,
+      247,
+      240
+    ],
+    "ink": [
+      38,
+      43,
+      46
+    ],
+    "faint": [
+      118,
+      120,
+      116
+    ],
+    "accent": [
+      202,
+      83,
+      48
+    ],
+    "teal": [
+      31,
+      111,
+      112
+    ],
+    "amber": [
+      232,
+      163,
+      61
+    ],
+    "pgreen": [
+      178,
+      206,
+      168
+    ],
+    "pmint": [
+      190,
+      216,
+      202
+    ],
+    "psage": [
+      196,
+      214,
+      180
+    ],
+    "psky": [
+      192,
+      210,
+      214
+    ],
+    "ppeach": [
+      234,
+      208,
+      186
+    ],
+    "pamber": [
+      232,
+      216,
+      172
+    ]
+  },
+  "narration": {
+    "transcript": "If you feel stuck, like something's wrong with you, listen to this, you're not broken. Your mind is doing exactly what it was built to do: protect you. And years ago some part of you drew a conclusion - I'm not safe, I'm not enough - and built everything on top of that. So the anxiety, the doubt, the stuck feeling, that's not a fault. It's an old protection, still running. You're not a knot that can't be undone. You're a thread that got tangled, and threads can be smoothed. You don't need fixing. You need to meet that old conclusion, and gently update it. You are never broken. You're protecting yourself. And that can change."
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0.0,
+      "end": 7.93,
+      "actions": [
+        {
+          "id": "a001",
+          "type": "draw_fill",
+          "start": 0.2,
+          "duration": 0.7,
+          "requires_pen": true,
+          "polygon": [
+            [
+              60.0,
+              436.6666666666667
+            ],
+            [
+              100.0,
+              370.0
+            ],
+            [
+              260.0,
+              370.0
+            ],
+            [
+              300.0,
+              436.6666666666667
+            ],
+            [
+              300.0,
+              503.3333333333333
+            ],
+            [
+              260.0,
+              570.0
+            ],
+            [
+              100.0,
+              570.0
+            ],
+            [
+              60.0,
+              503.3333333333333
+            ]
+          ],
+          "width": 17,
+          "color": "pgreen"
+        },
+        {
+          "id": "a002",
+          "type": "draw_fill",
+          "start": 1.02,
+          "duration": 0.7,
+          "requires_pen": true,
+          "polygon": [
+            [
+              790.0,
+              690.0
+            ],
+            [
+              826.6666666666666,
+              630.0
+            ],
+            [
+              973.3333333333334,
+              630.0
+            ],
+            [
+              1010.0,
+              690.0
+            ],
+            [
+              1010.0,
+              750.0
+            ],
+            [
+              973.3333333333334,
+              810.0
+            ],
+            [
+              826.6666666666666,
+              810.0
+            ],
+            [
+              790.0,
+              750.0
+            ]
+          ],
+          "width": 17,
+          "color": "ppeach"
+        },
+        {
+          "id": "a003",
+          "type": "write_text",
+          "start": 1.84,
+          "duration": 1.4,
+          "requires_pen": true,
+          "text": "YOU'RE NOT",
+          "x": 250,
+          "y": 400,
+          "size": 66,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a004",
+          "type": "write_text",
+          "start": 3.36,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "BROKEN",
+          "x": 290,
+          "y": 515,
+          "size": 98,
+          "width": 8,
+          "color": "accent"
+        },
+        {
+          "id": "a005",
+          "type": "draw_asset",
+          "start": 4.78,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "circle_highlight",
+          "at": [
+            540,
+            560
+          ],
+          "scale": 2.0,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "a006",
+          "type": "draw_asset",
+          "start": 5.6,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "question_mark",
+          "at": [
+            180,
+            250
+          ],
+          "scale": 0.5,
+          "color": "faint",
+          "width": 5
+        },
+        {
+          "id": "a007",
+          "type": "draw_asset",
+          "start": 6.12,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "question_mark",
+          "at": [
+            880,
+            300
+          ],
+          "scale": 0.42,
+          "color": "faint",
+          "width": 5
+        },
+        {
+          "id": "a008",
+          "type": "draw_asset",
+          "start": 6.64,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "exclamation",
+          "at": [
+            930,
+            560
+          ],
+          "scale": 0.5,
+          "color": "accent",
+          "width": 5
+        },
+        {
+          "id": "a009",
+          "type": "draw_asset",
+          "start": 7.16,
+          "duration": 0.4,
+          "requires_pen": true,
+          "asset": "star_five",
+          "at": [
+            150,
+            700
+          ],
+          "scale": 0.32,
+          "color": "teal",
+          "width": 5
+        }
+      ]
+    },
+    {
+      "id": "job",
+      "start": 7.93,
+      "end": 16.0,
+      "actions": [
+        {
+          "id": "a010",
+          "type": "draw_fill",
+          "start": 8.13,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              45.0,
+              692.5
+            ],
+            [
+              83.33333333333333,
+              637.5
+            ],
+            [
+              236.66666666666669,
+              637.5
+            ],
+            [
+              275.0,
+              692.5
+            ],
+            [
+              275.0,
+              747.5
+            ],
+            [
+              236.66666666666669,
+              802.5
+            ],
+            [
+              83.33333333333333,
+              802.5
+            ],
+            [
+              45.0,
+              747.5
+            ]
+          ],
+          "width": 17,
+          "color": "pmint"
+        },
+        {
+          "id": "a011",
+          "type": "write_text",
+          "start": 8.85,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "YOUR MIND IS",
+          "x": 260,
+          "y": 95,
+          "size": 52,
+          "width": 4,
+          "color": "ink"
+        },
+        {
+          "id": "a012",
+          "type": "write_text",
+          "start": 10.27,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "DOING ITS JOB",
+          "x": 230,
+          "y": 185,
+          "size": 56,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a013",
+          "type": "draw_asset",
+          "start": 11.69,
+          "duration": 0.6,
+          "requires_pen": true,
+          "asset": "underline_swash",
+          "at": [
+            540,
+            300
+          ],
+          "scale": 1.6,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "a014",
+          "type": "sketch_image",
+          "start": 12.41,
+          "duration": 1.9,
+          "requires_pen": true,
+          "image": "two_chairs",
+          "at": [
+            540,
+            700
+          ],
+          "height": 520
+        },
+        {
+          "id": "a015",
+          "type": "write_text",
+          "start": 14.43,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "for you - not against you",
+          "x": null,
+          "y": 1000,
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "start": 16.0,
+      "end": 24.99,
+      "actions": [
+        {
+          "id": "a016",
+          "type": "draw_fill",
+          "start": 16.2,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              805.0,
+              442.5
+            ],
+            [
+              843.3333333333334,
+              387.5
+            ],
+            [
+              996.6666666666666,
+              387.5
+            ],
+            [
+              1035.0,
+              442.5
+            ],
+            [
+              1035.0,
+              497.5
+            ],
+            [
+              996.6666666666666,
+              552.5
+            ],
+            [
+              843.3333333333334,
+              552.5
+            ],
+            [
+              805.0,
+              497.5
+            ]
+          ],
+          "width": 17,
+          "color": "psky"
+        },
+        {
+          "id": "a017",
+          "type": "draw_fill",
+          "start": 16.92,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              45.0,
+              752.5
+            ],
+            [
+              83.33333333333333,
+              697.5
+            ],
+            [
+              236.66666666666669,
+              697.5
+            ],
+            [
+              275.0,
+              752.5
+            ],
+            [
+              275.0,
+              807.5
+            ],
+            [
+              236.66666666666669,
+              862.5
+            ],
+            [
+              83.33333333333333,
+              862.5
+            ],
+            [
+              45.0,
+              807.5
+            ]
+          ],
+          "width": 17,
+          "color": "psage"
+        },
+        {
+          "id": "a018",
+          "type": "write_text",
+          "start": 17.64,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "AN OLD",
+          "x": 360,
+          "y": 95,
+          "size": 58,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a019",
+          "type": "write_text",
+          "start": 19.06,
+          "duration": 1.4,
+          "requires_pen": true,
+          "text": "CONCLUSION",
+          "x": 280,
+          "y": 190,
+          "size": 58,
+          "width": 5,
+          "color": "teal"
+        },
+        {
+          "id": "a020",
+          "type": "draw_asset",
+          "start": 20.58,
+          "duration": 0.5,
+          "requires_pen": true,
+          "asset": "old_loop",
+          "at": [
+            150,
+            250
+          ],
+          "scale": 0.45,
+          "color": "faint",
+          "width": 5
+        },
+        {
+          "id": "a021",
+          "type": "sketch_image",
+          "start": 21.2,
+          "duration": 2.1,
+          "requires_pen": true,
+          "image": "iceberg_mind",
+          "at": [
+            540,
+            700
+          ],
+          "height": 540
+        },
+        {
+          "id": "a022",
+          "type": "write_text",
+          "start": 23.42,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "I'm not safe. I'm not enough.",
+          "x": null,
+          "y": 1005,
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "guard",
+      "start": 24.99,
+      "end": 33.06,
+      "actions": [
+        {
+          "id": "a023",
+          "type": "draw_fill",
+          "start": 25.19,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              55.0,
+              442.5
+            ],
+            [
+              93.33333333333333,
+              387.5
+            ],
+            [
+              246.66666666666669,
+              387.5
+            ],
+            [
+              285.0,
+              442.5
+            ],
+            [
+              285.0,
+              497.5
+            ],
+            [
+              246.66666666666669,
+              552.5
+            ],
+            [
+              93.33333333333333,
+              552.5
+            ],
+            [
+              55.0,
+              497.5
+            ]
+          ],
+          "width": 17,
+          "color": "pamber"
+        },
+        {
+          "id": "a024",
+          "type": "write_text",
+          "start": 25.91,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "NOT A FAULT",
+          "x": 310,
+          "y": 95,
+          "size": 54,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a025",
+          "type": "write_text",
+          "start": 27.33,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "A GUARD",
+          "x": 370,
+          "y": 190,
+          "size": 64,
+          "width": 6,
+          "color": "accent"
+        },
+        {
+          "id": "a026",
+          "type": "draw_asset",
+          "start": 28.65,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "circle_highlight",
+          "at": [
+            550,
+            205
+          ],
+          "scale": 1.7,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "a027",
+          "type": "sketch_image",
+          "start": 29.47,
+          "duration": 1.9,
+          "requires_pen": true,
+          "image": "key_keyhole",
+          "at": [
+            540,
+            700
+          ],
+          "height": 500
+        },
+        {
+          "id": "a028",
+          "type": "write_text",
+          "start": 31.49,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "an old protection, still running",
+          "x": null,
+          "y": 1010,
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "tangled",
+      "start": 33.06,
+      "end": 40.73,
+      "actions": [
+        {
+          "id": "a029",
+          "type": "draw_fill",
+          "start": 33.26,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              805.0,
+              732.5
+            ],
+            [
+              843.3333333333334,
+              677.5
+            ],
+            [
+              996.6666666666666,
+              677.5
+            ],
+            [
+              1035.0,
+              732.5
+            ],
+            [
+              1035.0,
+              787.5
+            ],
+            [
+              996.6666666666666,
+              842.5
+            ],
+            [
+              843.3333333333334,
+              842.5
+            ],
+            [
+              805.0,
+              787.5
+            ]
+          ],
+          "width": 17,
+          "color": "pgreen"
+        },
+        {
+          "id": "a030",
+          "type": "write_text",
+          "start": 33.98,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "NOT BROKEN.",
+          "x": 300,
+          "y": 95,
+          "size": 52,
+          "width": 5,
+          "color": "faint"
+        },
+        {
+          "id": "a031",
+          "type": "draw_asset",
+          "start": 35.3,
+          "duration": 0.5,
+          "requires_pen": true,
+          "asset": "cross_out",
+          "at": [
+            550,
+            85
+          ],
+          "scale": 1.5,
+          "color": "accent",
+          "width": 6
+        },
+        {
+          "id": "a032",
+          "type": "write_text",
+          "start": 35.92,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "JUST TANGLED",
+          "x": 270,
+          "y": 195,
+          "size": 60,
+          "width": 6,
+          "color": "teal"
+        },
+        {
+          "id": "a033",
+          "type": "sketch_image",
+          "start": 37.34,
+          "duration": 1.7,
+          "requires_pen": true,
+          "image": "tangled_thread",
+          "at": [
+            540,
+            720
+          ],
+          "height": 440
+        },
+        {
+          "id": "a034",
+          "type": "write_text",
+          "start": 39.16,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "threads can be smoothed",
+          "x": null,
+          "y": 1010,
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "fixing",
+      "start": 40.73,
+      "end": 49.52,
+      "actions": [
+        {
+          "id": "a035",
+          "type": "draw_fill",
+          "start": 40.93,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              35.0,
+              732.5
+            ],
+            [
+              73.33333333333333,
+              677.5
+            ],
+            [
+              226.66666666666669,
+              677.5
+            ],
+            [
+              265.0,
+              732.5
+            ],
+            [
+              265.0,
+              787.5
+            ],
+            [
+              226.66666666666669,
+              842.5
+            ],
+            [
+              73.33333333333333,
+              842.5
+            ],
+            [
+              35.0,
+              787.5
+            ]
+          ],
+          "width": 17,
+          "color": "pmint"
+        },
+        {
+          "id": "a036",
+          "type": "write_text",
+          "start": 41.65,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "YOU DON'T",
+          "x": 350,
+          "y": 95,
+          "size": 56,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a037",
+          "type": "write_text",
+          "start": 43.07,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "NEED FIXING",
+          "x": 300,
+          "y": 190,
+          "size": 60,
+          "width": 6,
+          "color": "ink"
+        },
+        {
+          "id": "a038",
+          "type": "draw_asset",
+          "start": 44.49,
+          "duration": 0.6,
+          "requires_pen": true,
+          "asset": "underline_swash",
+          "at": [
+            540,
+            300
+          ],
+          "scale": 1.6,
+          "color": "accent",
+          "width": 6
+        },
+        {
+          "id": "a039",
+          "type": "sketch_image",
+          "start": 45.21,
+          "duration": 1.9,
+          "requires_pen": true,
+          "image": "head_staircase",
+          "at": [
+            540,
+            700
+          ],
+          "height": 500
+        },
+        {
+          "id": "a040",
+          "type": "draw_asset",
+          "start": 47.23,
+          "duration": 0.6,
+          "requires_pen": true,
+          "asset": "heart",
+          "at": [
+            935,
+            470
+          ],
+          "scale": 0.5,
+          "color": "accent",
+          "width": 6
+        },
+        {
+          "id": "a041",
+          "type": "write_text",
+          "start": 47.95,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "just meet it, and update it",
+          "x": null,
+          "y": 1010,
+          "size": 30,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "protect",
+      "start": 49.52,
+      "end": 57.79,
+      "actions": [
+        {
+          "id": "a042",
+          "type": "draw_fill",
+          "start": 49.72,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              805.0,
+              472.5
+            ],
+            [
+              843.3333333333334,
+              417.5
+            ],
+            [
+              996.6666666666666,
+              417.5
+            ],
+            [
+              1035.0,
+              472.5
+            ],
+            [
+              1035.0,
+              527.5
+            ],
+            [
+              996.6666666666666,
+              582.5
+            ],
+            [
+              843.3333333333334,
+              582.5
+            ],
+            [
+              805.0,
+              527.5
+            ]
+          ],
+          "width": 17,
+          "color": "psage"
+        },
+        {
+          "id": "a043",
+          "type": "write_text",
+          "start": 50.44,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "YOU WERE",
+          "x": 370,
+          "y": 95,
+          "size": 56,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a044",
+          "type": "write_text",
+          "start": 51.86,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "PROTECTING YOU",
+          "x": 210,
+          "y": 190,
+          "size": 52,
+          "width": 5,
+          "color": "teal"
+        },
+        {
+          "id": "a045",
+          "type": "draw_asset",
+          "start": 53.28,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "checkmark",
+          "at": [
+            540,
+            330
+          ],
+          "scale": 1.0,
+          "color": "teal",
+          "width": 9
+        },
+        {
+          "id": "a046",
+          "type": "sketch_image",
+          "start": 54.1,
+          "duration": 1.3,
+          "requires_pen": true,
+          "image": "mega/doodle-13",
+          "layer": "ink",
+          "at": [
+            540,
+            720
+          ],
+          "height": 449
+        },
+        {
+          "id": "a047",
+          "type": "sketch_image",
+          "start": 55.52,
+          "duration": 1.9,
+          "requires_pen": true,
+          "image": "mega/doodle-13",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            720
+          ],
+          "height": 449
+        }
+      ]
+    },
+    {
+      "id": "change",
+      "start": 57.79,
+      "end": 67.38,
+      "actions": [
+        {
+          "id": "a048",
+          "type": "draw_fill",
+          "start": 57.99,
+          "duration": 0.6,
+          "requires_pen": true,
+          "polygon": [
+            [
+              55.0,
+              442.5
+            ],
+            [
+              93.33333333333333,
+              387.5
+            ],
+            [
+              246.66666666666669,
+              387.5
+            ],
+            [
+              285.0,
+              442.5
+            ],
+            [
+              285.0,
+              497.5
+            ],
+            [
+              246.66666666666669,
+              552.5
+            ],
+            [
+              93.33333333333333,
+              552.5
+            ],
+            [
+              55.0,
+              497.5
+            ]
+          ],
+          "width": 17,
+          "color": "ppeach"
+        },
+        {
+          "id": "a049",
+          "type": "write_text",
+          "start": 58.71,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "AND THAT",
+          "x": 360,
+          "y": 110,
+          "size": 60,
+          "width": 5,
+          "color": "ink"
+        },
+        {
+          "id": "a050",
+          "type": "write_text",
+          "start": 60.13,
+          "duration": 1.3,
+          "requires_pen": true,
+          "text": "CAN CHANGE.",
+          "x": 290,
+          "y": 210,
+          "size": 66,
+          "width": 6,
+          "color": "accent"
+        },
+        {
+          "id": "a051",
+          "type": "draw_asset",
+          "start": 61.55,
+          "duration": 0.7,
+          "requires_pen": true,
+          "asset": "underline_swash",
+          "at": [
+            540,
+            320
+          ],
+          "scale": 1.9,
+          "color": "teal",
+          "width": 6
+        },
+        {
+          "id": "a052",
+          "type": "sketch_image",
+          "start": 62.37,
+          "duration": 1.3,
+          "requires_pen": true,
+          "image": "mega/doodle-124",
+          "layer": "ink",
+          "at": [
+            540,
+            700
+          ],
+          "height": 346
+        },
+        {
+          "id": "a053",
+          "type": "sketch_image",
+          "start": 63.79,
+          "duration": 1.9,
+          "requires_pen": true,
+          "image": "mega/doodle-124",
+          "reveal": "serpentine",
+          "at": [
+            540,
+            700
+          ],
+          "height": 346
+        },
+        {
+          "id": "a054",
+          "type": "write_text",
+          "start": 65.81,
+          "duration": 1.2,
+          "requires_pen": true,
+          "text": "Aaron Ellis",
+          "x": null,
+          "y": 1000,
+          "size": 44,
+          "width": 3,
+          "color": "faint",
+          "align": "center"
+        }
+      ]
+    }
+  ]
+}

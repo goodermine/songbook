@@ -363,6 +363,88 @@ def show_image(state: FrameState, action: dict[str, Any], p: float) -> None:
                                         round(float(at[1]) - image.height / 2)))
 
 
+@lru_cache(maxsize=64)
+def ink_layer(name: str, height: int, ink: tuple[int, int, int]) -> Image.Image:
+    """Charcoal outline-only version of a flat colour doodle: dark, opaque
+    pixels become ink; fills and light areas drop out. Lets the hand 'ink' the
+    linework first, then a full-colour pass fills it in."""
+    image = load_image_asset(name, height)
+    arr = np.asarray(image).astype(np.int32)
+    lum = (arr[..., 0] * 299 + arr[..., 1] * 587 + arr[..., 2] * 114) // 1000
+    darkness = np.clip((150 - lum) / 150.0, 0.0, 1.0) * (arr[..., 3] / 255.0)
+    alpha = (darkness * 255).astype(np.uint8)
+    out = np.zeros_like(arr, dtype=np.uint8)
+    out[..., 0], out[..., 1], out[..., 2] = ink
+    out[..., 3] = alpha
+    return Image.fromarray(out, "RGBA")
+
+
+def sketch_image(state: FrameState, action: dict[str, Any], p: float,
+                 ink: tuple[int, int, int] = (38, 43, 46)) -> None:
+    """Reveal a raster image left-to-right behind the nib, like the hand is
+    drawing it in. The pen is claimed at the reveal front so the sprite rides
+    across the artwork; nothing pops into place. With ``"layer": "ink"`` only
+    the charcoal outline is revealed (first pass of an ink-then-colour draw)."""
+    height = int(action.get("height", 400))
+    if action.get("layer") == "ink":
+        image = ink_layer(action["image"], height, ink)
+    else:
+        image = load_image_asset(action["image"], height)
+    at = action.get("at")
+    if not (isinstance(at, (list, tuple)) and len(at) == 2):
+        raise BuildError(f"Action {action.get('id')!r}: sketch_image requires \"at\": [x, y]")
+    bw, bh = state.image.size
+    ox = round(float(at[0]) - image.width / 2)
+    oy = round(float(at[1]) - image.height / 2)
+    iw, ih = image.width, image.height
+    prog = clamp(p)
+    mask = Image.new("L", (bw, bh), 0)
+    md = ImageDraw.Draw(mask)
+    front = None  # (x, y, tangent) where the nib should sit this frame
+    if action.get("reveal") == "serpentine":
+        # Colour it in like a person: back-and-forth bands working downward,
+        # each row swept the opposite way to the last.
+        bands = max(5, round(ih / 78))
+        bl = ih / bands
+        pos = prog * bands
+        full = int(pos)
+        frac = pos - full
+        for b in range(min(full, bands)):
+            md.rectangle((ox, oy + b * bl, ox + iw, oy + (b + 1) * bl), fill=255)
+        if full < bands:
+            ext = frac * iw
+            top, bot = oy + full * bl, oy + (full + 1) * bl
+            if full % 2 == 0:            # left to right
+                md.rectangle((ox, top, ox + ext, bot), fill=255)
+                fx, tan = ox + ext, (1.0, 0.25)
+            else:                        # right to left
+                md.rectangle((ox + iw - ext, top, ox + iw, bot), fill=255)
+                fx, tan = ox + iw - ext, (-1.0, 0.25)
+            front = (fx, oy + (full + 0.5) * bl, tan)
+    else:
+        # Outline / plain draw: a single clean sweep behind the nib.
+        reveal_x = ox + iw * prog
+        feather = 40
+        md.rectangle((0, 0, reveal_x - feather, bh), fill=255)
+        for i in range(feather):
+            xx = reveal_x - feather + i
+            md.line((xx, 0, xx, bh), fill=int(255 * (1 - i / feather)))
+        if 0.0 < p < 1.0:
+            alpha = np.asarray(image.getchannel("A"))
+            col = int(prog * (iw - 1))
+            colband = alpha[:, max(0, col - 6):min(iw, col + 7)]
+            rows = np.where(colband.sum(axis=1) > 8)[0]
+            yc = oy + (float(rows.mean()) if rows.size else ih / 2)
+            front = (reveal_x, yc, (0.3, 1.0))
+    layer = Image.new("RGBA", (bw, bh), (0, 0, 0, 0))
+    layer.alpha_composite(image, (ox, oy))
+    revealed = layer.copy()
+    revealed.putalpha(ImageChops.multiply(layer.getchannel("A"), mask))
+    state.image.alpha_composite(revealed)
+    if front is not None and 0.0 < p < 1.0:
+        state.claim_pen(action["id"], (front[0], front[1]), front[2])
+
+
 @lru_cache(maxsize=128)
 def marker_text_layer(width: int, height: int, text: str, x: int, y: int, size: int,
                       color: tuple[int, int, int]) -> tuple[Image.Image, tuple[int, int, int, int]]:
@@ -717,7 +799,7 @@ def preflight_project(storyboard: dict[str, Any]) -> dict[str, Any]:
     names = set()
     images = 0
     for action in flatten_actions(storyboard):
-        if action["type"] in {"show_image", "show_image_sequence"}:
+        if action["type"] in {"show_image", "show_image_sequence", "sketch_image"}:
             frame_names = (action["images"] if action["type"] == "show_image_sequence"
                            else [action["image"]])
             if not frame_names:
@@ -845,6 +927,8 @@ class WhiteboardProject:
                             caps=self.round_strokes)
             elif action_type == "show_image":
                 show_image(state, action, p)
+            elif action_type == "sketch_image":
+                sketch_image(state, action, p, self.style.get("ink", (38, 43, 46)))
             elif action_type == "show_image_sequence":
                 show_image_sequence(state, action, time_s)
             elif action_type == "fade_asset" and action["asset"] == "reaction_dots":
